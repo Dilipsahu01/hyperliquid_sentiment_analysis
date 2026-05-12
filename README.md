@@ -66,8 +66,6 @@ hyperliquid_sentiment_analysis/
 │   ├── figures/                   # 17 PNG charts (auto-generated)
 │   └── reports/                   # full_analysis_report.md (auto-generated)
 │
-├── prompts/
-│   └── ai_analysis_prompts.md     # 15+ structured prompts for GPT/Gemini/etc.
 │
 ├── main.py                        # Entry point
 ├── requirements.txt               # Python dependencies
