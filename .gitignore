@@ -8,3 +8,4 @@ data/*.csv
 !data/sample_data.csv
 outputs/
 data/*.csv
+prompts/
