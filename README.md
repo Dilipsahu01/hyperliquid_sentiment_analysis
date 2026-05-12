@@ -1,6 +1,5 @@
 # Hyperliquid × Bitcoin Fear & Greed Index — Sentiment Analysis
 
-> **Primetrade.ai Data Science Assignment**  
 > Quantitative analysis of how Bitcoin market sentiment drives trader behaviour and profitability on the Hyperliquid perpetual futures exchange.
 
 ---
