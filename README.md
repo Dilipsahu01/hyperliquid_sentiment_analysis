@@ -32,6 +32,14 @@ source .venv/bin/activate
 python main.py
 ```
 
+> [!IMPORTANT]
+> **Note on Data Files:** To maintain a professional and lightweight repository, the raw and merged CSV files are excluded from Git tracking. This includes:
+> - `data/fear_greed_index.csv` — Bitcoin Fear & Greed Index (daily)
+> - `data/historical_data.csv` — Hyperliquid trade records
+> - `outputs/merged_data.csv` — merged trade + sentiment dataset
+>
+> Place your local copies of `fear_greed_index.csv` and `historical_data.csv` inside the `data/` directory before running the pipeline. Running `python main.py` will then automatically ingest these files and regenerate all outputs (including `outputs/merged_data.csv`) in the `outputs/` directory.
+
 That's it. Everything generates automatically:
 - `outputs/merged_data.csv` — merged trade + sentiment dataset
 - `outputs/figures/` — 17 publication-quality charts
@@ -67,6 +75,42 @@ hyperliquid_sentiment_analysis/
 ├── setup.sh                       # One-shot environment bootstrap
 └── README.md
 ```
+
+---
+
+## Dataset Schema
+
+Both CSV files must be placed in the `data/` directory before running the pipeline.
+
+### `data/historical_data.csv` — Hyperliquid Trade Records
+
+| Column | Type | Description |
+|---|---|---|
+| `Account` | string | Trader wallet address |
+| `Coin` | string | Asset traded (e.g. BTC, ETH) |
+| `Execution Price` | float | Price at which the trade was executed |
+| `Size Tokens` | float | Position size in token units |
+| `Size USD` | float | Position size in USD |
+| `Side` | string | `BUY` or `SELL` |
+| `Timestamp IST` | string | Trade timestamp in IST (`DD-MM-YYYY HH:MM`) |
+| `Start Position` | float | Position size before this trade |
+| `Direction` | string | `Buy` or `Sell` (open/close direction) |
+| `Closed PnL` | float | Realised PnL for closed trades |
+| `Transaction Hash` | string | On-chain transaction identifier |
+| `Order ID` | int | Unique order identifier |
+| `Crossed` | bool | Whether the order crossed the spread |
+| `Fee` | float | Trading fee paid (USD) |
+| `Trade ID` | int | Unique trade identifier |
+| `Timestamp` | int | Unix timestamp of the trade |
+
+### `data/fear_greed_index.csv` — Bitcoin Fear & Greed Index
+
+| Column | Type | Description |
+|---|---|---|
+| `timestamp` | int | Unix timestamp of the reading |
+| `value` | int | Fear & Greed score (0 = Extreme Fear, 100 = Extreme Greed) |
+| `classification` | string | Regime label: `Extreme Fear`, `Fear`, `Neutral`, `Greed`, `Extreme Greed` |
+| `date` | string | Date of the reading (`YYYY-MM-DD`) |
 
 ---
 

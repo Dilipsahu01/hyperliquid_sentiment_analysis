@@ -1,4 +1,4 @@
-# 📊 Beginner's Guide to Reading the Charts
+#  Beginner's Guide to Reading the Charts
 ### *What the graphs are actually telling you — in plain English*
 
 > **Who is this for?**  
@@ -6,7 +6,7 @@
 
 ---
 
-## 🧠 First — What Is the Fear & Greed Index?
+##  First — What Is the Fear & Greed Index?
 
 Before anything else, you need to understand the one number that drives this entire analysis.
 
@@ -14,11 +14,11 @@ The **Bitcoin Fear & Greed Index** is a score from **0 to 100** that measures ho
 
 | Score | Label | What It Means in Real Life |
 |---|---|---|
-| 0 – 24 | 🔴 **Extreme Fear** | Everyone is panicking. People are selling. Prices are crashing. |
+| 0 – 24 |  **Extreme Fear** | Everyone is panicking. People are selling. Prices are crashing. |
 | 25 – 44 | 🟠 **Fear** | People are nervous. The market is down or uncertain. |
 | 45 – 55 | 🟡 **Neutral** | No strong feeling either way. Market is sideways and choppy. |
 | 56 – 74 | 🟢 **Greed** | People are excited. Prices are rising. Everyone wants to buy. |
-| 75 – 100 | 🔵 **Extreme Greed** | Full euphoria. Everyone thinks prices will go up forever. |
+| 75 – 100 |  **Extreme Greed** | Full euphoria. Everyone thinks prices will go up forever. |
 
 **The famous Warren Buffett quote applies perfectly here:**
 > *"Be fearful when others are greedy, and greedy when others are fearful."*
@@ -27,7 +27,7 @@ Our data from 211,000+ real trades on Hyperliquid tests exactly whether this is 
 
 ---
 
-## 📈 Chart-by-Chart Breakdown
+##  Chart-by-Chart Breakdown
 
 ---
 
@@ -51,12 +51,12 @@ Greed         → avg $42.74 profit per trade
 Extreme Greed → avg $67.89 profit per trade  ← BEST
 ```
 
-#### What this means for you 🎯
+#### What this means for you 
 - **Extreme Greed produces the highest average profit per trade.** This seems counterintuitive but it makes sense: when everyone is excited and prices are rising, closing your winning positions banks the most money.
 - **Neutral is the worst time to trade.** The market has no direction. You're basically gambling on noise.
 - **Fear is surprisingly good** — smart traders are buying when others panic, and those positions pay off.
 
-#### ✅ Beginner Action
+####  Beginner Action
 > If the Fear & Greed Index is between **45–55 (Neutral)**, consider sitting out or making very small trades. The market isn't giving clear signals.
 
 ---
@@ -81,14 +81,14 @@ Greed         → 38.5% win rate
 Extreme Greed → 46.5% win rate  ← highest
 ```
 
-#### What this means for you 🎯
+#### What this means for you 
 Wait — only 46% win rate even in the best regime? How are people profitable?
 
 This is the key insight: **win rate alone doesn't tell the story.** What matters is *how much you win when you win vs how much you lose when you lose.* A trader who wins 40% of the time but makes $200 on winners and loses $50 on losers is very profitable.
 
 That's why we also look at Chart 08 (Profit Factor).
 
-#### ✅ Beginner Action
+####  Beginner Action
 > Don't obsess over win rate. A 40% win rate with good position sizing can be more profitable than a 70% win rate with poor risk management.
 
 ---
@@ -117,14 +117,14 @@ Average Trade Size:
   Neutral     → $4,783
 ```
 
-#### What this means for you 🎯
+#### What this means for you 
 This is fascinating and reveals **smart money behaviour**:
 
 1. **Traders go BIGGER in Fear** — when prices are dropping, confident traders place larger bets because they believe they're getting a discount.
 2. **Traders go SMALLER in Extreme Greed** — even though prices are high and euphoria is everywhere, experienced traders are cautious. They reduce size because they know a correction could come any moment.
 3. **The least trades happen in Extreme Fear** — most people freeze or exit entirely when panic hits. This creates opportunity for those who keep their cool.
 
-#### ✅ Beginner Action
+####  Beginner Action
 > **Copy the smart money:** When the index drops below 30 (Fear/Extreme Fear), consider slightly *larger* position sizes if your analysis is strong. When it hits above 75 (Extreme Greed), *reduce* your position size — don't go all-in when the market is partying.
 
 ---
@@ -144,10 +144,10 @@ A grouped bar chart showing what percentage of trades were **BUY** vs **SELL** i
 - **Extreme Greed → Sell Bias (55% sells)** — traders are taking profits, not buying more
 - **Extreme Fear → Slight Buy Bias (51% buys)** — brave contrarians are buying the dip
 
-#### What this means for you 🎯
+#### What this means for you 
 The market crowds panic and **sell during Fear** but the traders who make money in this data are doing the opposite. In Extreme Greed, the smart traders are **selling** — they already bought earlier and are now cashing out to the late buyers.
 
-#### ✅ Beginner Action
+####  Beginner Action
 > Think of the market like a restaurant. In Extreme Fear, the restaurant is empty (everyone left). The food is cheap and plentiful. In Extreme Greed, there's a 2-hour wait and prices are marked up 50%. When is the better time to "eat"?
 
 ---
@@ -169,12 +169,12 @@ Look for where the line **drops sharply** — those are the painful periods. Now
 
 Also look for **big upward surges** — when do those happen?
 
-#### What this means for you 🎯
+#### What this means for you 
 - Sharp drops often happen when the market transitions **from Greed into Fear** — the crash phase.
 - Big recoveries often start **during Fear** — the people who held or bought during the red zones benefit most.
 - The two lines (gross vs net) diverge over time: **fees compound into a significant drag.** Every unnecessary trade is money given to the exchange.
 
-#### ✅ Beginner Action
+####  Beginner Action
 > Track whether the cumulative line is trending up or down in the sentiment zone you're planning to trade. If it's been going down in Neutral for months, maybe wait for a clearer regime.
 
 ---
@@ -196,7 +196,7 @@ Watch for the moments the gold line is **falling** (greed turning to fear). What
 
 Also notice: the biggest single-day profits often appear **just after** the gold line bottoms out (fear bottoming) — those are the bounce trades.
 
-#### ✅ Beginner Action
+####  Beginner Action
 > Use this chart to understand **timing**. You don't need to predict the future — you just need to see the pattern: sentiment peaks → then comes a pullback. If the index has been in Extreme Greed for weeks, be extra careful adding new positions.
 
 ---
@@ -218,12 +218,12 @@ These plots show the **full spread** of individual trade profits/losses in each 
 - **Long tails below zero** = big losses are possible too
 - The **white line inside the box** = median trade (half above, half below)
 
-#### What this means for you 🎯
+#### What this means for you 
 In every sentiment regime, the **median trade is near $0** — most individual trades are small wins or small losses. The averages we see are pulled upward by a smaller number of **big winning trades**.
 
 This is how real trading works: most trades are modest, but a few exceptional trades generate the majority of profits.
 
-#### ✅ Beginner Action
+####  Beginner Action
 > Don't expect every trade to be a home run. Accept that most of your trades will be small. **Protect against big losses** (the downward tails) and **let your winners run** (the upward tails) — that's what separates profitable traders from losers.
 
 ---
@@ -253,12 +253,12 @@ Greed         → Profit Factor: 3.03  (good)
 Extreme Greed → Profit Factor: 11.02 (extraordinary!)
 ```
 
-#### What this means for you 🎯
+#### What this means for you 
 Even though win rates are below 50%, the **profit factor is strongly positive in every regime** — meaning when traders win, they win *much* more than they lose. This is the hallmark of good risk management: cut your losses quickly and let your winners grow.
 
 Extreme Greed's profit factor of **11x** means for every $1 lost, $11 is gained. This is because traders closing profitable long positions during euphoria pocket large gains.
 
-#### ✅ Beginner Action
+####  Beginner Action
 > **Set a stop-loss on every trade.** The data shows profitable traders aren't winning more often — they're **losing less when they're wrong.** A 2:1 reward-to-risk ratio (aim to make $2 for every $1 you risk) is a solid starting rule.
 
 ---
@@ -279,10 +279,10 @@ The complete history of the Fear & Greed Index from the dataset's start to end. 
 2. **What comes after Extreme Greed?** Look at the chart after every major blue spike. What usually follows?
 3. **What comes after Extreme Fear?** These red zones are followed by... what?
 
-#### What this means for you 🎯
+#### What this means for you 
 History shows a clear pattern: **Extreme Greed → market peaks → correction into Fear**. This has repeated multiple times in the data. This doesn't mean you should always short at Extreme Greed — but it means you should be cautious.
 
-#### ✅ Beginner Action
+####  Beginner Action
 > Bookmark Alternative.me's Fear & Greed Index page and check it every morning before trading. It's free. Knowing the current regime takes 5 seconds and can save you from walking into the wrong market mood unprepared.
 
 ---
@@ -305,10 +305,10 @@ Look at the row/column labelled **"Fear/Greed Value"** — what is it correlated
 #### What the data shows
 The Fear & Greed value has **very weak correlations** with most things. This is actually an important finding: the daily number doesn't predict things in a simple straight-line way.
 
-#### What this means for you 🎯
+#### What this means for you 
 This tells us: **you can't just buy when F&G is high and sell when it's low in a simple formula.** The relationship is more nuanced — it works better as categories (Fear vs Greed as zones) than as a daily number you plug into a formula.
 
-#### ✅ Beginner Action
+####  Beginner Action
 > Don't over-engineer it. The regime category (Fear/Greed) matters. The exact number (42 vs 38) matters less. Keep it simple: know which *zone* you're in.
 
 ---
@@ -324,10 +324,10 @@ The best-performing traders in the dataset, ranked by total profit. Left panel s
 - Are their profits enormous compared to average? (Yes — the gap between top and average is huge)
 - Some traders have lower win rates but still top the charts — how? **Size and discipline.**
 
-#### What this means for you 🎯
+#### What this means for you 
 The top traders are **not necessarily right more often** — they're managing their positions better. They cut losses faster and let winners run longer. They also likely trade more frequently and with larger size.
 
-#### ✅ Beginner Action
+####  Beginner Action
 > Don't try to copy a top trader's every move. Instead, copy their *principles*: have a plan before every trade, know your exit price in advance (both profit target and stop-loss), and don't hold losers hoping they recover.
 
 ---
@@ -347,10 +347,10 @@ Which crypto assets (coins/tokens) generated the most total profit vs loss acros
 #### What to look for
 Some coins are consistently profitable (green, high win rate). Others are loss-makers despite lots of trading. The loss-making coins are often volatile memecoins or newer assets.
 
-#### What this means for you 🎯
+#### What this means for you 
 Not all coins are equal trading vehicles. The top coins by profit are usually the **most liquid markets** (BTC, ETH, SOL) where price discovery is fairer and spreads are tighter. Exotic coins with huge potential also carry huge loss risk.
 
-#### ✅ Beginner Action
+####  Beginner Action
 > **Start with major coins** (BTC, ETH, SOL). They are more predictable, have more analysis available, and have better liquidity (easier to enter and exit). Only move to smaller coins once you understand the basics.
 
 ---
@@ -367,12 +367,12 @@ Not all coins are equal trading vehicles. The top coins by profit are usually th
 - **Deeper bars** = bigger potential losses
 - Compare bars across sentiment zones — where is the risk highest?
 
-#### What this means for you 🎯
+#### What this means for you 
 Every regime has risk. Even in Extreme Greed (high profits), there are big losing trades. There is no "safe" regime — only better or worse risk-adjusted opportunities.
 
 The max loss numbers show that **one bad trade can wipe out many winning trades** if you're not using stop-losses. This is why controlling downside is more important than maximising upside.
 
-#### ✅ Beginner Action
+####  Beginner Action
 > **Never risk more than 1-2% of your total account on any single trade.** If your account is $1,000, don't risk more than $10-20 on one trade. This way, even a string of losses won't destroy you.
 
 ---
@@ -388,12 +388,12 @@ How much total dollar volume was traded each day, coloured by the sentiment regi
 - **Volume in different sentiment zones** — is more money moving during Fear or Greed?
 - **Trend in volume** — is overall activity increasing or decreasing over time?
 
-#### What this means for you 🎯
+#### What this means for you 
 High volume days = **high volatility = more opportunity AND more risk.** Low volume days often produce the "choppy" Neutral conditions that are hard to profit from.
 
 Professional traders love high-volume Fear days because there's clear price movement and motivated sellers who will accept any price — creating buying opportunities.
 
-#### ✅ Beginner Action
+####  Beginner Action
 > Watch volume as a **confirmation signal.** If the price is rising AND volume is high, that's a stronger signal than price rising on low volume. Volume reveals conviction.
 
 ---
@@ -411,10 +411,10 @@ The error bars (the vertical lines on top of each bar) show how much variability
 #### What the data shows
 Transition days show **higher variability** (the error bars are bigger) than stable days. This means when the market mood is shifting, outcomes are more extreme — both bigger wins and bigger losses.
 
-#### What this means for you 🎯
+#### What this means for you 
 Days when sentiment shifts are **higher stakes.** They can be hugely profitable (a turn from Fear to Greed is a powerful buying signal) or hugely damaging (a turn from Greed to Fear can trigger a cascade of liquidations).
 
-#### ✅ Beginner Action
+####  Beginner Action
 > **Be extra careful the day after a sentiment shift.** Reduce your position size. Let the new regime establish itself for a few days before going in with full conviction.
 
 ---
@@ -431,10 +431,10 @@ Fees are a **guaranteed loss** on every trade. They don't care if you win or los
 #### What the data shows
 The total fees paid in Fear are the highest (simply because more trades happen in Fear). But the *fee-to-PnL ratio* reveals where fees hurt the most as a proportion of what you're making.
 
-#### What this means for you 🎯
+#### What this means for you 
 In Neutral sentiment (low PnL, average fees), fees eat a **much larger percentage of your profits** than in Fear or Extreme Greed where profits are higher. Trading frequently in a choppy market is the fastest way to slowly bleed your account to the exchange.
 
-#### ✅ Beginner Action
+####  Beginner Action
 > **Trade less, but better.** Each trade should have a clear reason and a clear plan. "I was bored" is not a trading strategy — it's a fee donation. Aim for quality setups over quantity.
 
 ---
@@ -455,22 +455,22 @@ Note when the win rate stays **persistently below 50%** for extended periods. Wh
 
 Also look for quick spikes above 50% — these often happen right after fear bottoms when the market bounces sharply.
 
-#### What this means for you 🎯
+#### What this means for you 
 The win rate is never consistently high. Even the best market conditions only produce ~46% win rates. This tells you: **trading is hard, and losses are normal.** The goal isn't to win every trade — it's to win enough and lose small enough that the overall picture is profitable.
 
-#### ✅ Beginner Action
+####  Beginner Action
 > Don't judge your trading by whether your last trade won or lost. Look at your last **20-30 trades** as a group. Is your overall win rate improving? Are your average wins bigger than your average losses? That's the right way to evaluate yourself.
 
 ---
 
-## 🧭 The Big Picture — 5 Rules for Beginner Traders
+##  The Big Picture — 5 Rules for Beginner Traders
 
 Based on everything the data shows:
 
 ### Rule 1: Know Your Regime Before You Trade
 Check the Fear & Greed Index every day before opening any position. You wouldn't drive without checking the weather — don't trade without checking market sentiment. It takes 10 seconds and it's free.
 
-> 🔗 **Bookmark this:** https://alternative.me/crypto/fear-and-greed-index/
+>  **Bookmark this:** https://alternative.me/crypto/fear-and-greed-index/
 
 ### Rule 2: Trade Smaller When Greed is Extreme
 The data is clear — experienced traders *reduce* their size when the index is above 75. When everyone is screaming "this is going to the moon", that's usually near a peak. This is the hardest rule to follow emotionally but it's one of the most important.
@@ -486,21 +486,21 @@ The fee analysis shows that frequent trading in choppy (Neutral) markets is esse
 
 ---
 
-## 🗺️ Quick Reference Card
+## ️ Quick Reference Card
 
 Cut this out and keep it by your desk while trading:
 
 | Index Score | Regime | Trade Size | Bias | Caution Level |
 |---|---|---|---|---|
-| 0–24 | 🔴 Extreme Fear | Medium | Selective Buys | ⚠️ High volatility |
-| 25–44 | 🟠 Fear | Larger | Buy the dip | 📈 Good opportunity |
-| 45–55 | 🟡 Neutral | Small | Wait | ❌ Avoid overtrading |
-| 56–74 | 🟢 Greed | Normal | Hold/Trim | 👁️ Watch for tops |
-| 75–100 | 🔵 Extreme Greed | Smallest | Take profits | 🚨 Danger zone |
+| 0–24 |  Extreme Fear | Medium | Selective Buys | ️ High volatility |
+| 25–44 | 🟠 Fear | Larger | Buy the dip |  Good opportunity |
+| 45–55 | 🟡 Neutral | Small | Wait |  Avoid overtrading |
+| 56–74 | 🟢 Greed | Normal | Hold/Trim | ️ Watch for tops |
+| 75–100 |  Extreme Greed | Smallest | Take profits |  Danger zone |
 
 ---
 
-## ❓ FAQ — Questions Beginners Always Ask
+##  FAQ — Questions Beginners Always Ask
 
 **Q: Should I always buy when there's Extreme Fear?**  
 A: Not blindly. Fear means the market is falling — and falling things can keep falling. The strategy is to start *looking* for quality setups in Fear and size in slowly, not to go all-in the moment it turns red.

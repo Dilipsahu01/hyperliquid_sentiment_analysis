@@ -51,7 +51,7 @@ def main(args):
         generate_report(merged_df, results)
 
     elapsed = time.time() - t0
-    print(f"\n✅  Pipeline complete in {elapsed:.1f}s")
+    print(f"\n  Pipeline complete in {elapsed:.1f}s")
     print("   Outputs:")
     print("     outputs/merged_data.csv")
     print("     outputs/figures/   (17 PNG charts)")

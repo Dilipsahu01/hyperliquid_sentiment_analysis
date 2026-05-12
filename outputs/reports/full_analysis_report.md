@@ -1,6 +1,6 @@
 # Hyperliquid × Bitcoin Fear & Greed Index — Full Analysis Report
 
-> **Generated:** 2026-05-12 13:13  
+> **Generated:** 2026-05-12 15:05  
 > **Dataset coverage:** 2023-05-01 → 2025-05-01  
 > **Total trades analysed:** 211,218  
 > **Unique traders:** 32  
@@ -268,7 +268,7 @@ Tests whether PnL during Extreme Fear differs from Extreme Greed.
 
 Based on the quantitative evidence in this analysis:
 
-### 🔴 Scale Down in Extreme Greed
+###  Scale Down in Extreme Greed
 Position sizes are naturally smaller during Extreme Greed. Lean into this: 
 reduce leverage and size as the F&G index climbs above 75. Euphoric markets 
 invite mean-reversion and sudden reversals.
@@ -278,23 +278,23 @@ Fear regimes show the highest average position sizes and above-average PnL.
 This is the "buying the dip" effect — traders who enter during fear 
 and hold for the recovery capture the most value.
 
-### ⚪ Reduce Activity in Neutral
+###  Reduce Activity in Neutral
 Neutral sentiment (F&G 40–60) produces the lowest average PnL and choppy 
 price action. Reduce trade frequency; be selective. Avoid overtrading in 
 directionless markets.
 
-### 📊 Use Sentiment as a Risk Filter
+###  Use Sentiment as a Risk Filter
 - **Sentiment > 75 (Extreme Greed):** Tighten stops; avoid adding to positions.
 - **Sentiment 55–75 (Greed):** Normal trading; watch for distribution.
 - **Sentiment 45–55 (Neutral):** Reduce size; wait for clearer signals.
 - **Sentiment 25–45 (Fear):** Consider selective longs on oversold assets.
 - **Sentiment < 25 (Extreme Fear):** Contrarian buying with strict risk control.
 
-### 💡 Watch Sentiment Transitions
+###  Watch Sentiment Transitions
 On days the F&G category changes, volatility is elevated. Use tighter 
 stops and smaller sizes until the new regime is confirmed.
 
-### 💸 Mind the Fee Drag
+###  Mind the Fee Drag
 Total fees are a significant cost. On lower-PnL days (especially Neutral), 
 fees can consume a disproportionate share of gross profits. 
 Prefer larger, less frequent positions over many small trades.

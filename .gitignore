@@ -6,3 +6,5 @@ __pycache__/
 # Data & Results (Keep these local)
 data/*.csv
 !data/sample_data.csv
+outputs/
+data/*.csv
