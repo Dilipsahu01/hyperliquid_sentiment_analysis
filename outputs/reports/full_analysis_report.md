@@ -1,6 +1,6 @@
 # Hyperliquid × Bitcoin Fear & Greed Index — Full Analysis Report
 
-> **Generated:** 2026-05-12 15:05  
+> **Generated:** 2026-05-14 19:21  
 > **Dataset coverage:** 2023-05-01 → 2025-05-01  
 > **Total trades analysed:** 211,218  
 > **Unique traders:** 32  
