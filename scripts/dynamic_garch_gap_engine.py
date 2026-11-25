@@ -98,17 +98,20 @@ def run_dynamic_calibration_comparison():
         basis_bps = df_window["basis_hl_spot_bps"].iloc[i - 1] if i > 0 else -1.5
         vol_ratio = df_window["hl_to_spot_vol_ratio"].iloc[i - 1] if i > 0 else 1.0
 
+        # 1. Localized rolling volatility tracking trailing 15m (3x 5m bars)
         if i < 3:
-            sig = 0.00085  # ~40% ann
+            sig = 0.00085  # Baseline ~40% annualized
         else:
             sig = float(np.std(df_window["spot_log_ret"].iloc[max(0, i - 3):i]))
-            sig = max(0.00075, min(sig, 0.0035))
+            sig = max(0.00075, min(sig, 0.0035))  # Clamp to reasonable bounds (35% to 165% ann)
         dyn_sigmas.append(sig)
 
+        # 2. Dynamic jump intensity conditioned on perpetual discount and volume migration
         lam = 0.02 + max(0.0, -basis_bps - 2.0) * 0.03 + max(0.0, vol_ratio - 1.2) * 0.08
         lam = min(lam, 0.45)
         dyn_lambdas.append(lam)
 
+        # 3. Regime switch: expand negative jump drift when liquidation pressure rises
         is_stress = (lam > 0.08)
         j_mu = -0.0055 if is_stress else -0.0005
         j_sig = 0.0065 if is_stress else 0.0025
