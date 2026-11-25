@@ -1,7 +1,7 @@
 # Strategy Track B: Full-Day & Intraday Horizon Prediction Framework
 
-> [!IMPORTANT]
-> **Core Objective:** Predict high-frequency intraday price paths, order flow imbalances, volatility regimes, and dynamic uncertainty corridors over 5-minute bars, tested in real-time against live streaming data from Binance Spot, Binance Futures, and Hyperliquid Decentralized Perpetuals.
+> [!NOTE]
+> **Research Focus:** In this strategy track, we forecast high-frequency intraday price paths, order flow imbalances, volatility regimes, and dynamic uncertainty corridors over 5-minute bars. We evaluate our models in real-time against live streaming fills from Binance Spot, Binance Futures, and Hyperliquid Decentralized Perpetuals.
 
 ---
 

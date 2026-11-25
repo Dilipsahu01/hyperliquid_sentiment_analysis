@@ -6,11 +6,11 @@
 **Status:** Audited, Round 4 Master Validated (`pytest tests/`: 14/14 passing)  
 **Forecast Origin Timestamp:** `2026-11-25 11:00:00 UTC`  
 **Master Artifacts:**
-- Primary Master Audit: [`results/audit_v4.md`](file://results/audit_v4.md)
-- Clean Feature Parquet (1h RV): [`data/engineered_features_master.parquet`](file://data/engineered_features_master.parquet) (1,419 days, 64 clean features)
-- High-Frequency Parquet (5m RV): [`data/engineered_features_5m.parquet`](file://data/engineered_features_5m.parquet) (1,419 days, 64 clean features)
-- Unified Forecast Table: [`results/forecast_nov26_30.csv`](file://results/forecast_nov26_30.csv)
-- Holdout Metrics JSON: [`results/holdout.json`](file://results/holdout.json)
+- Primary Master Audit: [`results/audit_v4.md`](results/audit_v4.md)
+- Clean Feature Parquet (1h RV): [`data/engineered_features_master.parquet`](data/engineered_features_master.parquet) (1,419 days, 64 clean features)
+- High-Frequency Parquet (5m RV): [`data/engineered_features_5m.parquet`](data/engineered_features_5m.parquet) (1,419 days, 64 clean features)
+- Unified Forecast Table: [`results/forecast_nov26_30.csv`](results/forecast_nov26_30.csv)
+- Holdout Metrics JSON: [`results/holdout.json`](results/holdout.json)
 
 ---
 
@@ -197,7 +197,7 @@ High-frequency analysis was conducted exclusively across **24 full 86,400-second
 ## 10. Pytest Test Suite Verification
 
 All pipeline components, causal windows, rolling calculations, and regenerated deliverables are monitored by automated pytest suites:
-- **Test File:** [`tests/test_pipeline.py`](file://tests/test_pipeline.py)
+- **Test File:** [`tests/test_pipeline.py`](tests/test_pipeline.py)
 - **Results:** **14 / 14 tests passing**
   1. `test_data_integrity_shape_and_dates`: Minimum 500 rows, date continuity, zero duplicates.
   2. `test_no_nans_in_feature_matrix`: Zero NaNs in 64 stationary feature columns.

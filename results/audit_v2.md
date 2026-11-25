@@ -130,7 +130,7 @@ In high-frequency crypto trading, variance increases with time aggregation ($0.0
 1. **Positive High-Frequency Autocorrelation:** During liquidations, stop cascades, and directional momentum runs, adjacent sub-minute returns exhibit positive covariance ($\text{Cov}(r_i, r_{i+k}) > 0$). The variance of an aggregated return $\text{Var}(\sum r_i) = \sum \text{Var}(r_i) + 2\sum_{i<j} \text{Cov}(r_i, r_j)$ exceeds the sum of independent 1s variances.
 2. **Zero-Trade Seconds:** Out of 2,073,600 seconds, 240,355 seconds (11.6%) had zero trades ($r_t = 0$), compressing ultra-high-frequency sum-of-squares variance.
 
-The plot is saved to [outputs/figures/signature_plot_rv.png](file://outputs/figures/signature_plot_rv.png).
+The plot is saved to [outputs/figures/signature_plot_rv.png](outputs/figures/signature_plot_rv.png).
 
 #### 2. Holdout Scoring on Pure 1s Target vs. Pure 1h Target ($N=22$ Full Days)
 
@@ -169,7 +169,7 @@ To confirm zero look-ahead bias across all features:
 - We selected 20 random dates across 2024–2026.
 - For each date $t_k$, raw hourly klines were sliced strictly to $t \le t_k$ and daily RV components ($RV_d, RV_w, RV_m$) were re-engineered from scratch.
 - **Assertion Result:** Recomputed values matched the master features table at date $t_k$ with zero error (**20 / 20 dates passed at $|e| < 10^{-6}$**).
-- Automated unit test suite passing 100% across 14 tests in [tests/test_pipeline.py](file://tests/test_pipeline.py).
+- Automated unit test suite passing 100% across 14 tests in [tests/test_pipeline.py](tests/test_pipeline.py).
 
 ---
 
@@ -222,9 +222,9 @@ Because the ML edge over **`HAR_Crypto_Log_DOW_7_30`** is not statistically sign
 ---
 
 ### Artifacts Index
-- **Audit V2 Markdown:** [results/audit_v2.md](file://results/audit_v2.md)
-- **Audit V2 JSON Metadata:** [results/audit_v2_meta.json](file://results/audit_v2_meta.json)
-- **Final Revised Forecast CSV:** [results/forecast_nov26_30_v2.csv](file://results/forecast_nov26_30_v2.csv)
-- **Signature Plot Figure:** [outputs/figures/signature_plot_rv.png](file://outputs/figures/signature_plot_rv.png)
-- **Test Suite (14 Tests Passing):** [tests/test_pipeline.py](file://tests/test_pipeline.py)
-- **Cleaned Package Directory:** [btc_pipeline/](file://btc_pipeline/)
+- **Audit V2 Markdown:** [results/audit_v2.md](results/audit_v2.md)
+- **Audit V2 JSON Metadata:** [results/audit_v2_meta.json](results/audit_v2_meta.json)
+- **Final Revised Forecast CSV:** [results/forecast_nov26_30_v2.csv](results/forecast_nov26_30_v2.csv)
+- **Signature Plot Figure:** [outputs/figures/signature_plot_rv.png](outputs/figures/signature_plot_rv.png)
+- **Test Suite (14 Tests Passing):** [tests/test_pipeline.py](tests/test_pipeline.py)
+- **Cleaned Package Directory:** [btc_pipeline/](btc_pipeline/)

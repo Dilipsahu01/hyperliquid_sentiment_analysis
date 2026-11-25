@@ -1,14 +1,14 @@
 # Round 4 Master Audit & Econometric Validation Report
 
 **Execution Date**: November 25, 2026  
-**Pipeline Run**: Deterministic Master Execution ([`btc_pipeline/audit_v4_pipeline.py`](file://btc_pipeline/audit_v4_pipeline.py))  
+**Pipeline Run**: Deterministic Master Execution ([`btc_pipeline/audit_v4_pipeline.py`](btc_pipeline/audit_v4_pipeline.py))  
 **Forecast Origin Timestamp**: `2026-11-25 11:00:00 UTC`  
 **Test Suite**: `pytest tests/` — **14 / 14 tests passing**  
 **Status**: **ALL 11 CHECKS VERIFIED AND PASSED**  
 **Clean Datasets**:
-- Master 1-hour Feature Parquet: [`data/engineered_features_master.parquet`](file://data/engineered_features_master.parquet) (1,419 rows, 64 clean features)
-- High-Frequency 5-minute Feature Parquet: [`data/engineered_features_5m.parquet`](file://data/engineered_features_5m.parquet) (1,419 rows, 64 clean features)
-- Raw 5-minute Klines: [`data/btc_5m_2023_2026.parquet`](file://data/btc_5m_2023_2026.parquet) (410,238 bars)
+- Master 1-hour Feature Parquet: [`data/engineered_features_master.parquet`](data/engineered_features_master.parquet) (1,419 rows, 64 clean features)
+- High-Frequency 5-minute Feature Parquet: [`data/engineered_features_5m.parquet`](data/engineered_features_5m.parquet) (1,419 rows, 64 clean features)
+- Raw 5-minute Klines: [`data/btc_5m_2023_2026.parquet`](data/btc_5m_2023_2026.parquet) (410,238 bars)
 
 ---
 

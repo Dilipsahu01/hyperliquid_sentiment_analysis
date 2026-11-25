@@ -1,7 +1,7 @@
 # Strategy Track C: Data Factor Analysis & Feature Evaluation
 
-> [!IMPORTANT]
-> **Core Objective:** Provide an empirical, econometric analysis of all data-specific factors engineered in this repository across 1,419 daily observations (2023–2026), 34,187 hourly candles, and high-frequency multi-venue streaming logs. All factors are evaluated for statistical significance, regime stability, and predictive transmission into our long-term and intraday forecasting models.
+> [!NOTE]
+> **Research Focus:** Here we present an empirical econometric analysis of all data-specific factors engineered across our repository: 1,419 daily observations (2023–2026), 34,187 hourly candles, and high-frequency multi-venue streaming logs. We evaluate each factor for statistical significance, regime stability, and predictive transmission into our long-term and intraday forecasting models.
 
 ---
 

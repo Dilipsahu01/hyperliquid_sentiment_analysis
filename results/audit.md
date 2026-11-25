@@ -248,7 +248,7 @@ Incorporating:
 | **2026-11-30** | **Monday (Equities Reopen)** | Open | **39.56%** | [11.26%, 101.17%] | [7.00%, 203.67%] | **2.75%** | Neutral (AUC ~ 0.50) |
 
 *Artifacts Saved:*
-- Audit Report: [results/audit.md](file://results/audit.md)
-- Audit Numerical Metadata: [results/audit_meta.json](file://results/audit_meta.json)
-- Revised Forecast CSV: [results/revised_forecast_nov26_30.csv](file://results/revised_forecast_nov26_30.csv)
-- Test Suite: [tests/test_pipeline.py](file://tests/test_pipeline.py) (11/11 passing)
+- Audit Report: [results/audit.md](results/audit.md)
+- Audit Numerical Metadata: [results/audit_meta.json](results/audit_meta.json)
+- Revised Forecast CSV: [results/revised_forecast_nov26_30.csv](results/revised_forecast_nov26_30.csv)
+- Test Suite: [tests/test_pipeline.py](tests/test_pipeline.py) (11/11 passing)

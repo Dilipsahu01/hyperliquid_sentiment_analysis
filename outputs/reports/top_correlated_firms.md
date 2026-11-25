@@ -4,8 +4,8 @@
 > **Target Asset:** Bitcoin (BTC/USD)  
 > **Source:** Daily institutional price action cross-referenced with Binance 1-second OHLCV  
 > **Saved Outputs:**  
-> - CSV: [`outputs/top_correlated_firms_with_btc.csv`](file://outputs/top_correlated_firms_with_btc.csv)  
-> - JSON: [`outputs/top_correlated_firms_with_btc.json`](file://outputs/top_correlated_firms_with_btc.json)
+> - CSV: [`outputs/top_correlated_firms_with_btc.csv`](outputs/top_correlated_firms_with_btc.csv)  
+> - JSON: [`outputs/top_correlated_firms_with_btc.json`](outputs/top_correlated_firms_with_btc.json)
 
 ---
 

@@ -1,7 +1,7 @@
 # Methodology and Analytical Techniques
 
-> [!IMPORTANT]
-> **Strict Grounding Notice:** Every formula, pipeline stage, and parameter documented here reflects the verified code in [`btc_pipeline/`](btc_pipeline), [`scripts/`](scripts), [`src/data.py`](src/data.py), and the test suite in [`tests/test_pipeline.py`](tests/test_pipeline.py). Zero outside data sources or unverified assumptions are introduced.
+> [!NOTE]
+> **Methodology Context:** This document details the mathematical derivations, point-in-time causality constraints, and econometric techniques we implemented across our data pipeline and forecasting engines. All formulas and parameters reflect the exact verified implementations in [`btc_pipeline/`](btc_pipeline), [`scripts/`](scripts), and [`src/data.py`](src/data.py).
 
 ---
 

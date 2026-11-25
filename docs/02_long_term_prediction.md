@@ -1,7 +1,7 @@
 # Strategy Track A: Long-Term Horizon Prediction Framework
 
-> [!IMPORTANT]
-> **Core Objective:** Predict forward daily realized variance ($RV_{t+1}$ through $RV_{t+5}$) across multi-day and weekly horizons, calibrated against 889 out-of-sample walk-forward days (127 folds) and stress-tested against the 23-day November holdout (November 8–30, 2025).
+> [!NOTE]
+> **Research Focus:** In this strategy track, we predict forward daily realized variance ($RV_{t+1}$ through $RV_{t+5}$) across multi-day and weekly horizons. We calibrate our models against 889 out-of-sample walk-forward days (127 rolling folds) and evaluate them against the held-out November test sample.
 
 ---
 

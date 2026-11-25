@@ -1,33 +1,36 @@
 # Institutional Volatility and Microstructure Forecasting Pipeline
 ### Hyperliquid L1/L2 Perpetuals and Binance Multi-Venue Econometric Research
 
-> [!IMPORTANT]
-> **Strict Empirical Grounding:** This repository hosts an institutional econometric pipeline for cryptocurrency volatility forecasting and high-frequency price path inference. All models, variance ratios, walk-forward cross-validations, and live gap experiments are mathematically proven in code, strictly point-in-time ($t \le 21:00\text{ UTC}$), and tested against real-time streaming fills from Binance and Hyperliquid Mainnet.
+> [!NOTE]
+> **Research Overview:** Standard Wall Street volatility models collapse in 24/7 digital asset markets. Markets do not pause at 4:00 PM, liquidity compresses predictably on weekends, and decentralized on-chain perpetuals trade alongside centralized order books.
+>
+> We built this repository to study cross-venue market microstructure and forecast Bitcoin (BTC) volatility across multi-day and intraday horizons with empirical rigor. Every model, point-in-time cutoff ($t \le 21:00\text{ UTC}$), variance ratio proof, and live execution test is fully reproducible in code and verified across automated unit tests.
 
 ---
 
 ## 1. What This Project Actually Is
 
-### Executive Overview
-This repository is an institutional-grade quantitative finance platform and production inference engine engineered for Bitcoin (BTC). It bridges decentralized perpetual futures (**Hyperliquid L1/L2 Mainnet**) with premier centralized order books (**Binance Spot and USD-M Futures**), macroeconomic equity indices (**Nasdaq-100 `QQQ`, S&P-100 `OEX`**), individual mega-cap drivers (**NVDA, COIN, TLT, GLD**), and behavioral market sentiment (**Alternative.me Fear and Greed Index**).
+When quantitative researchers move from traditional equity markets into cryptocurrency, Corsi's classic HAR-RV model and standard econometric assumptions fall apart. In 24/7 markets, continuous trading without pauses, weekend liquidity drop-offs, and sudden liquidation cascades across decentralized perpetual exchanges require a completely redesigned architecture.
 
-### The Real-World Market Inefficiencies We Solve
+This project is an end-to-end quantitative research platform and production forecasting engine for Bitcoin (BTC). We bridge decentralized perpetual futures (**Hyperliquid L1/L2 Mainnet**) with premier centralized order books (**Binance Spot and USD-M Futures**), macroeconomic equity drivers (**Nasdaq-100 `QQQ`, S&P-100 `OEX`, NVDA, COIN**), and behavioral sentiment (**Alternative.me Fear and Greed Index**).
 
-1. **The Breakdown of Traditional Wall Street Models in 24/7 Crypto Markets:**
-   Traditional equity econometric models—such as Corsi's classic Heterogeneous Autoregressive model of Realized Variance (HAR-RV)—assume 5-day trading weeks and 22-day trading months with overnight market halts. In 24/7 digital asset markets, these assumptions fail:
-   * **Weekend Liquidity Compression:** Volatility systematically collapses on Saturdays and Sundays (dropping to $33\%\text{--}36\%$ annualized) due to banking and institutional closures, followed by sharp liquidity expansion upon Monday morning equity reopenings ($66.6\%$ annualized).
-   * **Continuous Memory Windows:** 5-day and 22-day calendars distort rolling memory. Our architecture replaces them with continuous 7-day ($RV_{7d}$) and 30-day ($RV_{30d}$) crypto-native rolling windows.
-   * **The Exponential Transformation Bias:** Forecasting logarithmic variance ($\ln RV$) prevents negative variance, but naive exponentiation introduces Jensen's inequality bias ($\mathbb{E}[e^X] > e^{\mathbb{E}[X]}$). We implement exact analytical bias correction ($\frac{1}{2}\hat{s}_{\varepsilon}^2$).
+### The Four Real-World Market Inefficiencies We Tackle
 
-2. **The Open-Loop Diffusion Blowout in Intraday Execution:**
-   Standard quantitative execution desks typically project intraday prices using unconstrained random walks or static Monte Carlo rollouts. Because volatility scales with $\sqrt{t}$, open-loop paths expand rapidly into wide, uninformative intervals ($\sim 1,770\text{ USD}$ wide over 2 hours). Our pipeline solves this through a dual approach:
-   * **Recursive Bayesian Kalman Filtering (Strategy Track B1):** Treats equilibrium price as an unobserved state and performs sequential 1-step receding horizon updates with process noise dynamically scaled to trailing 15-minute variance. This achieves a Price Mean Absolute Percentage Error (MAPE) of **$0.143\%$** (tracking within 14 basis points of execution fills) and compresses uncertainty to a tight **$+/- 62\text{ USD}$** actionable trading corridor.
-   * **Dynamic GARCH + Basis-Conditioned Jump Diffusion (Strategy Track B2):** Models discontinuous Poisson jumps whose arrival intensity $\lambda_t$ is dynamically conditioned on negative Hyperliquid perpetual basis ($P_{\text{HL}} < P_{\text{Spot}}$) and perp-to-spot volume migration. This maintains **$100.0\%$ coverage** during severe liquidation cascades without over-inflating quiet intervals.
+1. **Why Traditional HAR-RV Models Break Down in Crypto:**
+   Classic equity HAR-RV models assume 5-day trading weeks and 22-day trading months with overnight halts. In continuous crypto markets:
+   * **Weekend Liquidity Compression:** Volatility systematically collapses on Saturdays and Sundays (dropping to $33\%\text{--}36\%$ annualized) as banking rails and institutional market makers pause, followed by sharp re-expansion upon Monday equity market reopenings ($66.6\%$ annualized).
+   * **Continuous Memory Windows:** 5-day and 22-day calendars distort historical memory. We replace them with continuous 7-day ($RV_{7d}$) and 30-day ($RV_{30d}$) crypto-native rolling windows.
+   * **Analytical Bias Correction:** Forecasting logarithmic variance ($\ln RV$) guarantees non-negative volatility, but exponentiation introduces Jensen's inequality bias ($\mathbb{E}[e^X] > e^{\mathbb{E}[X]}$). We analytically correct this using residual variance ($\frac{1}{2}\hat{s}_{\varepsilon}^2$).
+
+2. **Solving the Intraday Monte Carlo Diffusion Blowout:**
+   Standard quantitative execution desks typically project intraday prices using unconstrained random walks or static Monte Carlo rollouts. Because volatility scales with $\sqrt{t}$, unconstrained paths expand into broad, uninformative bands ($\sim 1,770\text{ USD}$ wide over 2 hours). We solve this through a dual approach:
+   * **Recursive Bayesian Kalman Filtering (Strategy Track B1):** We treat equilibrium price as an unobserved state and perform sequential 1-step receding horizon updates with dynamic process noise scaled to trailing 15-minute variance. This achieves a Price Mean Absolute Percentage Error (MAPE) of **$0.143\%$** (tracking within 14 basis points of execution fills) and compresses uncertainty to a tight **$+/- 62\text{ USD}$** actionable trading corridor.
+   * **Dynamic GARCH + Basis Jump Diffusion (Strategy Track B2):** We model discontinuous Poisson jumps whose arrival intensity $\lambda_t$ dynamically conditions on negative Hyperliquid perpetual basis ($P_{\text{HL}} < P_{\text{Spot}}$) and perp-to-spot volume migration. This maintains **$100.0\%$ coverage** during severe liquidation cascades without over-inflating quiet intervals.
 
 3. **Multi-Collinearity and Macro Spillover via Frisch-Waugh-Lovell:**
-   High-frequency crypto markets exhibit substantial cross-asset coupling to US tech equities ($\beta_{\text{OEX}} = 1.21$, $\beta_{\text{QQQ}} = 0.98$). Merging 103 macro regressors directly into autoregressive models creates severe multi-collinearity with core HAR terms. We implement the **Frisch-Waugh-Lovell (FWL) theorem** via vectorized projection (`np.linalg.lstsq`), orthogonalizing all exogenous signals onto the null space of the HAR regressors prior to L1-regularized Lasso estimation.
+   Crypto markets exhibit substantial cross-asset coupling to US tech equities ($\beta_{\text{OEX}} = 1.21$, $\beta_{\text{QQQ}} = 0.98$). Merging 103 macro regressors directly into autoregressive models creates severe multi-collinearity with core HAR terms. We implement the **Frisch-Waugh-Lovell (FWL) theorem** via vectorized projection (`np.linalg.lstsq`), orthogonalizing all exogenous signals onto the null space of the HAR regressors prior to L1-regularized Lasso estimation.
 
-4. **Microstructure Variance Audit and the 1-Second Discrepancy:**
+4. **The Microstructure Variance Audit and the 1-Second Discrepancy:**
    Standard textbooks argue that sub-minute realized variance is diluted by zero-trade intervals. By analyzing 24 complete 86,400-second days ($2,073,600$ seconds) from November 2026, we mathematically prove that 240,355 zero-trade seconds ($11.59\%$) contribute identically zero squared returns. The expansion of the Variance Ratio from $1.217$ (5-second) to $1.516$ (1-hour) is driven by **positive lag-1 autocorrelation ($\rho_1 = +0.0997$)** induced by institutional algorithmic child-order splitting across exchanges.
 
 ---

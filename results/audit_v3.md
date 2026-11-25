@@ -3,7 +3,7 @@
 **Date of Execution**: November 25, 2026  
 **Pipeline Run**: Unified Deterministic Execution (`btc_pipeline/audit_v3_pipeline.py`)  
 **Status**: **ALL 11 FIXES PASSED**  
-**Dataset**: Clean Master Feature Parquet ([`data/engineered_features_master.parquet`](file://data/engineered_features_master.parquet)) — 1,419 rows (2023-01-06 to 2026-11-24), 64 stationary features.
+**Dataset**: Clean Master Feature Parquet ([`data/engineered_features_master.parquet`](data/engineered_features_master.parquet)) — 1,419 rows (2023-01-06 to 2026-11-24), 64 stationary features.
 
 ---
 
@@ -19,7 +19,7 @@
 | **Fix 6** | Nested time-series CV for hyperparameter $\alpha$ | **PASS** | Optimal $\alpha \in [10^{-3}, 10^{-1}]$ selected via rolling 5-split expanding window inside each training fold without test leakage. |
 | **Fix 7** | Real point-in-time leakage test for 20 dates ($\ge 5$ in November) | **PASS** | 20 / 20 dates matched across **ALL 64 features** with 0 numerical discrepancy ($< 10^{-12}$) when rebuilt strictly from raw data $\le t$. |
 | **Fix 8** | Signature plot investigation & 1.52x variance gap audit | **PASS** | 1s returns: $\rho_1 = +0.0862$. 240,355 zero-trade seconds (11.59%) forward-filled with $r=0$. 5m RV vs 1h RV ratio = 1.0285x (stable within 4.5%). Proved 1.52x gap is a microstructure artifact. |
-| **Fix 9** | Unified pipeline regeneration & archiving | **PASS** | All outputs generated from single execution run; stale files archived in [`archive/`](file://archive). 14/14 pytest tests pass. |
+| **Fix 9** | Unified pipeline regeneration & archiving | **PASS** | All outputs generated from single execution run; stale files archived in [`archive/`](archive). 14/14 pytest tests pass. |
 | **Fix 10** | Final forecast table: baseline vs ML comparison | **PASS** | ML failed to beat baseline under HAC DM ($p > 0.05$); `HAR_Crypto_Log_DOW_7_30` selected as primary forecast and reported alongside ML. |
 | **Fix 11** | Minor items: trading-sim DSR with per-period Sharpe & dynamic $n\_trials$ | **PASS** | $T=22$, $n\_trials=34$ (from code), daily Sharpe $-0.375$ (ann $-7.16$), $P(\text{DSR} > 0) = 0.0000$. Last row `target_dir_next` is strictly NaN. |
 
@@ -28,7 +28,7 @@
 ## Fix 1: Single-RV Master Definition (No 1-Second Override)
 
 ### Implementation Details
-In [`btc_pipeline/feature_engineering.py`](file://btc_pipeline/feature_engineering.py), the 1-second high-frequency override for November 2026 was permanently removed. Realized variance ($RV$) across all 1,419 rows from 2023-01-06 to 2026-11-24 is computed strictly from 24 hourly log returns sampled along the US equity session calendar (cutoff 21:00 UTC):
+In [`btc_pipeline/feature_engineering.py`](btc_pipeline/feature_engineering.py), the 1-second high-frequency override for November 2026 was permanently removed. Realized variance ($RV$) across all 1,419 rows from 2023-01-06 to 2026-11-24 is computed strictly from 24 hourly log returns sampled along the US equity session calendar (cutoff 21:00 UTC):
 $$RV_t = \sum_{k=1}^{24} r_{t,k}^2, \quad \sigma_{\text{ann}, t} = \sqrt{RV_t \times 365}$$
 
 ### Empirical Consistency Check
@@ -226,7 +226,7 @@ Per mandate, because machine learning models failed to achieve a statistically s
 | **2026-11-29** | Sunday (Weekend) | 37.08% | 34.82% | `HAR_Crypto_Log_DOW_7_30` | **37.08%** | [15.34%, 109.66%] | [9.40%, 233.20%] | 3.10% | Neutral (AUC ~ 0.50) |
 | **2026-11-30** | Monday (Equities Reopen) | 67.39% | 67.58% | `HAR_Crypto_Log_DOW_7_30` | **67.39%** | [28.03%, 194.08%] | [15.38%, 426.58%] | 5.63% | Neutral (AUC ~ 0.50) |
 
-- **CSV Artifact**: [`results/forecast_nov26_30_v3.csv`](file://results/forecast_nov26_30_v3.csv)
+- **CSV Artifact**: [`results/forecast_nov26_30_v3.csv`](results/forecast_nov26_30_v3.csv)
 
 ---
 
