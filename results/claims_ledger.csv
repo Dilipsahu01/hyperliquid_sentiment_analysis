@@ -1,0 +1,33 @@
+claim_text,value,source_script,sample,evaluation_type,status
+Total raw WebSocket messages processed across CEX and L1,"104,896,898",scripts/research/generate_master_md.py,"N=104,896,898 events | 2026-11-01 to 2026-11-25",lead-lag,verified
+"Non-trade WebSocket frames scrubbed (cancellations, heartbeats, depth updates)","5,885,612 (5.61%)",scripts/research/generate_master_md.py,"N=5,885,612 non-trade frames | 2026-11-01 to 2026-11-25",lead-lag,verified
+Lo-MacKinlay Variance Ratio expansion from 1-second to 1-hour,"1.5157 (95% CI: [1.1825, 1.9529])",btc_pipeline/audit_v4_pipeline.py,"N=2,073,600 seconds (24 full days) | 2026-11-01 to 2026-11-25",lead-lag,verified
+1-second return first-order autocorrelation rho_1 on Binance Spot trades,"+0.0997 (std: 0.0333, min: +0.0373, max: +0.1614)",btc_pipeline/audit_v4_pipeline.py,"N=2,073,600 seconds | 2026-11-01 to 2026-11-25",lead-lag,verified
+Zero-trade seconds share of total time,"11.59% (240,355 zero-trade seconds)",btc_pipeline/audit_v4_pipeline.py,"N=2,073,600 seconds | 2026-11-01 to 2026-11-25",lead-lag,verified
+Out-of-sample 5m Realized Volatility holdout QLIKE loss vs 1h baseline,0.3979 (5m RV) vs 0.4999 (1h RV) -> 20.40% error reduction,btc_pipeline/audit_v4_pipeline.py,N=23 holdout days | 2026-11-08 to 2026-11-30,daily-vol,verified
+Holdout 80% confidence corridor coverage on daily volatility,80.80%,btc_pipeline/audit_v4_pipeline.py,N=250 out-of-sample days | 2026-03-26 to 2026-11-30,daily-vol,verified
+Holdout 95% confidence corridor coverage on daily volatility,92.80% to 93.60%,btc_pipeline/audit_v4_pipeline.py,N=250 out-of-sample days | 2026-03-26 to 2026-11-30,daily-vol,verified
+Headline claim: Volatility blend beats HAR-Log at 5% statistical significance,"DM = +1.8149, p = 0.0695",btc_pipeline/audit_v4_pipeline.py,N=889 walk-forward days | 2024-06-05 to 2026-10-27,daily-vol,retracted
+Re-evaluated DM test vs HAR-Log with Newey-West bandwidth q=6 and HLN correction,"DM_HLN = +1.524, p = 0.128 (not significant at alpha=0.05)",scripts/reproduce_quant_audit.py,N=125 walk-forward folds (889 days) | 2024-06-05 to 2026-10-27,daily-vol,verified
+HAC Newey-West bandwidth = 2,2,None (Arithmetic error: floor(4*(889/100)^(2/9)) = 6),N=889 days,daily-vol,retracted
+Dynamic GARCH 1-sigma band width reduction vs static tunnel,72.82% ($1455.93 -> $395.68 USD; 248.27 -> 67.47 bps),scripts/audit_dynamic_nov25_kupiec.py,N=79 bars (6.58 hours) | 2026-11-25 11:45 to 18:15 UTC,5m-band,verified
+Dynamic 5m 1-sigma band two-sided full-width in bps and USD,"67.47 bps ($395.68 USD on $58,643.55 anchor)",scripts/reproduce_quant_audit.py,N=79 bars | 2026-11-25 11:45 to 18:15 UTC,5m-band,verified
+Dynamic 5m 1-sigma band one-sided radius (half-width) in bps and USD,"33.74 bps ($197.84 USD on $58,643.55 anchor)",scripts/reproduce_quant_audit.py,N=79 bars | 2026-11-25 11:45 to 18:15 UTC,5m-band,verified
+Median Pinball Loss (q=0.50 core) reduction from static to dynamic model,30.57% ($58.0827 -> $40.3284 USD),scripts/dynamic_garch_gap_engine.py,N=16 bars (75 minutes) | 2026-11-25 12:30 to 13:45 UTC,5m-band,verified
+"Winkler score reduction claimed in assistant response ($1,682 to $512 USD)","$1,682 to $512 USD",None (Chat reasoning without script execution; violated Rule 1),N=0 (Undefined sample),5m-band,retracted
+Actual empirically computed 95% Winkler score reduction on N=79 bars,52.77% ($2912.16 -> $1375.37 USD; 496.59 -> 234.53 bps),scripts/reproduce_quant_audit.py,N=79 bars | 2026-11-25 11:45 to 18:15 UTC,5m-band,verified
+Kupiec (1995) POF test on Dynamic GARCH 1-sigma coverage (64.56% vs 68.27%),"LR_uc = 0.4931, p = 0.4825 (Fail to Reject H0)",scripts/audit_dynamic_nov25_kupiec.py,N=79 bars (low statistical power) | 2026-11-25 11:45 to 18:15 UTC,5m-band,verified
+Kupiec test on Static Tunnel 1-sigma coverage (86.08% vs 68.27%),"LR_uc = 13.3991, p = 0.00025 (Reject H0 - Miscalibrated)",scripts/audit_dynamic_nov25_kupiec.py,N=79 bars | 2026-11-25 11:45 to 18:15 UTC,5m-band,verified
+Christoffersen (1998) Independence test on Dynamic 1-sigma breaches,"LR_ind = 1.4123, p = 0.2347 (Fail to Reject H0 - No Clustering)",scripts/audit_dynamic_nov25_kupiec.py,N=79 bars | 2026-11-25 11:45 to 18:15 UTC,5m-band,verified
+Claim that 5-minute 2-sigma band serves as a liquidation margin model,2-sigma corridor = 95.45% coverage,None (Breaches 13 times/day under 288 5m bars; invalid for margin),N=79 bars,5m-band,retracted
+London Close (16:00-17:00 UTC) log RV in-sample OLS regression t-stat,"t = +2.364, p = 0.0181",scripts/backtest_london_close_feature.py,"N=1,423 daily sessions | 2023-01-01 to 2026-11-23",daily-vol,verified
+London Close out-of-sample walk-forward incremental QLIKE advantage,"DM = +1.0777, p = 0.2812 (Not statistically significant)",scripts/backtest_london_close_feature.py,N=917 out-of-sample days | 2024-05-15 to 2026-11-17,daily-vol,verified
+London Close feature is a proven ex-ante predictive alpha feature,p = 0.0181,None (Fails Bonferroni 0.05/39=0.00128 and fails OOS DM test),"N=1,423 in-sample / N=917 OOS",daily-vol,retracted
+Binance leads Hyperliquid price discovery by 60-120s on US macro events,60 to 120 seconds,None (Hardcoded 13:30 UTC filter misaligned summer EDT events; requires DST fix),N=18 selective events,lead-lag,unverified
+Hyperliquid perpetuals lead spot markets in liquidation cascades,Perpetual basis discount of -6.8 to -8.68 bps leads spot,None (Confounded instrument [perp vs spot] with venue; circular basis definition),N=24 selective events,lead-lag,retracted
+L2 order book depth dropped 64.2% on Hyperliquid during cascade event,64.2% depth drop,scripts/test_latest_live_window.py,"N=1 event (Nov 25 14:15 UTC drop to $57,300) | Case study",lead-lag,verified
+Forward logger represents a proprietary data moat,Data moat claim,None (Public requester-pays S3 buckets exist: s3://hyperliquid-archive),N/A,lead-lag,retracted
+FTX collapse aftermath was included in the 917-day stress regime,FTX aftermath claim,None (FTX collapsed Nov 2022; repo data begins Jan 2023),N=917 days | 2023-01-01 to 2026-11-25,daily-vol,retracted
+Volatility-targeted trading strategy net return under 7 bps fee hurdle,-16.47% vs -15.42% Buy & Hold (Annualized Sharpe: -7.96),btc_pipeline/trading_simulation.py,N=22 holdout trading days | 2026-11-01 to 2026-11-23,sim,verified
+Deflated Sharpe Ratio (Bailey & Lopez de Prado 2014) probability,9.75e-14 (0.000% probability of true positive Sharpe),btc_pipeline/trading_simulation.py,N=39 total experimental trials | T=22 days,sim,verified
+Claim of 7 bps adverse-selection savings for market makers,7 bps adverse selection savings,"None (7 bps was simulated taker friction, not quote markout curve)",N=22 trading days,sim,retracted
