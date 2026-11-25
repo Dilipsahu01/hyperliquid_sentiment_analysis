@@ -10,6 +10,7 @@ files_to_bundle = [
     ("src/data.py", "python"),
     ("Master.md", "markdown"),
     ("report.md", "markdown"),
+    ("Q&A.md", "markdown"),
     ("results/audit_v4.md", "markdown"),
     ("results/audit_v3.md", "markdown"),
     ("results/audit_v2.md", "markdown"),

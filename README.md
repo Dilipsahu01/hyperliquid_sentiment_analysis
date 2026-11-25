@@ -246,6 +246,7 @@ All quantitative research methodologies, empirical proofs, and implementation gu
 | **[`docs/03_full_day_intraday_prediction.md`](docs/03_full_day_intraday_prediction.md)** | Strategy Track B: 5-minute streaming forward gap tests, Recursive Kalman filtering, dynamic jump diffusion, and liquidation cascade absorption. |
 | **[`docs/04_data_factors_analysis.md`](docs/04_data_factors_analysis.md)** | Strategy Track C: Comprehensive empirical data factor analysis across volatility/jumps, sentiment regimes, microstructure U-curve/OFI, calendar seasonality, and macro spillovers. |
 | **[`report.md`](report.md)** | Full Consolidated Research Report: Complete numerical tables, ablation matrices, and trading simulation metrics. |
+| **[`Q&A.md`](Q&A.md)** | Quantitative Research & Microstructure Audit: 14 in-depth questions and answers defending synchronization, econometrics, microstructure, execution risk, and tick discretization. |
 | **[`Analysis_in_words.md`](Analysis_in_words.md)** | Plain-English Conceptual Guide: Non-technical walkthrough explaining chart interpretation, Fear & Greed mechanics, and trader takeaways. |
 
 ---
@@ -319,6 +320,7 @@ hyperliquid_sentiment_analysis/
 │   └── test_live_logger.py                # Live parquet schema and monotonic sanity
 │
 ├── build_bundle.py                        # Single-file review compiler
+├── Q&A.md                                 # Quantitative Research & Microstructure Audit Q&A (14 Questions)
 ├── claude-to-review.md                    # 32-file unified compilation (405 KB)
 └── requirements.txt                       # Locked dependencies
 ```
