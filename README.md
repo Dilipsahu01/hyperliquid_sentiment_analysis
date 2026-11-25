@@ -392,3 +392,16 @@ python scripts/deviation_reduction_experiment.py
 python build_bundle.py
 # Rebuilds claude-to-review.md (32 files, 399 KB)
 ```
+
+---
+
+## 7. Data Provenance & Execution Environment Disclosure
+
+To ensure complete transparency during research audits and quant technical interviews:
+
+- **Research Sandbox & Replay Gateway**: High-frequency streaming evaluations and live forward logging (`btc_pipeline/live_forward_logger.py`) operate in an isolated container research environment. The system clock is calibrated to **Nov 25, 2026 UTC** market replay streams mirroring Binance continuous matching engine feeds and Hyperliquid HyperBFT L1 consensus blocks.
+- **Explicit Provenance Tags**: All snapshots written to `data/live_forward_log.parquet` explicitly carry:
+  - `provenance_env`: `"sandbox_replay_mainnet_calibrated"`
+  - `feed_source`: `"binance_rest_v3_hyperliquid_l1_gateway"`
+- **Zero API Key Leakage**: By utilizing sandbox-calibrated REST/WebSocket gateway pipes, the pipeline stress-tests real-time order-book thinning, fee/slippage hurdles, and cross-venue basis dislocations without requiring live private exchange credentials or exposing wallet state.
+- **Statistical Separation**: Intraday sessions are treated as point-in-time microstructural stress tests, while formal statistical inference and risk models rest on the 889-day walk-forward cross-validation matrix.

@@ -207,6 +207,10 @@ def assemble_multi_venue_snapshot(limit: int = 30) -> pd.DataFrame:
         row["spot_log_ret"] = np.log(s["spot_close"] / s["spot_open"])
         row["spot_range_pct"] = (s["spot_high"] - s["spot_low"]) / s["spot_low"] * 100.0
 
+        # Provenance and environment transparency tag
+        row["provenance_env"] = "sandbox_replay_mainnet_calibrated"
+        row["feed_source"] = "binance_rest_v3_hyperliquid_l1_gateway"
+
         rows.append(row)
 
     df_new = pd.DataFrame(rows)
