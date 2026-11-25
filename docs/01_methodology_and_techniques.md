@@ -8,10 +8,9 @@
 ## 1. End-to-End Methodological Architecture
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'background': '#ffffff', 'primaryColor': '#f0f4f8', 'primaryTextColor': '#1f2937', 'primaryBorderColor': '#2563eb', 'lineColor': '#475569', 'secondaryColor': '#e2e8f0', 'tertiaryColor': '#f8fafc'}}}%%
 flowchart TD
     subgraph S1["1. Raw Ingestion and Multi-Venue Polling"]
-        A1["Binance Spot 1m/5m/1h Klines"] 
+        A1["Binance Spot 1m/5m/1h Klines"]
         A2["Binance USD-M Perp Mark Price"]
         A3["Hyperliquid L1/L2 Mainnet Candles and OI"]
         A4["Alternative.me Fear and Greed API"]
@@ -35,7 +34,9 @@ flowchart TD
         D3["Live 5m Forward Gap and Stress Testing"]
     end
 
-    S1 --> S2 --> S3 --> S4
+    S1 --> S2
+    S2 --> S3
+    S3 --> S4
 ```
 
 ---

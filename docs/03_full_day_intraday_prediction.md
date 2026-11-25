@@ -14,34 +14,29 @@ While daily models project aggregate 24-hour variance, high-frequency intraday e
 3. **Cross-Venue Basis & Lead-Lag**: Hyperliquid perpetuals lead spot markets during liquidation cascades. Negative basis ($P_{\text{HL}} < P_{\text{Spot}}$) and surging perp volume reliably signal aggressive long unwinds.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'background': '#ffffff', 'primaryColor': '#f0f4f8', 'primaryTextColor': '#1f2937', 'primaryBorderColor': '#2563eb', 'lineColor': '#475569', 'secondaryColor': '#e2e8f0', 'tertiaryColor': '#f8fafc'}}}%%
 sequenceDiagram
     autonumber
-    participant Venue as Live APIs (Binance & Hyperliquid)
+    participant Venue as Live APIs (Binance and Hyperliquid)
     participant Log as btc_pipeline/live_forward_logger.py
     participant Kalman as Approach 1: Recursive Kalman Filter
-    participant Jump as Approach 2: Dynamic GARCH + Basis MC
-    participant Trader as Execution & Risk Output
+    participant Jump as Approach 2: Dynamic GARCH and Basis MC
+    participant Trader as Execution and Risk Output
 
-    Venue->>Log: Pull 5m OHLCV, Taker Buy Vol, Mark Price, & Funding
-    Log->>Log: Compute Net OFI (BTC) & Basis (USD/bps)
-    
-    rect rgb(240, 244, 255)
-        note over Kalman: Approach 1: Sequential 1-Step Receding Horizon
-        Log->>Kalman: Feed live fill P_t & trailing 15m realized variance
-        Kalman->>Kalman: Compute dynamic process noise Q_t = (sigma_15m * P)^2
-        Kalman->>Kalman: Measurement update via Kalman gain K_t
-        Kalman->>Trader: Emit point forecast & tight ±$62 trading band
-    end
+    Venue->>Log: Pull 5m OHLCV, Taker Buy Vol, Mark Price, and Funding
+    Log->>Log: Compute Net OFI (BTC) and Basis (USD/bps)
 
-    rect rgb(240, 253, 244)
-        note over Jump: Approach 2: Calibrated Density & Liquidation Corridors
-        Log->>Jump: Ingest trailing log-return r_{t-1}, Basis, & Vol Ratio
-        Jump->>Jump: GARCH(1,1) continuous sigma update
-        Jump->>Jump: Condition jump intensity lambda_t on negative basis
-        Jump->>Jump: Simulate M=5,000 paths & minimize Pinball Loss
-        Jump->>Trader: Emit calibrated 80% corridor & 95% liquidation stops
-    end
+    Note over Kalman: Approach 1: Sequential 1-Step Receding Horizon
+    Log->>Kalman: Feed live fill P_t and trailing 15m realized variance
+    Kalman->>Kalman: Compute dynamic process noise Q_t = (sigma_15m * P)^2
+    Kalman->>Kalman: Measurement update via Kalman gain K_t
+    Kalman->>Trader: Emit point forecast and tight +/- 62 USD trading band
+
+    Note over Jump: Approach 2: Calibrated Density and Liquidation Corridors
+    Log->>Jump: Ingest trailing log return r(t-1), Basis, and Vol Ratio
+    Jump->>Jump: GARCH(1,1) continuous sigma update
+    Jump->>Jump: Condition jump intensity lambda_t on negative basis
+    Jump->>Jump: Simulate M=5000 paths and minimize Pinball Loss
+    Jump->>Trader: Emit calibrated 80% corridor and 95% liquidation stops
 ```
 
 ---

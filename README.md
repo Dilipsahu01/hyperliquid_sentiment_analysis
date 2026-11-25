@@ -9,18 +9,17 @@
 ## 1. System Architecture Overview
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'background': '#ffffff', 'primaryColor': '#f0f4f8', 'primaryTextColor': '#1f2937', 'primaryBorderColor': '#2563eb', 'lineColor': '#475569', 'secondaryColor': '#e2e8f0', 'tertiaryColor': '#f8fafc'}}}%%
 flowchart TD
     subgraph Ingestion["1. Multi-Venue Data Feeds"]
-        HL["Hyperliquid L1/L2 Mainnet<br/>(Trades, Candles, Basis, Funding, OI)"]
-        BN_Spot["Binance Spot REST/WS<br/>(1s / 5m / 1h OHLCV and Taker Fills)"]
-        BN_Fut["Binance USD-M Futures<br/>(Mark Price, Basis Spreads)"]
-        FG["Alternative.me API<br/>(Crypto Fear and Greed Index)"]
+        HL["Hyperliquid L1/L2 Mainnet: Trades, Candles, Basis, Funding, OI"]
+        BN_Spot["Binance Spot REST/WS: 1s, 5m, 1h OHLCV and Taker Fills"]
+        BN_Fut["Binance USD-M Futures: Mark Price, Basis Spreads"]
+        FG["Alternative.me API: Crypto Fear and Greed Index"]
     end
 
     subgraph Processing["2. Feature and Microstructure Engine"]
         Align["Strict Point-in-Time Alignment (t <= 21:00 UTC)"]
-        RV_Engine["Hourly Realized Variance Engine (sum r^2)"]
+        RV_Engine["Hourly Realized Variance Engine: sum(r^2)"]
         FWL["Frisch-Waugh-Lovell Vectorized Projection"]
         Micro["Order Flow Imbalance (OFI) and Perpetual Basis (bps)"]
     end
@@ -28,23 +27,27 @@ flowchart TD
     Ingestion --> Processing
 
     subgraph TrackA["Strategy Track A: Long-Term Horizon (Daily / Multi-Day)"]
-        direction TB
         A_Feat["Continuous Memory (7d, 30d) + DOW Dummies + Macro Betas"]
-        AppA1["Best 1: HAR_Crypto_Log_DOW_7_30<br/>(Walk-Forward R2 = 0.4219 | QLIKE = 0.3812)"]
-        AppA2["Best 2: Equal-Weight Blend<br/>(HAR + Nested-CV Lasso ML | DM = +1.815)"]
+        AppA1["Best 1: HAR_Crypto_Log_DOW_7_30 (R2 = 0.4219, QLIKE = 0.3812)"]
+        AppA2["Best 2: Equal-Weight Blend (HAR + Nested-CV Lasso ML, DM = +1.815)"]
         A_Out["Multi-Horizon Production Fan Chart (Nov 26-30)"]
         
-        A_Feat --> AppA1 & AppA2 --> A_Out
+        A_Feat --> AppA1
+        A_Feat --> AppA2
+        AppA1 --> A_Out
+        AppA2 --> A_Out
     end
 
     subgraph TrackB["Strategy Track B: Full-Day / Intraday Horizon (5-Minute Bars)"]
-        direction TB
         B_Feat["Streaming 5m Bars + Trailing 15m Realized Variance + Net OFI"]
-        AppB1["Best 1: Recursive Bayesian Kalman Filter<br/>(MAE: $83.88 | MAPE: 0.143% | +/-$62 Core)"]
-        AppB2["Best 2: Dynamic GARCH + Basis Engine<br/>(62.5% Core | 81.2% 80-Cone | 100% 95-Cone)"]
+        AppB1["Best 1: Recursive Bayesian Kalman Filter (MAE: 83.88 USD, Core: +/- 62 USD)"]
+        AppB2["Best 2: Dynamic GARCH + Basis Engine (62.5% Core, 81.2% 80-Cone)"]
         B_Out["Real-Time Execution and Liquidation Risk Engine"]
         
-        B_Feat --> AppB1 & AppB2 --> B_Out
+        B_Feat --> AppB1
+        B_Feat --> AppB2
+        AppB1 --> B_Out
+        AppB2 --> B_Out
     end
 
     Processing --> TrackA

@@ -15,34 +15,51 @@ Long-term volatility modeling in 24/7 cryptocurrency markets faces distinct stru
 4. **Macro Contagion & Cross-Asset Spillovers**: Traditional tech equities (Nasdaq 100 `QQQ`, S&P 100 `OEX`) and macro risk-off sentiment spill over into crypto market dynamics.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'background': '#ffffff', 'primaryColor': '#f0f4f8', 'primaryTextColor': '#1f2937', 'primaryBorderColor': '#2563eb', 'lineColor': '#475569', 'secondaryColor': '#e2e8f0', 'tertiaryColor': '#f8fafc'}}}%%
 flowchart TD
-    subgraph Ingestion["1. Data Ingestion & Partitions (src/data.py)"]
-        A["Binance Spot 1h BTC/USDT<br/>(2022-01-01 to 2025-11-30)"] --> B["Compute Daily Realized Variance RV_t<br/>(21:00 UTC Cutoff)"]
-        FNG["Alternative.me Fear & Greed<br/>(Daily Index & Sentiment)"] --> B
+    subgraph Ingestion["1. Data Ingestion and Partitions in src/data.py"]
+        A["Binance Spot 1h BTC/USDT (2022-01-01 to 2025-11-30)"]
+        B["Compute Daily Realized Variance RV_t (21:00 UTC Cutoff)"]
+        FNG["Alternative.me Fear and Greed: Daily Index and Sentiment"]
+        A --> B
+        FNG --> B
     end
 
     subgraph FeatureStore["2. Feature Generation Store (103 Features)"]
-        B --> C1["Continuous 7-Day Memory: RV_7d"]
-        B --> C2["Continuous 30-Day Memory: RV_30d"]
-        B --> C3["Day-of-Week Dummies (DOW_0 to DOW_6)"]
-        B --> C4["Cross-Asset Macro Regressors (OEX, QQQ, Vol Ratios)"]
+        C1["Continuous 7-Day Memory: RV_7d"]
+        C2["Continuous 30-Day Memory: RV_30d"]
+        C3["Day-of-Week Dummies: DOW_0 to DOW_6"]
+        C4["Cross-Asset Macro Regressors: OEX, QQQ, Vol Ratios"]
+        B --> C1
+        B --> C2
+        B --> C3
+        B --> C4
     end
 
     subgraph Models["3. Top 2 Winning Methodologies"]
-        C1 & C2 & C3 --> App1["Approach 1: HAR_Crypto_Log_DOW_7_30<br/>(Structural Autoregressive Foundation)"]
-        C1 & C2 & C3 & C4 --> FWL["Frisch-Waugh-Lovell Orthogonalization<br/>X_other projected onto null(X_HAR)"]
-        FWL --> App2["Approach 2: Equal-Weight Blend<br/>(HAR-Crypto + Nested-CV Lasso ML)"]
+        App1["Approach 1: HAR_Crypto_Log_DOW_7_30 (Structural Autoregressive Foundation)"]
+        FWL["Frisch-Waugh-Lovell Orthogonalization: X_other projected onto null(X_HAR)"]
+        App2["Approach 2: Equal-Weight Blend (HAR-Crypto and Nested-CV Lasso ML)"]
+        C1 --> App1
+        C2 --> App1
+        C3 --> App1
+        C1 --> FWL
+        C2 --> FWL
+        C3 --> FWL
+        C4 --> FWL
+        FWL --> App2
     end
 
     subgraph Evaluation["4. Rigorous Out-of-Sample Calibration"]
-        App1 --> WF["889-Day Walk-Forward CV (127 Folds)"]
+        WF["889-Day Walk-Forward CV (127 Folds)"]
+        Holdout["23-Day November Holdout Evaluation (HAC Diebold-Mariano Test)"]
+        App1 --> WF
         App2 --> WF
-        WF --> Holdout["23-Day November Holdout Evaluation<br/>(HAC Diebold-Mariano Test)"]
+        WF --> Holdout
     end
 
     subgraph Inference["5. Multi-Horizon Production Inference"]
-        Holdout --> Ens["Consensus Forecast & Empirical Quantile Cones<br/>(outputs/figures/final_forecast_nov26_30.png)"]
+        Ens["Consensus Forecast and Empirical Quantile Cones (outputs/figures/final_forecast_nov26_30.png)"]
+        Holdout --> Ens
     end
 ```
 

@@ -10,21 +10,30 @@
 The repository extracts signals across five distinct structural factor groups:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'background': '#ffffff', 'primaryColor': '#f0f4f8', 'primaryTextColor': '#1f2937', 'primaryBorderColor': '#2563eb', 'lineColor': '#475569', 'secondaryColor': '#e2e8f0', 'tertiaryColor': '#f8fafc'}}}%%
 flowchart LR
     subgraph Factors["Engineered Data Factor Dimensions"]
-        F1["1. Volatility & Jumps<br/>(RV, BV, Jump, Parkinson Range)"]
-        F2["2. Market Sentiment<br/>(Fear & Greed Index, Momentum)"]
-        F3["3. Microstructure & OFI<br/>(U-Curve, Basis bps, Volume Ratio)"]
-        F4["4. Calendar Seasonality<br/>(DOW, Weekend Drop, ACF Memory)"]
-        F5["5. Macro Contagion<br/>(QQQ, COIN, NVDA, TLT, GLD)"]
+        F1["1. Volatility and Jumps: RV, BV, Jump, Parkinson Range"]
+        F2["2. Market Sentiment: Fear and Greed Index, Momentum"]
+        F3["3. Microstructure and OFI: U-Curve, Basis bps, Volume Ratio"]
+        F4["4. Calendar Seasonality: DOW, Weekend Drop, ACF Memory"]
+        F5["5. Macro Contagion: QQQ, COIN, NVDA, TLT, GLD"]
     end
 
     subgraph Targets["Downstream Prediction Engines"]
-        F1 & F4 --> L1["Long-Term Track A:<br/>HAR_Crypto_Log_DOW_7_30"]
-        F1 & F2 & F4 & F5 --> L2["Long-Term Track A:<br/>Equal-Weight Blend (Lasso ML)"]
-        F1 & F3 --> I1["Intraday Track B:<br/>Recursive Kalman Filter"]
-        F1 & F3 --> I2["Intraday Track B:<br/>Dynamic GARCH + Jump MC"]
+        L1["Long-Term Track A: HAR_Crypto_Log_DOW_7_30"]
+        L2["Long-Term Track A: Equal-Weight Blend with Lasso ML"]
+        I1["Intraday Track B: Recursive Kalman Filter"]
+        I2["Intraday Track B: Dynamic GARCH and Jump MC"]
+        F1 --> L1
+        F4 --> L1
+        F1 --> L2
+        F2 --> L2
+        F4 --> L2
+        F5 --> L2
+        F1 --> I1
+        F3 --> I1
+        F1 --> I2
+        F3 --> I2
     end
 ```
 
