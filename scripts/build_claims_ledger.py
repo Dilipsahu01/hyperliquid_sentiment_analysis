@@ -113,10 +113,26 @@ claims = [
 
     # 3. Intraday 5-Minute Bands & Specifically Traced Claims
     {
-        "claim_text": "Dynamic GARCH 1-sigma band width reduction vs static tunnel",
+        "claim_text": "Dynamic GARCH 1-sigma band width reduction vs static tunnel on intraday session",
         "value": "72.82% ($1455.93 -> $395.68 USD; 248.27 -> 67.47 bps)",
         "source_script": "scripts/audit_dynamic_nov25_kupiec.py",
         "sample": "N=79 bars (6.58 hours) | 2026-11-25 11:45 to 18:15 UTC",
+        "evaluation_type": "5m-band",
+        "status": "verified"
+    },
+    {
+        "claim_text": "Generalization of 72.8% band reduction to full historical 4-year sample",
+        "value": "72.8% full sample reduction",
+        "source_script": "None (Invalidated by scripts/walkforward_5m_band_evaluation.py; true reduction is 20.94%)",
+        "sample": "N=384,334 bars | 2023-04-01 to 2026-11-25",
+        "evaluation_type": "5m-band",
+        "status": "retracted"
+    },
+    {
+        "claim_text": "Dynamic Jump Engine 1-sigma width reduction vs standard GARCH(1,1)-t over full historical out-of-sample",
+        "value": "20.94% (30.23 bps -> 23.90 bps)",
+        "source_script": "scripts/walkforward_5m_band_evaluation.py",
+        "sample": "N=384,334 bars | 2023-04-01 to 2026-11-25",
         "evaluation_type": "5m-band",
         "status": "verified"
     },

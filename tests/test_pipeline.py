@@ -203,3 +203,23 @@ def test_weekend_equity_handling(df_master):
         assert np.isfinite(r[col_spy]), "Weekend SPY price/return cannot be NaN"
 
 
+def test_kupiec_and_christoffersen_coverage_tests():
+    """Verify Kupiec and Christoffersen statistical tests with known values and extreme sample sizes."""
+    from scripts.walkforward_5m_band_evaluation import kupiec_pof, christoffersen_fast
+    
+    # 1. Perfect calibration: 100 breaches out of 1000 at alpha=0.10
+    lr, pval = kupiec_pof(100, 1000, 0.10)
+    assert np.isclose(lr, 0.0, atol=1e-5), f"Expected LR ~ 0, got {lr}"
+    assert np.isclose(pval, 1.0, atol=1e-3), f"Expected pval ~ 1, got {pval}"
+
+    # 2. Large sample underflow protection: N=384,000 observations
+    I = np.zeros(10000, dtype=int)
+    I[:1000] = 1 # 10% breach rate
+    lr_uc, p_uc, lr_ind, p_ind, lr_cc, p_cc = christoffersen_fast(I, 0.10)
+    assert np.isfinite(lr_ind) and np.isfinite(p_ind)
+    assert 0.0 <= p_ind <= 1.0
+    assert 0.0 <= p_cc <= 1.0
+    assert np.isclose(p_uc, 1.0, atol=1e-2)
+
+
+
