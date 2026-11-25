@@ -52,7 +52,7 @@ All raw equity price levels (`AAPL` through `XOM`) were replaced exclusively wit
 1. **HAR & High-Frequency Volatility (11 features):** $RV$, $\sigma_{\text{ann}}$, 5d week ($RV_w, \sigma_w$), 22d month ($RV_m, \sigma_m$), continuous 7d crypto week ($RV_{7d}, \sigma_{7d}$), 30d crypto month ($RV_{30d}, \sigma_{30d}$), and Bipower Variation / Jump components ($BV, \text{Jump}, \text{RelJump}$).
 2. **Order Flow & Price Extremes (8 features):** Daily return, Order Flow Imbalance ($OFI$), Parkinson range percentage, range lags (1, 2, 3), log volume, volume 1-day change %, trade count 1-day change %.
 3. **BTC Return Lags (4 features):** Lags 1, 2, 3, and 5 of daily percentage returns.
-4. **Sentiment (2 features):** Alternative.me Fear & Greed Index level and 1-day momentum $\Delta \text{F&G}$.
+4. **Sentiment (2 features):** Alternative.me Fear & Greed Index level and 1-day momentum $\Delta \text{FNG}$.
 5. **Equities & Macro Cross-Asset (29 features):** Daily percentage returns for 24 equities/ETFs, rolling 20-day correlations ($\rho_{\text{QQQ}}, \rho_{\text{COIN}}, \rho_{\text{TLT}}$) computed strictly on trading days and forward-filled over weekends, `equity_is_trading_day`, and `equity_is_stale`.
 6. **Calendar & Holiday Structure (10 features):** Day of week (`dow`), `is_weekend`, `is_friday`, `is_sunday`, `is_monday`, `is_thanksgiving`, `is_black_friday`, and target-date DOW dummies.
 

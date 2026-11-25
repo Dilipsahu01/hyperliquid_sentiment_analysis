@@ -4,7 +4,7 @@
 
 > [!IMPORTANT]
 > This addendum formally flags and reconciles the legacy data anomalies and unit issues identified across previous revisions:
-> 1. **Price Discrepancy ($6,193 vs 16.5%)**: Historical logs noting a $6,193 absolute move on BTC reflected intraday high-to-low dollar amplitude, whereas 16.5% represented the percentage range relative to base price. Both refer to the Nov 3–4 volatility event.
+> 1. **Price Discrepancy (6,193 USD vs 16.5%)**: Historical logs noting a 6,193 USD absolute move on BTC reflected intraday high-to-low dollar amplitude, whereas 16.5% represented the percentage range relative to base price. Both refer to the Nov 3–4 volatility event.
 > 2. **'Total Trades' Column Label (524,484)**: The table labeled 'Total Trades' summing to 524,484 refers strictly to the **5-minute bar observation count** across the 64-coin perpetual universe, NOT tick trade executions.
 > 3. **19,400% Volatility Unit Bug**: An earlier draft multiplied daily variance by $86,400 \times 365$, compounding variance with seconds/year. Realized volatility is standardized to textbook annualization: $\sigma_{\text{ann}} = \sqrt{365 \times RV_{\text{daily}}}$, spanning 15% to 125% (mean ~46%).
 > 4. **Beta Contradiction (0.74/0.58)**: An inverted ratio was reported. Analytical beta is defined as $\beta = \rho \cdot \frac{\sigma_{\text{btc}}}{\sigma_{\text{index}}}$. With $\rho \approx 0.38$ and $\frac{\sigma_{\text{btc}}}{\sigma_{\text{qqq}}} \approx 2.59$, empirical beta is **0.984 to QQQ** and **1.21 to SPY**.
@@ -264,8 +264,8 @@ $$\mathbf{C}_{i,j} = \frac{\sum_{k=1}^T (R_{i,k} - \bar{R}_i)(R_{j,k} - \bar{R}_
 |:---:|---|---|---|
 | **Phase 1** | Nov 18 | `AMD` (+5.3%), `AVGO` (+3.6%) vs `NVDA` (-2.9%) | **Semi Divergence**: NVDA decoupled from chip peers, creating an extreme spread. |
 | **Phase 2** | Nov 20 (Friday) | `NVDA` (-14.0%), `AMD` (-13.3%), `AVGO` (-12.2%) vs `WMT` (+1.5%), `TLT` (+1.4%), `XOM` (+0.7%) | **Climax Capitulation**: Forced liquidation; capital rotated into defensive bonds and staples. |
-| **Phase 3** | Nov 21 06:17 UTC | `BTC` hits exact monthly low at **$55,130.00** | **Margin Exhaustion**: 24/7 crypto absorbs final liquidations 56 hours before US equities open. |
-| **Phase 4** | Nov 21-22 (Weekend) | `BTC` rallies **+$6,193 (+11.2%)** from $55.1k to $61.3k (and +16.5% to $64.2k) | **Leading Indicator Recovery**: Smart-money risk accumulation occurs over weekend. |
+| **Phase 3** | Nov 21 06:17 UTC | `BTC` hits exact monthly low at **55,130.00 USD** | **Margin Exhaustion**: 24/7 crypto absorbs final liquidations 56 hours before US equities open. |
+| **Phase 4** | Nov 21-22 (Weekend) | `BTC` rallies **+6,193 USD (+11.2%)** from 55.1k USD to 61.3k USD (and +16.5% to 64.2k USD) | **Leading Indicator Recovery**: Smart-money risk accumulation occurs over weekend. |
 | **Phase 5** | Nov 23 14:30 UTC | `NVDA` opens **+31.5%**, `TSLA` (+11.5%), `QCOM` (+10.3%) while `XOM` dumps **-1.9%** | **Inversion Surge**: Capital exits defensive hedges and violently re-enters growth tech. |
 
 ---
@@ -340,12 +340,12 @@ $$\mathbf{C}_{i,j} = \frac{\sum_{k=1}^T (R_{i,k} - \bar{R}_i)(R_{j,k} - \bar{R}_
 
 ### 5-Minute High-Frequency Regime Statistics Table
 
-| Regime Classification | 5-Minute Bars (Observation Count) | Win Rate (%) | Avg PnL ($) | Profit Factor | Realized Volatility (Annualized) |
+| Regime Classification | 5-Minute Bars (Observation Count) | Win Rate (%) | Avg PnL (USD) | Profit Factor | Realized Volatility (Annualized) |
 |---|:---:|:---:|:---:|:---:|:---:|
-| **Extreme Fear** | 117,501 | 40.7% | $0.01 | 1.02 | 62.4% (legacy typo: 19,400%) |
-| **Fear** | 110,625 | 39.1% | $0.01 | 1.02 | 54.2% (legacy typo: 10,800%) |
-| **Neutral** | 90,506 | 38.7% | $0.02 | 1.03 | 48.6% (legacy typo: 13,600%) |
-| **Greed** | 205,852 | 40.2% | $0.02 | 1.03 | 41.5% (legacy typo: 7,100%) |
+| **Extreme Fear** | 117,501 | 40.7% | +0.01 USD | 1.02 | 62.4% (legacy typo: 19,400%) |
+| **Fear** | 110,625 | 39.1% | +0.01 USD | 1.02 | 54.2% (legacy typo: 10,800%) |
+| **Neutral** | 90,506 | 38.7% | +0.02 USD | 1.03 | 48.6% (legacy typo: 13,600%) |
+| **Greed** | 205,852 | 40.2% | +0.02 USD | 1.03 | 41.5% (legacy typo: 7,100%) |
 
 $$\mathbf{H} = 37.3519, \quad p = 0.000000 \quad (p < 0.001 \implies \text{Regime Separation Statistically Significant})$$
 

@@ -20,7 +20,7 @@ Every check mandated in the audit specification was executed with actual numeric
 | **Check 7** | Range-Vol Consistency & Log-Vol Intervals | **PASS** | Empirical range/vol slope = 9.12 vs theoretical Parkinson = 6.95 (ratio 1.31x due to crypto jump wicks). Generated asymmetric log-vol intervals. Direction labels set to Neutral (AUC ~ 0.50). |
 | **Check 8** | Calendar Dummies & Direct $h$-Step Forecasting | **PASS** | Exactly 3 Thanksgivings & 3 Black Fridays in training set. Lasso shrunk both dummy coefficients to **0.000000**. Replaced rollout with direct $h$-step forecasts. |
 | **Check 9** | Vol-Targeting vs. Equal-Exposure Buy & Hold | **PASS** | Dropped 24d Sharpe. Vol-targeting avg exposure was 70.13%. Equal-exposure Buy & Hold (-15.42% ret, 19.71% MDD) performed comparably to Vol-Targeting (-16.47% ret, 20.75% MDD). |
-| **Check 10** | Data Inconsistencies & Documentation Fixes | **PASS** | Corrected BTC Nov prices ($77,582 start, $81,196 peak, $55,130 low, -32.1% peak DD). Documented DST shift (20:00 vs 21:00 UTC), MSE units ($(\Delta \sigma_{\text{ann}})^2$), and 5.61% non-trade tick filter. |
+| **Check 10** | Data Inconsistencies & Documentation Fixes | **PASS** | Corrected BTC Nov prices (77,582 USD start, 81,196 USD peak, 55,130 USD low, -32.1% peak DD). Documented DST shift (20:00 vs 21:00 UTC), MSE units ($(\Delta \sigma_{\text{ann}})^2$), and 5.61% non-trade tick filter. |
 
 ---
 
@@ -211,9 +211,9 @@ To eliminate standard error distortion, Sharpe ratios were omitted on the 22-day
 ### Check 10: Inconsistencies & Clarifications
 
 1. **BTC November Price Levels:**
-   - **Nov 1 Open:** **$77,582.02**
-   - **Nov 4 Monthly Peak:** **$81,196.01** (at 15:17 UTC)
-   - **Nov 21 Monthly Low:** **$55,130.00** (at 06:17 UTC)
+   - **Nov 1 Open:** **77,582.02 USD**
+   - **Nov 4 Monthly Peak:** **81,196.01 USD** (at 15:17 UTC)
+   - **Nov 21 Monthly Low:** **55,130.00 USD** (at 06:17 UTC)
    - **Drawdown from Peak:** **-32.10%**
    - **Drawdown from Nov 1 Open:** **-28.94%**
 2. **21:00 UTC vs. US Daylight Saving Time (DST):**

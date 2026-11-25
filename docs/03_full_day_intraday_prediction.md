@@ -10,7 +10,7 @@
 While daily models project aggregate 24-hour variance, high-frequency intraday execution requires modeling the **empirical U-curve**, microstructure order flow, and tail liquidation cascades:
 
 1. **The Intraday U-Curve & Cash Open Spikes**: Trade congestion and return volatility peak at 13:00–16:30 UTC (US cash market open) and bottom at 03:00–06:00 UTC (Asian inter-session lull).
-2. **The Open-Loop $\sqrt{t}$ Diffusion Blowout**: Traditional Monte Carlo path rollouts expand with $\sqrt{t}$. Over 22 bars (nearly 2 hours), unconstrained random walks produce broad, uninformative intervals ($\sim \$1,770$ wide).
+2. **The Open-Loop $\sqrt{t}$ Diffusion Blowout**: Traditional Monte Carlo path rollouts expand with $\sqrt{t}$. Over 22 bars (nearly 2 hours), unconstrained random walks produce broad, uninformative intervals ($\sim 1,770\text{ USD}$ wide).
 3. **Cross-Venue Basis & Lead-Lag**: Hyperliquid perpetuals lead spot markets during liquidation cascades. Negative basis ($P_{\text{HL}} < P_{\text{Spot}}$) and surging perp volume reliably signal aggressive long unwinds.
 
 ```mermaid
@@ -89,8 +89,8 @@ Approach 1 models the unobserved true equilibrium price $x_t$ as a sequential st
    $$\hat{P}_{t+1} = \hat{x}_{t|t} + \mu_t$$
 
 4. **Dynamic Trading Corridors**:
-   $$\text{Spread}_{50\%} = \pm 0.6745 \sqrt{P_{t|t} + Q_t} \implies \text{Total Width} \approx \$124.78 \text{ USD}$$
-   $$\text{Spread}_{95\%} = \pm 1.9600 \sqrt{P_{t|t} + Q_t} \implies \text{Total Width} \approx \$362.87 \text{ USD}$$
+   $$\text{Spread}_{50\%} = \pm 0.6745 \sqrt{P_{t|t} + Q_t} \implies \text{Total Width} \approx 124.78\text{ USD}$$
+   $$\text{Spread}_{95\%} = \pm 1.9600 \sqrt{P_{t|t} + Q_t} \implies \text{Total Width} \approx 362.87\text{ USD}$$
 
 #### Features Used
 * Binance Spot 5-minute close price $y_t$.
@@ -98,9 +98,9 @@ Approach 1 models the unobserved true equilibrium price $x_t$ as a sequential st
 * Aggressive Order Flow Imbalance ($\text{OFI}_t$) and Hyperliquid perpetual basis ($\text{Basis}_{\text{USD}, t}$).
 
 #### Strengths
-* **Superior Point Accuracy**: Delivers an average MAE of **\$83.88 USD** on live 22-bar evaluation data, outperforming naive drift (\$183.56 USD) by **54.3%**.
+* **Superior Point Accuracy**: Delivers an average MAE of **83.88 USD** on live 22-bar evaluation data, outperforming naive drift (183.56 USD) by **54.3%**.
 * **Tight Tracking Error**: Price Mean Absolute Percentage Error (MAPE) of **0.143%**, tracking within 14 basis points of execution fills.
-* **Massive Interval Compression**: Compresses the 95% uncertainty band from \$1,770 USD down to **\$362.87 USD** (a **79.5% width reduction**), providing an actionable 50% interquartile execution spread of **$\pm \$62$ USD**.
+* **Massive Interval Compression**: Compresses the 95% uncertainty band from 1,770 USD down to **362.87 USD** (a **79.5% width reduction**), providing an actionable 50% interquartile execution spread of **$\pm 62\text{ USD}$**.
 
 #### Limitations
 * **Strict Streaming Requirement**: Designed as a sequential online filter; requires continuous 5-minute data delivery to update state covariances.
@@ -128,8 +128,8 @@ Approach 2 models full predictive probability densities and liquidation tail cor
    $$\lambda_t = \min\left(0.45, \; \lambda_{\text{base}} + \gamma_b \max(0, -\text{Basis}_{\text{bps}, t} - 2.0) + \gamma_v \max(0, \text{Ratio}_{\text{vol}, t} - 1.2)\right)$$
    with calibrated sensitivity parameters:
    $$\lambda_{\text{base}} = 0.02, \quad \gamma_b = 0.03, \quad \gamma_v = 0.08$$
-   * **Calm Regime (12:30–13:25 UTC)**: Basis is narrow ($-\$5$ to $-\$15$, or $-1$ to $-2.5$ bps) and volume migration is quiet $\implies \lambda_t \approx 2.0\%$.
-   * **Liquidation Cascade (13:30–13:45 UTC)**: Hyperliquid perp volume surges to 970 BTC ($2.08\times$ spot) and basis dislocates to $-\$40$ ($-6.8$ bps) $\implies \lambda_t$ expands dynamically to **$35.0\%$**, widening downside corridors to capture flash drops to \$58,224 and \$57,989.
+   * **Calm Regime (12:30–13:25 UTC)**: Basis is narrow (-5 USD to -15 USD, or -1 to -2.5 bps) and volume migration is quiet ($\lambda_t \approx 2.0\%$).
+   * **Liquidation Cascade (13:30–13:45 UTC)**: Hyperliquid perp volume surges to 970 BTC ($2.08\times$ spot) and basis dislocates to -40 USD (-6.8 bps) $\implies \lambda_t$ expands dynamically to **35.0%**, widening downside corridors to capture flash drops to 58,224 USD and 57,989 USD.
 
 3. **Regime-Switching Jump Size Distribution**:
    $$J_t \sim \begin{cases} \mathcal{N}(\mu_{J, \text{calm}} = -0.05\%, \; \sigma_{J, \text{calm}}^2 = (0.25\%)^2) & \text{if } \lambda_t < 0.10 \\ \mathcal{N}(\mu_{J, \text{stress}} = -0.55\%, \; \sigma_{J, \text{stress}}^2 = (0.65\%)^2) & \text{if } \lambda_t \ge 0.10 \end{cases}$$
@@ -150,7 +150,7 @@ Approach 2 models full predictive probability densities and liquidation tail cor
 #### Strengths
 * **Eliminates Over-Dispersion**: Resolves the static model's 100% over-coverage caveat, establishing true empirical calibration (**62.5%** on 50% core, **81.2%** on 80% corridor).
 * **Zero Tail Blowouts**: Maintained **100.0% coverage** on the 95% corridor throughout the 13:30 liquidation cascade.
-* **Quantile Loss Optimization**: Achieved a median Pinball Loss of **\$40.33 USD** (**30.6% error reduction** over static diffusion).
+* **Quantile Loss Optimization**: Achieved a median Pinball Loss of **40.33 USD** (**30.6% error reduction** over static diffusion).
 
 #### Limitations
 * Requires concurrent low-latency streaming connections to both centralized (Binance) and decentralized (Hyperliquid) endpoints.
@@ -168,19 +168,19 @@ The following table reports empirical metrics evaluated against the live multi-v
 
 | Evaluation Metric | Approach 1: Recursive Kalman Filter | Approach 2: Dynamic GARCH + Basis Engine | Benchmark: Open-Loop Diffusion |
 | :--- | :---: | :---: | :---: |
-| **Mean Absolute Error (MAE)** | **\$83.88 USD** | \$114.41 USD | \$183.56 USD |
+| **Mean Absolute Error (MAE)** | **83.88 USD** | 114.41 USD | 183.56 USD |
 | **Price Error (MAPE)** | **0.143%** | 0.195% | 0.314% |
-| **Average 95% Corridor Width** | \$362.87 USD | \$554.41 USD | \$1,770.18 USD (Over-dispersed) |
-| **Average 50% Core Width** | **\$124.78 USD** | \$88.22 USD (calm) | \$558.33 USD (Too wide) |
+| **Average 95% Corridor Width** | 362.87 USD | 554.41 USD | 1,770.18 USD (Over-dispersed) |
+| **Average 50% Core Width** | **124.78 USD** | 88.22 USD (calm) | 558.33 USD (Too wide) |
 | **50% Interquartile Coverage** | 45.5% (Target 50%) | **62.5%** (Calibrated) | 100.0% (Over-covered) |
 | **80% Corridor Coverage** | 77.3% (Target 80%) | **81.2%** (Exact match) | 100.0% (Over-covered) |
 | **95% Corridor Coverage** | 90.9% (Target 95%) | **100.0%** (Zero blowouts) | 100.0% (Zero blowouts) |
-| **Median Pinball Loss ($q=0.50$)**| — | **\$40.33 USD** | \$58.08 USD |
-| **13:30 Liquidation Low Captured** | Yes (inside cone) | **Yes (flash low \$57,989 caught)** | Yes (via over-inflation) |
-| **Optimal Institutional Role** | Active market-making & pricing | Tail-risk & option strike stops | Legacy baseline |
+| **Median Pinball Loss ($q=0.50$)**| — | **40.33 USD** | 58.08 USD |
+| **13:30 Liquidation Low Captured** | Yes (inside cone) | **Yes (flash low 57,989 USD caught)** | Yes (via over-inflation) |
+| **Optimal Institutional Role** | Active market-making and pricing | Tail-risk and option strike stops | Legacy baseline |
 
 > [!TIP]
-> **Operational Synergy:** Institutional trading desks run both models simultaneously: Approach 1 supplies the **centerline pricing and execution spread** ($\pm \$62$), while Approach 2 sets the **liquidation stop-loss and dynamic margin boundary** ($\pm \$180$).
+> **Operational Synergy:** Institutional trading desks run both models simultaneously: Approach 1 supplies the **centerline pricing and execution spread** ($\pm 62\text{ USD}$), while Approach 2 sets the **liquidation stop-loss and dynamic margin boundary** ($\pm 180\text{ USD}$).
 
 ---
 
