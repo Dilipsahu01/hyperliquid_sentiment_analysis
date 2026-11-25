@@ -8,6 +8,11 @@ DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 LOG_PARQUET = DATA_DIR / "live_forward_log.parquet"
 
 def test_live_forward_log_structure():
+    """Verify structural integrity of the live forward parquet dataset.
+    
+    Validates column schemas, strictly monotonic timestamp ordering, absence of
+    duplicates, and positivity of spot and perpetual prices.
+    """
     assert LOG_PARQUET.exists(), f"Log file missing: {LOG_PARQUET}"
     df = pd.read_parquet(LOG_PARQUET)
     assert len(df) >= 16, f"Expected >= 16 bars in live log, got {len(df)}"
