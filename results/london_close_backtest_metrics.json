@@ -1,0 +1,17 @@
+{
+  "out_of_sample_days": 917,
+  "evaluation_window": "2024-05-15 to 2026-11-17",
+  "baseline_har_qlike": 0.3395271830116983,
+  "london_close_har_qlike": 0.3370421765719413,
+  "qlike_relative_improvement_pct": 0.7319020579484501,
+  "diebold_mariano_qlike": {
+    "dm_stat": 1.077731265967433,
+    "p_value": 0.2811537011753771
+  },
+  "baseline_har_mse": 5.501980711306756e-07,
+  "london_close_har_mse": 5.47352173357112e-07,
+  "diebold_mariano_mse": {
+    "dm_stat": 0.0,
+    "p_value": 1.0
+  }
+}
