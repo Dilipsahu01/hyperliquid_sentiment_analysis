@@ -20,10 +20,12 @@ RESULTS_DIR = Path("results")
 def deflated_sharpe_ratio(est_sharpe: float, n_trials: int, variance_trials: float, skew: float, kurt: float, T: int) -> float:
     """
     Computes the Deflated Sharpe Ratio (Bailey & Lopez de Prado 2014).
-    Tests H0: Sharpe <= 0 under multiple testing.
+    Adjusts the estimated Sharpe ratio for multiple testing bias, non-normality
+    (skewness and kurtosis), and sample length.
     """
     if T <= 2:
         return 0.5
+    # Euler-Mascheroni constant for extreme value approximation
     gamma = 0.5772156649
     z = (1.0 - gamma) * stats.norm.ppf(1.0 - 1.0 / n_trials) + gamma * stats.norm.ppf(1.0 - 1.0 / (n_trials * np.e))
     exp_max_sr = np.sqrt(variance_trials) * z
