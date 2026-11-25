@@ -1,0 +1,69 @@
+{
+  "evaluation_bars": 79,
+  "anchor_utc": "2026-11-25 11:45:00",
+  "latest_utc": "2026-11-25 18:15:00",
+  "models": {
+    "static_tunnel": {
+      "coverage_1sigma": 86.07594936708861,
+      "coverage_2sigma": 100.0,
+      "mean_width_1sigma_usd": 1455.9293743993805,
+      "kupiec_1sigma": {
+        "breaches": 11,
+        "total": 79,
+        "p_nominal": 0.3173,
+        "p_empirical": 0.13924050632911392,
+        "lr_stat": 13.39911660424572,
+        "p_value": 0.00025174283222095806,
+        "decision": "REJECT_H0 (MISCALIBRATED)"
+      },
+      "christoffersen_1sigma": {
+        "n00": 63,
+        "n01": 5,
+        "n10": 4,
+        "n11": 6,
+        "lr_stat": 14.280143369161186,
+        "p_value": 0.00015751779491957052,
+        "decision": "REJECT_H0 (BREACH_CLUSTERING)"
+      }
+    },
+    "dynamic_garch_basis": {
+      "coverage_50pct": 48.10126582278481,
+      "coverage_1sigma": 64.55696202531645,
+      "coverage_2sigma": 88.60759493670885,
+      "mean_width_1sigma_usd": 395.6777925756669,
+      "width_reduction_pct": 72.82300916973414,
+      "kupiec_1sigma": {
+        "breaches": 28,
+        "total": 79,
+        "p_nominal": 0.3173,
+        "p_empirical": 0.35443037974683544,
+        "lr_stat": 0.493105884816579,
+        "p_value": 0.482545101993649,
+        "decision": "FAIL_TO_REJECT_H0 (WELL-CALIBRATED)"
+      },
+      "christoffersen_1sigma": {
+        "n00": 31,
+        "n01": 20,
+        "n10": 20,
+        "n11": 7,
+        "lr_stat": 1.412297008519049,
+        "p_value": 0.23467545076248342,
+        "decision": "FAIL_TO_REJECT_H0 (NO_CLUSTERING)"
+      },
+      "conditional_coverage_1sigma": {
+        "lr_stat": 1.905402893335628,
+        "p_value": 0.3856976731175433,
+        "decision": "FAIL_TO_REJECT_H0 (CALIBRATED_&_INDEPENDENT)"
+      },
+      "kupiec_2sigma": {
+        "breaches": 9,
+        "total": 79,
+        "p_nominal": 0.0455,
+        "p_empirical": 0.11392405063291139,
+        "lr_stat": 6.106857757913872,
+        "p_value": 0.013465832619915075,
+        "decision": "REJECT_H0 (MISCALIBRATED)"
+      }
+    }
+  }
+}
