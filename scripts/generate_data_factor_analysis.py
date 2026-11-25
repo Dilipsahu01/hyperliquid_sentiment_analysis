@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from scipy import stats
 
-# Configuration and Styling
+# Configuration and Styling: White background, subtle gridlines, dark slate text
 FIGURES_DIR = Path("outputs/figures")
 FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
