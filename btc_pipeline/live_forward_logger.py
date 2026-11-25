@@ -219,7 +219,7 @@ def update_live_forward_log(limit: int = 30) -> pd.DataFrame:
 
     if LOG_PARQUET.exists():
         df_old = pd.read_parquet(LOG_PARQUET)
-        # Upsert: keep old records, replace/append with fresh snapshot
+        # Deduplicate and sort monotonically by UTC timestamp
         df_merged = pd.concat([df_old, df_new], ignore_index=True)
         df_merged = df_merged.drop_duplicates(subset=["timestamp_utc"], keep="last")
         df_merged = df_merged.sort_values("timestamp_utc").reset_index(drop=True)
@@ -227,8 +227,8 @@ def update_live_forward_log(limit: int = 30) -> pd.DataFrame:
         df_merged = df_new.sort_values("timestamp_utc").reset_index(drop=True)
 
     df_merged.to_parquet(LOG_PARQUET, index=False)
-    print(f"Updated {LOG_PARQUET} (Total Snapshots: {len(df_merged)})")
-    print(f"  Range: {df_merged['timestamp_utc'].iloc[0]} -> {df_merged['timestamp_utc'].iloc[-1]}")
+    print(f"[OK] Live forward log synchronized: {len(df_merged)} total snapshots saved to {LOG_PARQUET.name}")
+    print(f"     Time window: {df_merged['timestamp_utc'].iloc[0]} to {df_merged['timestamp_utc'].iloc[-1]}")
     return df_merged
 
 
