@@ -234,5 +234,41 @@ def test_newey_west_bandwidth_t889():
     assert int(np.floor(formula_val)) == 6
 
 
+def test_lead_lag_estimators_and_mark_price_assertion():
+    """Verify guard against mark/oracle prices and test Hasbrouck / Gonzalo-Granger logic."""
+    from btc_pipeline.lead_lag_estimators import (
+        assert_not_mark_or_oracle,
+        hayashi_yoshida_cross_correlation,
+        compute_information_shares
+    )
+
+    # 1. Test assert_not_mark_or_oracle
+    df_clean = pd.DataFrame({"binance_fut_close": [100.0, 101.0], "hl_close": [100.1, 101.1]})
+    assert_not_mark_or_oracle("binance_fut_close", df_clean)
+    assert_not_mark_or_oracle("hl_close", df_clean)
+
+    # Reject mark price column
+    df_bad = pd.DataFrame({"binance_fut_close": [100.0], "hl_mark_price": [100.0]})
+    with pytest.raises(AssertionError):
+        assert_not_mark_or_oracle("hl_mark_price", df_bad)
+
+    with pytest.raises(AssertionError):
+        assert_not_mark_or_oracle("hl_oracle_price")
+
+    # 2. Test Hasbrouck and Gonzalo-Granger on synthetic data
+    np.random.seed(42)
+    T = 200
+    common = np.cumsum(np.random.randn(T))
+    p1 = common + np.random.randn(T) * 0.05
+    p2 = common + np.random.randn(T) * 0.05
+    shares = compute_information_shares(p1, p2, sampling_freq_label="1s")
+
+    assert 0.0 <= shares["gonzalo_granger_share_m1"] <= 1.0
+    assert 0.0 <= shares["gonzalo_granger_share_m2"] <= 1.0
+    assert np.isclose(shares["gonzalo_granger_share_m1"] + shares["gonzalo_granger_share_m2"], 1.0, atol=1e-5)
+    assert shares["hasbrouck_is_m1_lower"] <= shares["hasbrouck_is_m1_upper"]
+
+
+
 
 

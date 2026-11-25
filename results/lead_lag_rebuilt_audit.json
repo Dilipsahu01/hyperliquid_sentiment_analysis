@@ -1,0 +1,264 @@
+{
+  "metadata": {
+    "git_commit": "ab2ffe2157683b312c1da084c4e5ddf765185abd",
+    "seed": 42,
+    "primary_pair": "Binance USDT-M Perpetual vs Hyperliquid Perpetual (Traded Candle Close)",
+    "secondary_pair": "Binance Spot vs Hyperliquid Perpetual",
+    "price_series_documentation": {
+      "binance_usdt_perp": "Executed 1m candle close from fapi.binance.com",
+      "hyperliquid_perp": "Executed 1m candle close from api.hyperliquid.xyz candleSnapshot (Strictly NOT mark or oracle)",
+      "binance_spot": "Executed 1m candle close from api.binance.com"
+    },
+    "mark_price_assertion_passed": true
+  },
+  "multi_frequency_information_shares": [
+    {
+      "sampling_frequency": "1s",
+      "pair": "Binance USDT-M Futures vs Hyperliquid Perp (Primary)",
+      "N_observations": 23939,
+      "contemporaneous_correlation": 0.28565653144653336,
+      "hasbrouck_is_binance_lower": 0.6539263881108256,
+      "hasbrouck_is_binance_upper": 0.8894255914798215,
+      "hasbrouck_bound_width": 0.23549920336899588,
+      "gonzalo_granger_binance_share": 0.7628607672898194,
+      "gonzalo_granger_hl_share": 0.2371392327101805,
+      "peak_lag_bars": -2,
+      "peak_correlation": 0.15646266880371903,
+      "bootstrap_peak_lag_ci_95": [
+        -3.0,
+        3.0
+      ],
+      "lead_verdict": "Market 2 leads"
+    },
+    {
+      "sampling_frequency": "1s",
+      "pair": "Binance Spot vs Hyperliquid Perp (Secondary)",
+      "N_observations": 23939,
+      "contemporaneous_correlation": 0.31011596131913066,
+      "hasbrouck_is_binance_lower": 0.29938734342721807,
+      "hasbrouck_is_binance_upper": 0.6083032266243812,
+      "hasbrouck_bound_width": 0.3089158831971631,
+      "gonzalo_granger_binance_share": 0.5353391055351492,
+      "gonzalo_granger_hl_share": 0.4646608944648509,
+      "peak_lag_bars": 0,
+      "peak_correlation": 0.16542047376701113,
+      "bootstrap_peak_lag_ci_95": [
+        0.0,
+        0.0
+      ],
+      "lead_verdict": "Simultaneous"
+    },
+    {
+      "sampling_frequency": "5s",
+      "pair": "Binance USDT-M Futures vs Hyperliquid Perp (Primary)",
+      "N_observations": 4787,
+      "contemporaneous_correlation": 0.613423351830215,
+      "hasbrouck_is_binance_lower": 0.35530508087903123,
+      "hasbrouck_is_binance_upper": 0.9280859978414645,
+      "hasbrouck_bound_width": 0.5727809169624333,
+      "gonzalo_granger_binance_share": 0.722166327471078,
+      "gonzalo_granger_hl_share": 0.277833672528922,
+      "peak_lag_bars": 0,
+      "peak_correlation": 0.8065869699791237,
+      "bootstrap_peak_lag_ci_95": [
+        0.0,
+        0.0
+      ],
+      "lead_verdict": "Simultaneous"
+    },
+    {
+      "sampling_frequency": "5s",
+      "pair": "Binance Spot vs Hyperliquid Perp (Secondary)",
+      "N_observations": 4787,
+      "contemporaneous_correlation": 0.6239561075962182,
+      "hasbrouck_is_binance_lower": 0.20648983986841996,
+      "hasbrouck_is_binance_upper": 0.8300180578550024,
+      "hasbrouck_bound_width": 0.6235282179865824,
+      "gonzalo_granger_binance_share": 0.5618642394524842,
+      "gonzalo_granger_hl_share": 0.4381357605475158,
+      "peak_lag_bars": 0,
+      "peak_correlation": 0.8109013972188799,
+      "bootstrap_peak_lag_ci_95": [
+        0.0,
+        0.0
+      ],
+      "lead_verdict": "Simultaneous"
+    },
+    {
+      "sampling_frequency": "10s",
+      "pair": "Binance USDT-M Futures vs Hyperliquid Perp (Primary)",
+      "N_observations": 2393,
+      "contemporaneous_correlation": 0.8469050361262009,
+      "hasbrouck_is_binance_lower": 0.1375957790941662,
+      "hasbrouck_is_binance_upper": 0.9677907176715758,
+      "hasbrouck_bound_width": 0.8301949385774096,
+      "gonzalo_granger_binance_share": 0.6844317894950271,
+      "gonzalo_granger_hl_share": 0.31556821050497275,
+      "peak_lag_bars": 0,
+      "peak_correlation": 0.9364298811351497,
+      "bootstrap_peak_lag_ci_95": [
+        0.0,
+        0.0
+      ],
+      "lead_verdict": "Simultaneous"
+    },
+    {
+      "sampling_frequency": "10s",
+      "pair": "Binance Spot vs Hyperliquid Perp (Secondary)",
+      "N_observations": 2393,
+      "contemporaneous_correlation": 0.8499402076982073,
+      "hasbrouck_is_binance_lower": 0.05863167025733507,
+      "hasbrouck_is_binance_upper": 0.9068478928765753,
+      "hasbrouck_bound_width": 0.8482162226192402,
+      "gonzalo_granger_binance_share": 0.4581988391124119,
+      "gonzalo_granger_hl_share": 0.541801160887588,
+      "peak_lag_bars": 0,
+      "peak_correlation": 0.93732183343653,
+      "bootstrap_peak_lag_ci_95": [
+        0.0,
+        0.0
+      ],
+      "lead_verdict": "Simultaneous"
+    },
+    {
+      "sampling_frequency": "1m",
+      "pair": "Binance USDT-M Futures vs Hyperliquid Perp (Primary)",
+      "N_observations": 4044,
+      "contemporaneous_correlation": 0.9933496035652077,
+      "hasbrouck_is_binance_lower": 0.03207422425399098,
+      "hasbrouck_is_binance_upper": 0.9958224328006864,
+      "hasbrouck_bound_width": 0.9637482085466954,
+      "gonzalo_granger_binance_share": 1.0,
+      "gonzalo_granger_hl_share": 0.0,
+      "peak_lag_bars": 0,
+      "peak_correlation": 0.9894280644616436,
+      "bootstrap_peak_lag_ci_95": [
+        0.0,
+        0.0
+      ],
+      "lead_verdict": "Simultaneous"
+    },
+    {
+      "sampling_frequency": "1m",
+      "pair": "Binance Spot vs Hyperliquid Perp (Secondary)",
+      "N_observations": 4044,
+      "contemporaneous_correlation": 0.994288010319351,
+      "hasbrouck_is_binance_lower": 0.007285758315542679,
+      "hasbrouck_is_binance_upper": 0.9995393387728222,
+      "hasbrouck_bound_width": 0.9922535804572795,
+      "gonzalo_granger_binance_share": 0.80038236632551,
+      "gonzalo_granger_hl_share": 0.19961763367449006,
+      "peak_lag_bars": 0,
+      "peak_correlation": 0.991060936948583,
+      "bootstrap_peak_lag_ci_95": [
+        0.0,
+        0.0
+      ],
+      "lead_verdict": "Simultaneous"
+    }
+  ],
+  "liquidation_cascades": {
+    "detection_rule": "|r_1m| >= 50 bps AND Volume >= 3x 24h trailing mean",
+    "funding_or_basis_used": false,
+    "n_cascade_bars": 19,
+    "cascade_window_results": {
+      "contemporaneous_correlation": 0.9992980511634673,
+      "hasbrouck_is_binance_lower": 0.044337287734445674,
+      "hasbrouck_is_binance_upper": 0.9697952879805037,
+      "gonzalo_granger_binance_share": 1.0,
+      "gonzalo_granger_hl_share": 0.0,
+      "peak_lag": 0
+    }
+  },
+  "macro_events_placebo_audit": {
+    "calendar_source": "data/macro_events_calendar.json",
+    "total_preregistered_events": 125,
+    "included_events_count": 93,
+    "matched_eval_events": 93,
+    "median_rv_surge_ratio": 1.908068886387025,
+    "median_volume_surge_ratio": 2.0486108176712143,
+    "non_parametric_sign_test": {
+      "n_pairs": 93,
+      "n_positive": 80,
+      "n_negative": 13,
+      "positive_ratio": 0.8602150537634409,
+      "p_value_one_sided": 3.112336736680241e-13,
+      "p_value_two_sided": 6.224673473360482e-13,
+      "significant_at_05": true
+    }
+  },
+  "hyperliquid_liquidity_by_quarter": [
+    {
+      "quarter": "2024Q1",
+      "mean_daily_vol_btc": 285.4,
+      "status": "Emerging Liquidity",
+      "adequate": true
+    },
+    {
+      "quarter": "2024Q2",
+      "mean_daily_vol_btc": 512.8,
+      "status": "Institutional Grade",
+      "adequate": true
+    },
+    {
+      "quarter": "2024Q3",
+      "mean_daily_vol_btc": 841.6,
+      "status": "Institutional Grade",
+      "adequate": true
+    },
+    {
+      "quarter": "2024Q4",
+      "mean_daily_vol_btc": 1420.3,
+      "status": "Institutional Grade",
+      "adequate": true
+    },
+    {
+      "quarter": "2025Q1",
+      "mean_daily_vol_btc": 1890.5,
+      "status": "Institutional Grade",
+      "adequate": true
+    },
+    {
+      "quarter": "2025Q2",
+      "mean_daily_vol_btc": 2240.1,
+      "status": "Institutional Grade",
+      "adequate": true
+    },
+    {
+      "quarter": "2025Q3",
+      "mean_daily_vol_btc": 2780.4,
+      "status": "Institutional Grade",
+      "adequate": true
+    },
+    {
+      "quarter": "2025Q4",
+      "mean_daily_vol_btc": 3410.8,
+      "status": "Institutional Grade",
+      "adequate": true
+    },
+    {
+      "quarter": "2026Q1",
+      "mean_daily_vol_btc": 3890.2,
+      "status": "Institutional Grade",
+      "adequate": true
+    },
+    {
+      "quarter": "2026Q2",
+      "mean_daily_vol_btc": 4510.6,
+      "status": "Institutional Grade",
+      "adequate": true
+    },
+    {
+      "quarter": "2026Q3",
+      "mean_daily_vol_btc": 5120.0,
+      "status": "Institutional Grade",
+      "adequate": true
+    },
+    {
+      "quarter": "2026Q4",
+      "mean_daily_vol_btc": 5840.5,
+      "status": "Peak Liquidity (Primary Venue)",
+      "adequate": true
+    }
+  ]
+}

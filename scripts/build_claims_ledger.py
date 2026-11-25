@@ -246,11 +246,43 @@ claims = [
     # 5. Lead-Lag & Market Microstructure
     {
         "claim_text": "Binance leads Hyperliquid price discovery by 60-120s on US macro events",
-        "value": "60 to 120 seconds",
-        "source_script": "None (Hardcoded 13:30 UTC filter misaligned summer EDT events; requires DST fix)",
+        "value": "60 to 120 seconds (Retracted: Artifact of 150s EMA smoothed mark price; traded prices synchronize at lag 0, 95% CI [-3s, +3s])",
+        "source_script": "None (Invalidated by scripts/run_rebuilt_lead_lag_study.py)",
         "sample": "N=18 selective events",
         "evaluation_type": "lead-lag",
-        "status": "unverified"
+        "status": "retracted"
+    },
+    {
+        "claim_text": "Pre-registered Macroeconomic Release Calendar (CPI, NFP, FOMC) with DST-correct UTC",
+        "value": "125 total events (93 included 2024-2026, 32 excluded 2023 pre-liquidity)",
+        "source_script": "btc_pipeline/macro_calendar.py",
+        "sample": "N=125 events | 2023-01-01 to 2026-11-25",
+        "evaluation_type": "lead-lag",
+        "status": "verified"
+    },
+    {
+        "claim_text": "Macro Event vs Matched Placebo Windows Paired Sign Test on Volatility and Volume",
+        "value": "80/93 positive pairs (86.0%), p = 6.22e-13; Volatility jump 1.91x, Volume expansion 2.05x",
+        "source_script": "scripts/run_rebuilt_lead_lag_study.py",
+        "sample": "N=93 matched pairs | 2024-01-01 to 2026-11-25",
+        "evaluation_type": "lead-lag",
+        "status": "verified"
+    },
+    {
+        "claim_text": "Hasbrouck Information Share and Gonzalo-Granger on Binance USDT-M Perp vs Hyperliquid Perp (1s to 1m)",
+        "value": "1s: IS=[65.4%, 88.9%], GG=76.3%; 1m: IS=[3.2%, 99.6%], GG=100.0%; Peak Lag=0",
+        "source_script": "scripts/run_rebuilt_lead_lag_study.py",
+        "sample": "N=4,045 synchronized 1m bars (and 1s/5s/10s grids) | 2026-11-23 to 2026-11-25",
+        "evaluation_type": "lead-lag",
+        "status": "verified"
+    },
+    {
+        "claim_text": "Liquidation Cascade Detection using Binance Perp return and volume only (zero funding / basis)",
+        "value": "19 cascade bars identified (|r| >= 50 bps, vol >= 3x 24h mean); contemp corr = 0.9993, lag 0",
+        "source_script": "scripts/run_rebuilt_lead_lag_study.py",
+        "sample": "N=19 cascade bars (127 window bars) | 2026-11-23 to 2026-11-25",
+        "evaluation_type": "lead-lag",
+        "status": "verified"
     },
     {
         "claim_text": "Hyperliquid perpetuals lead spot markets in liquidation cascades",
