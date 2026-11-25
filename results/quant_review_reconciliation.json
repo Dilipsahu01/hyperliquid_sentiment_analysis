@@ -1,0 +1,156 @@
+{
+  "metadata": {
+    "git_commit": "5238feb1fdbecfe744c489a8ba70d0c6b0b77997",
+    "seed": 42,
+    "timestamp_utc": "2026-11-25 18:54:04 UTC",
+    "compliance_rules": "Strict adherence to quantitative research integrity rules (Rules 1-5)"
+  },
+  "hac_bandwidth_audit": {
+    "formula": "floor(4 * (T/100)^(2/9))",
+    "T": 889,
+    "correct_bandwidth": 6,
+    "previously_claimed_bandwidth": 2,
+    "status": "CORRECTED"
+  },
+  "walk_forward_diebold_mariano": {
+    "HAR-RV_vs_ElasticNet": {
+      "mean_loss_diff": 0.12066468060178685,
+      "hac_variance": 0.04728817264306906,
+      "hac_bandwidth": 6,
+      "dm_raw": 6.203815995602567,
+      "dm_hln": 6.178950901571877,
+      "p_value_hln": 8.516904292932281e-09,
+      "two_sided_significant_05": true,
+      "df": 124
+    },
+    "HAR-RV_vs_GARCH(1,1)-t": {
+      "mean_loss_diff": -0.07653461995300476,
+      "hac_variance": 0.06014563620670206,
+      "hac_bandwidth": 6,
+      "dm_raw": -3.489079578675887,
+      "dm_hln": -3.47509523551261,
+      "p_value_hln": 0.0007043189641879888,
+      "two_sided_significant_05": true,
+      "df": 124
+    },
+    "HAR-RV_vs_Lasso_a005": {
+      "mean_loss_diff": 0.1426720579658752,
+      "hac_variance": 0.02933776261080305,
+      "hac_bandwidth": 6,
+      "dm_raw": 9.312803451650352,
+      "dm_hln": 9.275477435907984,
+      "p_value_hln": 6.661338147750939e-16,
+      "two_sided_significant_05": true,
+      "df": 124
+    },
+    "HAR-RV_vs_LightGBM_Shallow": {
+      "mean_loss_diff": 0.09767221363888992,
+      "hac_variance": 0.020387393562768218,
+      "hac_bandwidth": 6,
+      "dm_raw": 7.647952532628951,
+      "dm_hln": 7.617299292913127,
+      "p_value_hln": 5.751843445978011e-12,
+      "two_sided_significant_05": true,
+      "df": 124
+    },
+    "HAR-RV_vs_RandomWalk": {
+      "mean_loss_diff": -0.4233241728933651,
+      "hac_variance": 0.4417858468042596,
+      "hac_bandwidth": 6,
+      "dm_raw": -7.120691583990135,
+      "dm_hln": -7.092151623113643,
+      "p_value_hln": 8.871969825463566e-11,
+      "two_sided_significant_05": true,
+      "df": 124
+    },
+    "HAR-RV_vs_Ridge_a10": {
+      "mean_loss_diff": 0.007693292772221263,
+      "hac_variance": 0.26117351224797786,
+      "hac_bandwidth": 6,
+      "dm_raw": 0.16830720263643684,
+      "dm_hln": 0.16763262195535866,
+      "p_value_hln": 0.8671453917673975,
+      "two_sided_significant_05": false,
+      "df": 124
+    },
+    "HAR-RV_vs_RollingMean20d": {
+      "mean_loss_diff": -0.06045250028111929,
+      "hac_variance": 0.06182855053872856,
+      "hac_bandwidth": 6,
+      "dm_raw": -2.7181582750395394,
+      "dm_hln": -2.7072638092547607,
+      "p_value_hln": 0.007741463598669673,
+      "two_sided_significant_05": true,
+      "df": 124
+    }
+  },
+  "london_close_audit": {
+    "n_insample_days": 1423,
+    "n_oos_days": 917,
+    "date_range": "2024-05-15 to 2026-11-17",
+    "insample_t_stat": 2.364,
+    "insample_p_val": 0.0181,
+    "oos_dm_stat": 1.077731265967433,
+    "oos_p_val": 0.2811537011753771,
+    "multiple_testing": {
+      "n_family_trials": 39,
+      "bonferroni_threshold": 0.001282051282051282,
+      "survives_bonferroni": false,
+      "holm_threshold_session_family": 0.0125,
+      "survives_holm": false
+    },
+    "verdict": "CONFIRMED_HYPOTHESIS_GENERATING_ONLY (Fails multiple-testing & not significant out-of-sample)"
+  },
+  "intraday_band_reconciliation": {
+    "n_intraday_bars": 79,
+    "date_window_utc": "2026-11-25 11:45:00 to 2026-11-25 18:15:00",
+    "anchor_price_usd": 58643.55,
+    "dynamic_1sigma": {
+      "full_width_usd": 395.6777925756669,
+      "full_width_log_bps": 67.47166441589346,
+      "one_sided_radius_usd": 197.83889628783345,
+      "one_sided_radius_log_bps": 33.73583220794673,
+      "empirical_coverage_pct": 64.55696202531645,
+      "target_coverage_pct": 68.27,
+      "kupiec_lr": 0.493105884816579,
+      "kupiec_p_val": 0.482545101993649
+    },
+    "static_tunnel_1sigma": {
+      "full_width_usd": 1455.9293743993805,
+      "full_width_log_bps": 248.2676056274527,
+      "one_sided_radius_usd": 727.9646871996903,
+      "one_sided_radius_log_bps": 124.13380281372635,
+      "empirical_coverage_pct": 86.07594936708861,
+      "target_coverage_pct": 68.27,
+      "kupiec_lr": 13.39911660424572,
+      "kupiec_p_val": 0.00025174283222095806
+    },
+    "width_reduction_pct": 72.82300916973414
+  },
+  "protocol_facts_audit": {
+    "hyperliquid_mark_price": {
+      "is_pure_traded_price": false,
+      "formula": "Median(Oracle_Price + 150s_EMA(Basis), Internal_Book_Trade_Median, CEX_Perp_Median)",
+      "oracle_composition": "CEX weighted median (Binance wt=3, OKX wt=2, Bybit wt=2, Gate wt=1, MEXC wt=1) updated every 3s",
+      "implication": "Using HL Mark Price mechanically lags Binance by up to 150s and induces positive return autocorrelation. Lead-lag must use traded candle close or L2 book mids strictly."
+    },
+    "hyperliquid_s3_archive": {
+      "exists": true,
+      "bucket_urls": [
+        "s3://hyperliquid-archive",
+        "s3://hl-mainnet-node-data",
+        "s3://aws-public-blockchain/v1.1/hyperliquid/"
+      ],
+      "implication": "Hyperliquid data is publicly queryable; our forward logger is a streaming replication client, not a proprietary data moat."
+    },
+    "us_macro_release_schedule": {
+      "cpi_nfp_local_time": "08:30 Eastern Time",
+      "dst_status": "During EDT (March-Nov): 12:30 UTC. During EST (Nov-March): 13:30 UTC.",
+      "implication": "Hardcoding 13:30 UTC misaligned summer macro events by 1 hour. Releases must be matched via local calendar timestamps."
+    },
+    "instrument_vs_venue": {
+      "confounding_issue": "Comparing HL Perp to Binance Spot confounds perpetual leverage/liquidation mechanics with venue architecture.",
+      "proper_control": "Binance USDT-M Perpetual vs Hyperliquid Perpetual."
+    }
+  }
+}
