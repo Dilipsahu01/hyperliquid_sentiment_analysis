@@ -129,6 +129,7 @@ def build_daily_btc_aggregates_5m(b5m: pd.DataFrame) -> pd.DataFrame:
         if len(r) < 200:
             return None
         rv = np.sum(r**2)
+        # Barndorff-Nielsen & Shephard (2004) Bipower Variation to isolate continuous jump components
         bv = (np.pi / 2.0) * np.sum(np.abs(r[1:]) * np.abs(r[:-1])) if len(r) > 1 else rv
         jump = max(0.0, rv - bv)
         rel_jump = jump / (rv + 1e-12)
@@ -137,6 +138,7 @@ def build_daily_btc_aggregates_5m(b5m: pd.DataFrame) -> pd.DataFrame:
         low_min = sub["low"].min()
         close_last = sub["close"].iloc[-1]
         open_first = sub["open"].iloc[0]
+        # Intraday high-low range and close-to-open return
         range_pct = (high_max - low_min) / (low_min + 1e-12) * 100.0
         daily_ret = (close_last / open_first - 1.0) * 100.0
 
