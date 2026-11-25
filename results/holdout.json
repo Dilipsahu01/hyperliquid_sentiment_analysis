@@ -1,0 +1,210 @@
+{
+  "holdout_start": "2026-11-01",
+  "holdout_end": "2026-11-23",
+  "n_holdout_days": 23,
+  "targets_evaluated": "2026-11-02 to 2026-11-24",
+  "rv_definition": "100% hourly-sampled realized variance (no 1s override)",
+  "benchmark_baseline": "HAR_Crypto_Log_DOW_7_30",
+  "volatility_models": {
+    "RandomWalk": {
+      "qlike": 1.2676083574930286,
+      "mse": 0.0819389319217649,
+      "mae": 0.23162513186872644,
+      "r2_oos": 0.09423990817451822,
+      "dm_stat_vs_crypto": -0.5261602693252575,
+      "dm_pval_vs_crypto": 0.6040412401860027
+    },
+    "RollingMean20d": {
+      "qlike": 0.7116638467286651,
+      "mse": 0.07133181483645604,
+      "mae": 0.1964774452284608,
+      "r2_oos": 0.21149190450717992,
+      "dm_stat_vs_crypto": 0.5617378817121712,
+      "dm_pval_vs_crypto": 0.5799729528249074
+    },
+    "HAR-RV (Linear 5/22)": {
+      "qlike": 0.49995481413630605,
+      "mse": 0.059997157699752106,
+      "mae": 0.19820544781278748,
+      "r2_oos": 0.3367861919498538,
+      "dm_stat_vs_crypto": 1.1287975523630864,
+      "dm_pval_vs_crypto": 0.27114238359016296
+    },
+    "HAR_Log_DOW_5_22": {
+      "qlike": 0.9170249763089248,
+      "mse": 0.08296103605382883,
+      "mae": 0.21430973484143007,
+      "r2_oos": 0.08294148005493551,
+      "dm_stat_vs_crypto": -1.1516647813327583,
+      "dm_pval_vs_crypto": 0.2618213448650992
+    },
+    "HAR_Crypto_Log_DOW_7_30": {
+      "qlike": 0.8464179089337888,
+      "mse": 0.0795512311227699,
+      "mae": 0.2094553859886296,
+      "r2_oos": 0.12063376081851418,
+      "dm_stat_vs_crypto": 0.0,
+      "dm_pval_vs_crypto": 1.0
+    },
+    "Ridge_a10": {
+      "qlike": 0.5164574585035266,
+      "mse": 0.06469006786229689,
+      "mae": 0.19050535681370687,
+      "r2_oos": 0.2849103541757684,
+      "dm_stat_vs_crypto": 1.5281281752844666,
+      "dm_pval_vs_crypto": 0.14073189672317765
+    },
+    "Lasso_a005": {
+      "qlike": 0.5448387251818556,
+      "mse": 0.06548914366891585,
+      "mae": 0.18919768613312332,
+      "r2_oos": 0.27607730059545377,
+      "dm_stat_vs_crypto": 1.6117136309339075,
+      "dm_pval_vs_crypto": 0.12127920878493392
+    },
+    "ElasticNet": {
+      "qlike": 0.544118279700715,
+      "mse": 0.06612543064766557,
+      "mae": 0.19110612783789852,
+      "r2_oos": 0.2690437289002554,
+      "dm_stat_vs_crypto": 1.5628613859889902,
+      "dm_pval_vs_crypto": 0.1323565547064487
+    },
+    "LightGBM_Shallow": {
+      "qlike": 0.5619095919660471,
+      "mse": 0.06501174720915855,
+      "mae": 0.19122365369239888,
+      "r2_oos": 0.2813544826514732,
+      "dm_stat_vs_crypto": 1.530635738846861,
+      "dm_pval_vs_crypto": 0.14011297427030533
+    },
+    "Equal_Weight_Blend": {
+      "qlike": 0.8028123669227776,
+      "mse": 0.07772034117023248,
+      "mae": 0.2068008803292968,
+      "r2_oos": -0.05168601396994532,
+      "dm_stat_vs_crypto": 1.8149107895792091,
+      "dm_pval_vs_crypto": 0.06953762016457832
+    },
+    "Lasso_Direct_ML": {
+      "qlike": 0.7643139715956953,
+      "mse": 0.07629526104055438,
+      "mae": 0.204004042197984,
+      "r2_oos": -0.03240229984051024,
+      "dm_stat_vs_crypto": 1.7827214390827553,
+      "dm_pval_vs_crypto": 0.07463165963274676
+    }
+  },
+  "low_power_disclosure": "On a 23-day holdout sample, HAC Diebold-Mariano test degrees of freedom are low (df=22). Statistical significance at p < 0.05 cannot be achieved even with meaningful economic differences.",
+  "direction_model": {
+    "model": "LogisticRegression_L2",
+    "accuracy": 0.6522,
+    "auc": 0.6833,
+    "label_policy": "Neutral (AUC ~ 0.50; UP/DOWN removed due to lack of edge)"
+  },
+  "range_model": {
+    "model": "Parkinson_Empirical_Scaling",
+    "formula": "E[range%] = 8.35 * sigma_ann",
+    "mae": 2.3737,
+    "r2_oos": -0.1367
+  },
+  "holdout_ranking": [
+    {
+      "model": "HAR-RV (Linear 5/22)",
+      "qlike": 0.49995481413630605,
+      "mse": 0.059997157699752106
+    },
+    {
+      "model": "Ridge_a10",
+      "qlike": 0.5070084170960135,
+      "mse": 0.06399686577044267
+    },
+    {
+      "model": "Lasso_Direct_ML",
+      "qlike": 0.7643139715956953,
+      "mse": 0.07629526104055438
+    },
+    {
+      "model": "Equal_Weight_Blend",
+      "qlike": 0.8028123669227776,
+      "mse": 0.07772034117023248
+    },
+    {
+      "model": "HAR_Crypto_Log_DOW_7_30",
+      "qlike": 0.8469014526493264,
+      "mse": 0.07944522611547797
+    }
+  ],
+  "per_weekday_diagnostics": [
+    {
+      "weekday": "Monday",
+      "n_days": 4,
+      "actual_vol": 0.45011495132019885,
+      "crypto_pred_vol": 0.5480672837102745,
+      "blend_pred_vol": 0.5374331637769612,
+      "crypto_mae": 0.09795233239007567,
+      "blend_mae": 0.0873182124567624,
+      "crypto_qlike": 0.09287904113213563
+    },
+    {
+      "weekday": "Tuesday",
+      "n_days": 3,
+      "actual_vol": 0.39665407570053457,
+      "crypto_pred_vol": 0.4776529172367847,
+      "blend_pred_vol": 0.47572716856694797,
+      "crypto_mae": 0.18131231719525212,
+      "blend_mae": 0.17683132065226145,
+      "crypto_qlike": 0.33032722870888603
+    },
+    {
+      "weekday": "Wednesday",
+      "n_days": 3,
+      "actual_vol": 0.5188352887749897,
+      "crypto_pred_vol": 0.47475827866664294,
+      "blend_pred_vol": 0.48196552061426917,
+      "crypto_mae": 0.10804245055680266,
+      "blend_mae": 0.10250508925752756,
+      "crypto_qlike": 0.14715454035898787
+    },
+    {
+      "weekday": "Thursday",
+      "n_days": 3,
+      "actual_vol": 0.5940411517402063,
+      "crypto_pred_vol": 0.5156559617676713,
+      "blend_pred_vol": 0.5292693360193191,
+      "crypto_mae": 0.27074976904760106,
+      "blend_mae": 0.278715563214154,
+      "crypto_qlike": 0.5476227049878043
+    },
+    {
+      "weekday": "Friday",
+      "n_days": 3,
+      "actual_vol": 0.6385998480838279,
+      "crypto_pred_vol": 0.26724657073413804,
+      "blend_pred_vol": 0.27237401397120337,
+      "crypto_mae": 0.4282796960611446,
+      "blend_mae": 0.4225202959513839,
+      "crypto_qlike": 3.779069854143215
+    },
+    {
+      "weekday": "Saturday",
+      "n_days": 3,
+      "actual_vol": 0.5551262822998451,
+      "crypto_pred_vol": 0.4039044240554032,
+      "blend_pred_vol": 0.40919834928497273,
+      "crypto_mae": 0.2234516081680696,
+      "blend_mae": 0.2258307688125065,
+      "crypto_qlike": 1.1546831820310477
+    },
+    {
+      "weekday": "Sunday",
+      "n_days": 4,
+      "actual_vol": 0.5718241212881987,
+      "crypto_pred_vol": 0.6354385043091606,
+      "blend_pred_vol": 0.6338977009173907,
+      "crypto_mae": 0.1983576679867772,
+      "blend_mae": 0.19698457102081918,
+      "crypto_qlike": 0.3076611789290358
+    }
+  ]
+}

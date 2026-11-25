@@ -1,0 +1,30 @@
+{
+  "anchor_timestamp": "2026-11-25 12:25:00 UTC",
+  "anchor_price": 58685.1,
+  "end_timestamp": "2026-11-25 13:45:00 UTC",
+  "end_price": 58317.11,
+  "n_bars": 16,
+  "coverage_95": 100.0,
+  "coverage_80": 100.0,
+  "coverage_50": 100.0,
+  "pinball_loss_q50": 59.64721717492148,
+  "pinball_loss_q10": 49.22106108524386,
+  "pinball_loss_q90": 41.14176304561233,
+  "naive_drift_mae": 128.44325000000208,
+  "mc_median_mae": 119.29443434984296,
+  "kalman_mae": 79.04546562988571,
+  "mc_loss_reduction_pct": 7.122846588013752,
+  "kalman_loss_reduction_pct": 38.45884028169294,
+  "actual_realized_vol_ann": 72.21608804125917,
+  "predicted_vol_ann": 56.080299327448756,
+  "range_mae_pct": 0.14221431811260332,
+  "ofi_directional_accuracy_pct": 56.25,
+  "liquidation_bar_1330": {
+    "binance_low": 58224.0,
+    "hyperliquid_low": 58190.0,
+    "binance_vol_btc": 466.89159,
+    "hyperliquid_vol_btc": 970.26372,
+    "hyperliquid_trades": 6834,
+    "inside_95_corridor": true
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "n_bars": 16,
+  "static_model": {
+    "cov_50": 100.0,
+    "cov_80": 100.0,
+    "cov_95": 100.0,
+    "pinball_loss_q50": 58.08274423893636,
+    "mae": 116.16548847787271,
+    "calm_iq_width_usd": 336.08743395052295
+  },
+  "dynamic_garch_basis_model": {
+    "cov_50": 62.5,
+    "cov_80": 81.25,
+    "cov_95": 100.0,
+    "pinball_loss_q50": 40.3284235936203,
+    "mae": 80.6568471872406,
+    "calm_iq_width_usd": 88.21897814940603,
+    "pinball_reduction_pct": 30.567289610628052,
+    "calm_iq_tightening_pct": 73.75118221099775
+  }
+}

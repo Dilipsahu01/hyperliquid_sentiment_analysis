@@ -1,0 +1,460 @@
+{
+  "har_baselines": {
+    "HAR_Linear_5_22": {
+      "qlike": 0.4194423305159629,
+      "mse": 0.03955996660015634,
+      "mae": 0.15353533713850148,
+      "r2_oos": 0.1359341685559271
+    },
+    "HAR_Log_5_22": {
+      "qlike": 0.40878435018081305,
+      "mse": 0.040230281688903746,
+      "mae": 0.15411592682216013,
+      "r2_oos": 0.12129319652624548
+    },
+    "HAR_Sqrt_5_22": {
+      "qlike": 0.4180601329990948,
+      "mse": 0.03601402381713481,
+      "mae": 0.13885094768008843,
+      "r2_oos": 0.21338438559055184
+    },
+    "HAR_Log_DOW_5_22": {
+      "qlike": 0.2729403266177002,
+      "mse": 0.02683031836547009,
+      "mae": 0.12079911357814661,
+      "r2_oos": 0.4139741931360106
+    },
+    "HAR_Crypto_Linear_7_30": {
+      "qlike": 0.4082703024764383,
+      "mse": 0.03822401356194122,
+      "mae": 0.15107271260235922,
+      "r2_oos": 0.16511395488898806
+    },
+    "HAR_Crypto_Log_7_30": {
+      "qlike": 0.3919367882334506,
+      "mse": 0.03808595388508902,
+      "mae": 0.15099892353622815,
+      "r2_oos": 0.16812944402410068
+    },
+    "HAR_Crypto_Log_DOW_7_30": {
+      "qlike": 0.2714199468311441,
+      "mse": 0.026467419109227768,
+      "mae": 0.12015688670039748,
+      "r2_oos": 0.4219006115464402
+    }
+  },
+  "strongest_baseline": "HAR_Crypto_Log_DOW_7_30",
+  "ablation_clean_features": {
+    "0_Calendar_Only": {
+      "n_features": 7,
+      "n_nonzero": 3,
+      "qlike": 0.42244616161786197,
+      "mse": 0.03691730845874468,
+      "r2_oos": 0.19365491001308233,
+      "nonzero_features": {
+        "is_weekend": -0.06942,
+        "is_friday": -0.06847,
+        "is_sunday": 0.0628
+      }
+    },
+    "1_HAR_Core": {
+      "n_features": 3,
+      "n_nonzero": 3,
+      "qlike": 0.4362826679481611,
+      "mse": 0.03749004763912724,
+      "r2_oos": 0.18114518367534826,
+      "nonzero_features": {
+        "rv": 0.05578,
+        "rv_w": 0.02056,
+        "rv_m": 0.03032
+      }
+    },
+    "2_Plus_Crypto_7_30d": {
+      "n_features": 10,
+      "n_nonzero": 3,
+      "qlike": 0.4067112675123402,
+      "mse": 0.034959371761695834,
+      "r2_oos": 0.23642001689878145,
+      "nonzero_features": {
+        "rv_ann": 0.05994,
+        "rv_ann_7d": 0.04526,
+        "rv_ann_30d": 0.00769
+      }
+    },
+    "3_Plus_Return_Lags": {
+      "n_features": 15,
+      "n_nonzero": 6,
+      "qlike": 0.4067316353684598,
+      "mse": 0.03489903421207453,
+      "r2_oos": 0.23773790514443593,
+      "nonzero_features": {
+        "rv_ann": 0.05981,
+        "rv_ann_7d": 0.04598,
+        "rv_ann_30d": 0.00734,
+        "daily_ret": -0.00996,
+        "btc_ret_lag2": -0.00064,
+        "btc_ret_lag5": -0.00306
+      }
+    },
+    "4_Plus_Jumps_BV": {
+      "n_features": 18,
+      "n_nonzero": 8,
+      "qlike": 0.4045327372805822,
+      "mse": 0.035005510629405476,
+      "r2_oos": 0.23541225520139764,
+      "nonzero_features": {
+        "rv_ann": 0.0663,
+        "rv_ann_w": -0.00081,
+        "rv_ann_7d": 0.04555,
+        "rv_ann_30d": 0.00665,
+        "daily_ret": -0.00976,
+        "btc_ret_lag2": -0.00072,
+        "btc_ret_lag5": -0.00323,
+        "jump": -0.00969
+      }
+    },
+    "5_Plus_Micro_OFI_Range": {
+      "n_features": 26,
+      "n_nonzero": 11,
+      "qlike": 0.4066991901724987,
+      "mse": 0.0343601684106999,
+      "r2_oos": 0.24950777167156546,
+      "nonzero_features": {
+        "rv_ann_7d": 0.0486,
+        "rv_ann_30d": 0.00863,
+        "daily_ret": -0.01096,
+        "btc_ret_lag2": -0.00144,
+        "btc_ret_lag5": -0.00349,
+        "jump": -0.00475,
+        "rel_jump": -0.00057,
+        "range_pct": 0.05633,
+        "range_pct_lag2": 0.00071,
+        "volume_log": 0.00997,
+        "trades_chg_1d": 0.0145
+      }
+    },
+    "6_Plus_Sentiment_FG": {
+      "n_features": 28,
+      "n_nonzero": 11,
+      "qlike": 0.41127051240117146,
+      "mse": 0.03455727044095825,
+      "r2_oos": 0.2452026838696506,
+      "nonzero_features": {
+        "rv_ann_7d": 0.0486,
+        "rv_ann_30d": 0.00863,
+        "daily_ret": -0.01096,
+        "btc_ret_lag2": -0.00144,
+        "btc_ret_lag5": -0.00349,
+        "jump": -0.00475,
+        "rel_jump": -0.00057,
+        "range_pct": 0.05633,
+        "range_pct_lag2": 0.00071,
+        "volume_log": 0.00997,
+        "trades_chg_1d": 0.0145
+      }
+    },
+    "7_Plus_Macro_Indexes": {
+      "n_features": 38,
+      "n_nonzero": 14,
+      "qlike": 0.4062733131894321,
+      "mse": 0.034204920483432925,
+      "r2_oos": 0.252898685286578,
+      "nonzero_features": {
+        "rv_ann": 0.00655,
+        "rv_ann_7d": 0.0434,
+        "rv_ann_30d": 0.00855,
+        "daily_ret": -0.00779,
+        "btc_ret_lag2": -0.00133,
+        "btc_ret_lag5": -0.00402,
+        "jump": -0.00621,
+        "rel_jump": -0.00062,
+        "range_pct": 0.05536,
+        "volume_log": 0.01256,
+        "trades_chg_1d": 0.01545,
+        "SPY_ret": -0.00893,
+        "equity_is_trading_day": -0.01174,
+        "roll20_corr_tlt": -0.00639
+      }
+    },
+    "8_Plus_All_Macro_Returns": {
+      "n_features": 57,
+      "n_nonzero": 18,
+      "qlike": 0.4063005068290942,
+      "mse": 0.03414478969302828,
+      "r2_oos": 0.25421205751288745,
+      "nonzero_features": {
+        "rv_ann": 0.00348,
+        "rv_ann_7d": 0.04361,
+        "rv_ann_30d": 0.00857,
+        "daily_ret": -0.00041,
+        "btc_ret_lag2": -0.00134,
+        "btc_ret_lag5": -0.00393,
+        "jump": -0.0056,
+        "rel_jump": -0.00072,
+        "range_pct": 0.05811,
+        "volume_log": 0.01228,
+        "trades_chg_1d": 0.01548,
+        "equity_is_trading_day": -0.01101,
+        "roll20_corr_tlt": -0.00653,
+        "AMD_ret": -0.00753,
+        "BAC_ret": -0.00505,
+        "JPM_ret": -0.00368,
+        "MSTR_ret": -0.00953,
+        "TSLA_ret": -0.00059
+      }
+    },
+    "9_All_64_Plus_Calendar": {
+      "n_features": 64,
+      "n_nonzero": 22,
+      "qlike": 0.28353252908140736,
+      "mse": 0.024750950171223387,
+      "r2_oos": 0.4593915977005797,
+      "nonzero_features": {
+        "rv_ann": 0.01224,
+        "jump": -0.00334,
+        "rel_jump": -0.00327,
+        "range_pct": 0.06268,
+        "daily_ret": -0.00812,
+        "ofi": -0.00031,
+        "btc_ret_lag2": -0.00182,
+        "btc_ret_lag5": -0.00121,
+        "rv_ann_7d": 0.0237,
+        "rv_ann_30d": 0.01087,
+        "range_pct_lag1": 0.0041,
+        "range_pct_lag2": 0.00534,
+        "range_pct_lag3": 0.0054,
+        "volume_log": 0.01533,
+        "AMD_ret": -0.00912,
+        "BAC_ret": -0.00517,
+        "GS_ret": -0.00231,
+        "JPM_ret": -0.00079,
+        "roll20_corr_tlt": -0.0059,
+        "is_weekend": -0.03604,
+        "is_friday": -0.07084,
+        "is_sunday": 0.06172
+      }
+    }
+  },
+  "direct_models": {
+    "1": {
+      "horizon": 1,
+      "target_label": "Nov 25 (Wednesday)",
+      "har_qlike": 0.2703475584021728,
+      "har_mse": 0.02633437120608237,
+      "lasso_qlike": 0.2583249656573292,
+      "lasso_mse": 0.0257414763676809,
+      "dm_stat": 2.522243894477704,
+      "dm_pval": 0.011834685695956138
+    },
+    "2": {
+      "horizon": 2,
+      "target_label": "Nov 26 (Thursday, Thanksgiving)",
+      "har_qlike": 0.3101677808160583,
+      "har_mse": 0.030468160901721372,
+      "lasso_qlike": 0.31127138743897675,
+      "lasso_mse": 0.03088822831994129,
+      "dm_stat": -0.562612539927733,
+      "dm_pval": 0.5738407528696057
+    },
+    "3": {
+      "horizon": 3,
+      "target_label": "Nov 27 (Friday, Black Friday)",
+      "har_qlike": 0.34815415077013034,
+      "har_mse": 0.03274374317446189,
+      "lasso_qlike": 0.35496851308384586,
+      "lasso_mse": 0.033639349101402635,
+      "dm_stat": -1.43320865669477,
+      "dm_pval": 0.152150187103133
+    },
+    "4": {
+      "horizon": 4,
+      "target_label": "Nov 28 (Saturday)",
+      "har_qlike": 0.3660193793566324,
+      "har_mse": 0.03426957173419834,
+      "lasso_qlike": 0.36538599360584845,
+      "lasso_mse": 0.03567736714493109,
+      "dm_stat": 0.07246993954993082,
+      "dm_pval": 0.9422442464820175
+    },
+    "5": {
+      "horizon": 5,
+      "target_label": "Nov 29 (Sunday)",
+      "har_qlike": 0.37718133815297117,
+      "har_mse": 0.03491481162719389,
+      "lasso_qlike": 0.39071067672195486,
+      "lasso_mse": 0.03565860275332085,
+      "dm_stat": -0.7232687924910836,
+      "dm_pval": 0.46970522531925574
+    },
+    "6": {
+      "horizon": 6,
+      "target_label": "Nov 30 (Monday, Equities Reopen)",
+      "har_qlike": 0.39138142529387443,
+      "har_mse": 0.03618176802351409,
+      "lasso_qlike": 0.39275379484531503,
+      "lasso_mse": 0.036232815086555445,
+      "dm_stat": -0.11484572008512267,
+      "dm_pval": 0.9085933719088761
+    }
+  },
+  "coverage": [
+    {
+      "h": 1,
+      "target": "Nov 25 (Wednesday)",
+      "cov_80_pct": 82.39999999999999,
+      "cov_95_pct": 93.60000000000001,
+      "status": "WELL-CALIBRATED"
+    },
+    {
+      "h": 2,
+      "target": "Nov 26 (Thursday, Thanksgiving)",
+      "cov_80_pct": 80.4,
+      "cov_95_pct": 94.8,
+      "status": "WELL-CALIBRATED"
+    },
+    {
+      "h": 3,
+      "target": "Nov 27 (Friday, Black Friday)",
+      "cov_80_pct": 81.2,
+      "cov_95_pct": 94.0,
+      "status": "WELL-CALIBRATED"
+    },
+    {
+      "h": 4,
+      "target": "Nov 28 (Saturday)",
+      "cov_80_pct": 82.0,
+      "cov_95_pct": 94.39999999999999,
+      "status": "WELL-CALIBRATED"
+    },
+    {
+      "h": 5,
+      "target": "Nov 29 (Sunday)",
+      "cov_80_pct": 80.0,
+      "cov_95_pct": 94.39999999999999,
+      "status": "WELL-CALIBRATED"
+    },
+    {
+      "h": 6,
+      "target": "Nov 30 (Monday, Equities Reopen)",
+      "cov_80_pct": 81.6,
+      "cov_95_pct": 93.60000000000001,
+      "status": "WELL-CALIBRATED"
+    }
+  ],
+  "holdout": [
+    {
+      "model": "RandomWalk",
+      "qlike": 1.2676083574930286,
+      "mse": 0.0819389319217649,
+      "mae": 0.23162513186872644,
+      "r2_oos": 0.09423990817451822,
+      "dm_stat": -0.5261602693252575,
+      "dm_pval": 0.6040412401860027
+    },
+    {
+      "model": "RollingMean20d",
+      "qlike": 0.7116638467286651,
+      "mse": 0.07133181483645604,
+      "mae": 0.1964774452284608,
+      "r2_oos": 0.21149190450717992,
+      "dm_stat": 0.5617378817121712,
+      "dm_pval": 0.5799729528249074
+    },
+    {
+      "model": "HAR-RV (Linear 5/22)",
+      "qlike": 0.49995481413630605,
+      "mse": 0.059997157699752106,
+      "mae": 0.19820544781278748,
+      "r2_oos": 0.3367861919498538,
+      "dm_stat": 1.1287975523630864,
+      "dm_pval": 0.27114238359016296
+    },
+    {
+      "model": "HAR_Log_DOW_5_22",
+      "qlike": 0.9170249763089248,
+      "mse": 0.08296103605382883,
+      "mae": 0.21430973484143007,
+      "r2_oos": 0.08294148005493551,
+      "dm_stat": -1.1516647813327583,
+      "dm_pval": 0.2618213448650992
+    },
+    {
+      "model": "HAR_Crypto_Log_DOW_7_30",
+      "qlike": 0.8464179089337888,
+      "mse": 0.0795512311227699,
+      "mae": 0.2094553859886296,
+      "r2_oos": 0.12063376081851418,
+      "dm_stat": 0.0,
+      "dm_pval": 1.0
+    },
+    {
+      "model": "Ridge_a10",
+      "qlike": 0.5164574585035266,
+      "mse": 0.06469006786229689,
+      "mae": 0.19050535681370687,
+      "r2_oos": 0.2849103541757684,
+      "dm_stat": 1.5281281752844666,
+      "dm_pval": 0.14073189672317765
+    },
+    {
+      "model": "Lasso_a005",
+      "qlike": 0.5448387251818556,
+      "mse": 0.06548914366891585,
+      "mae": 0.18919768613312332,
+      "r2_oos": 0.27607730059545377,
+      "dm_stat": 1.6117136309339075,
+      "dm_pval": 0.12127920878493392
+    },
+    {
+      "model": "ElasticNet",
+      "qlike": 0.544118279700715,
+      "mse": 0.06612543064766557,
+      "mae": 0.19110612783789852,
+      "r2_oos": 0.2690437289002554,
+      "dm_stat": 1.5628613859889902,
+      "dm_pval": 0.1323565547064487
+    },
+    {
+      "model": "LightGBM_Shallow",
+      "qlike": 0.5619095919660471,
+      "mse": 0.06501174720915855,
+      "mae": 0.19122365369239888,
+      "r2_oos": 0.2813544826514732,
+      "dm_stat": 1.530635738846861,
+      "dm_pval": 0.14011297427030533
+    }
+  ],
+  "leakage": {
+    "total_tested": 20,
+    "nov_tested": 5,
+    "features_checked": 64,
+    "mismatches": 0
+  },
+  "signature_plot": {
+    "autocorrelations": [
+      0.08616204648479597,
+      0.03650987594780286,
+      0.031030465507472762,
+      0.018546457013512745,
+      0.0011668293592920183
+    ],
+    "zero_trade_seconds": 240355,
+    "zero_trade_pct": 11.591194058641975,
+    "variance_ratios": {
+      "5-sec": 1.2171744826812585,
+      "1-min": 1.3467540733063357,
+      "5-min": 1.454175105867054,
+      "15-min": 1.3943784433319524,
+      "1-hour": 1.5157092832061871
+    },
+    "ratio_1h_to_5m": 1.0284631474135173,
+    "conclusion": "The 1.52x variance gap between 1-second RV and 1-hour RV is primarily an artifact of forward-filling 240,355 zero-trade seconds (11.6% of time) with log_return=0.0, combined with positive short-lag autocorrelations (rho_1=+0.086) from execution algorithms breaking orders across consecutive seconds. Once sampled at 5-minute intervals, realized variance stabilizes and matches hourly RV within 4.5%."
+  },
+  "trading": {
+    "T": 22,
+    "n_trials": 34,
+    "sr_daily": -0.375,
+    "sr_ann": -7.16436494045355,
+    "dsr_prob": 1.945519733902466e-12
+  }
+}

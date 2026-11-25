@@ -1,0 +1,28 @@
+{
+  "taker_fee_bps": 5.0,
+  "slippage_bps": 2.0,
+  "holdout_period": "2026-11-01 to 2026-11-23",
+  "n_trials_considered": 15,
+  "strategies": {
+    "buy_and_hold": {
+      "annualized_sharpe": -7.813246410587402,
+      "max_drawdown_pct": 27.041465971199685,
+      "trades": 1,
+      "return_pct": -21.394063871318313
+    },
+    "directional_logistic": {
+      "annualized_sharpe": -7.045462938823153,
+      "max_drawdown_pct": 23.84447367341088,
+      "trades": 5,
+      "return_pct": -18.73616344770698,
+      "deflated_sharpe_prob": 3.889179199891613e-15
+    },
+    "volatility_targeted_lasso": {
+      "annualized_sharpe": -7.765979780229825,
+      "max_drawdown_pct": 20.74638659179633,
+      "trades": 15,
+      "return_pct": -16.468258940507297,
+      "deflated_sharpe_prob": 5.2301970560279857e-14
+    }
+  }
+}

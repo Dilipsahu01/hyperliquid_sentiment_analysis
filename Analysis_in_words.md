@@ -15,9 +15,9 @@ The **Bitcoin Fear & Greed Index** is a score from **0 to 100** that measures ho
 | Score | Label | What It Means in Real Life |
 |---|---|---|
 | 0 – 24 |  **Extreme Fear** | Everyone is panicking. People are selling. Prices are crashing. |
-| 25 – 44 | 🟠 **Fear** | People are nervous. The market is down or uncertain. |
-| 45 – 55 | 🟡 **Neutral** | No strong feeling either way. Market is sideways and choppy. |
-| 56 – 74 | 🟢 **Greed** | People are excited. Prices are rising. Everyone wants to buy. |
+| 25 – 44 |  **Fear** | People are nervous. The market is down or uncertain. |
+| 45 – 55 |  **Neutral** | No strong feeling either way. Market is sideways and choppy. |
+| 56 – 74 |  **Greed** | People are excited. Prices are rising. Everyone wants to buy. |
 | 75 – 100 |  **Extreme Greed** | Full euphoria. Everyone thinks prices will go up forever. |
 
 **The famous Warren Buffett quote applies perfectly here:**
@@ -493,9 +493,9 @@ Cut this out and keep it by your desk while trading:
 | Index Score | Regime | Trade Size | Bias | Caution Level |
 |---|---|---|---|---|
 | 0–24 |  Extreme Fear | Medium | Selective Buys | ️ High volatility |
-| 25–44 | 🟠 Fear | Larger | Buy the dip |  Good opportunity |
-| 45–55 | 🟡 Neutral | Small | Wait |  Avoid overtrading |
-| 56–74 | 🟢 Greed | Normal | Hold/Trim | ️ Watch for tops |
+| 25–44 |  Fear | Larger | Buy the dip |  Good opportunity |
+| 45–55 |  Neutral | Small | Wait |  Avoid overtrading |
+| 56–74 |  Greed | Normal | Hold/Trim | ️ Watch for tops |
 | 75–100 |  Extreme Greed | Smallest | Take profits |  Danger zone |
 
 ---

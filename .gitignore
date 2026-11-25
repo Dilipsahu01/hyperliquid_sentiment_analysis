@@ -1,11 +1,112 @@
-# Python environment
-.venv/
-__pycache__/
-*.pyc
+# =============================================================================
+# .gitignore — Institutional Python Quantitative Research Repository
+# =============================================================================
 
-# Data & Results (Keep these local)
-data/*.csv
-!data/sample_data.csv
-outputs/
-data/*.csv
+# -----------------------------------------------------------------------------
+# Python Bytecode, Caches & Environments
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Testing & Coverage Caches
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+
+# -----------------------------------------------------------------------------
+# Operating System & Editor Metadata
+# -----------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.ipynb_checkpoints/
+
+# -----------------------------------------------------------------------------
+# Logs, Temp Files & Prompts
+# -----------------------------------------------------------------------------
+*.log
+*.tmp
+*.bak
 prompts/
+scratch/
+
+# -----------------------------------------------------------------------------
+# Review Bundles & Local Compilations
+# -----------------------------------------------------------------------------
+claude-to-review.md
+*-to-review.md
+
+# -----------------------------------------------------------------------------
+# Large Data Files (> 50 MB / GitHub 100 MB Limit)
+# -----------------------------------------------------------------------------
+# Ignore all CSV files in data/ by default
+data/*.csv
+# Ignore heavy raw tick/sub-minute datasets
+data/btc_1sec_nov2026.*
+data/btc_5m_2023_2026.parquet
+data/historical_data.csv
+
+# Keep lightweight canonical data splits for out-of-the-box test reproducibility
+!data/fear_greed_index.csv
+!data/train_split.parquet
+!data/val_split.parquet
+!data/holdout_test_split.parquet
+!data/live_forward_log.parquet
+!data/engineered_features_master.parquet
+!data/equities_macro_daily_2023_2026.parquet
+!data/btc_1h_2023_2026.parquet
+
+# -----------------------------------------------------------------------------
+# Outputs & Heavy Artifacts
+# -----------------------------------------------------------------------------
+# Ignore heavy raw output dumps (e.g. outputs/merged_data.csv is 99 MB)
+outputs/*.csv
+outputs/*.parquet
+outputs/*.json
+
+# Keep publication-grade figures and markdown reports for documentation rendering
+!outputs/figures/
+!outputs/figures/*.png
+!outputs/reports/
+!outputs/reports/*.md

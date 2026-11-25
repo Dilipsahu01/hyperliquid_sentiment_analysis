@@ -26,7 +26,6 @@ warnings.filterwarnings("ignore")
 plt.style.use(FIGURE_STYLE)
 
 
-# ─── utility helpers ────────────────────────────────────────────────────────
 
 def _save(fig: plt.Figure, name: str) -> Path:
     path = FIG_DIR / f"{name}.png"
@@ -41,9 +40,6 @@ def _sentiment_palette(df_col):
     return [SENTIMENT_COLORS.get(s, "#888888") for s in df_col]
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 1. Average PnL by Sentiment
-# ─────────────────────────────────────────────────────────────────────────────
 
 def plot_avg_pnl_by_sentiment(sentiment_pnl: pd.DataFrame) -> Path:
     fig, axes = plt.subplots(1, 2, figsize=(14, 6), facecolor="#0f0f1a")
@@ -57,7 +53,6 @@ def plot_avg_pnl_by_sentiment(sentiment_pnl: pd.DataFrame) -> Path:
         for spine in ax.spines.values():
             spine.set_edgecolor("#333355")
 
-    # ── left: avg PnL ───────────────────────────────────────────────────────
     ax1 = axes[0]
     cats = sentiment_pnl["classification"].astype(str)
     colors = _sentiment_palette(cats)
@@ -71,7 +66,6 @@ def plot_avg_pnl_by_sentiment(sentiment_pnl: pd.DataFrame) -> Path:
     ax1.set_ylabel("Avg Closed PnL (USD)", fontsize=10)
     ax1.tick_params(axis="x", rotation=20)
 
-    # ── right: net PnL (after fees) ─────────────────────────────────────────
     ax2 = axes[1]
     bars2 = ax2.bar(cats, sentiment_pnl["avg_net_pnl"], color=colors, edgecolor="#222240", linewidth=0.8)
     ax2.axhline(0, color="white", linewidth=0.8, linestyle="--", alpha=0.4)
@@ -89,9 +83,6 @@ def plot_avg_pnl_by_sentiment(sentiment_pnl: pd.DataFrame) -> Path:
     return _save(fig, "01_avg_pnl_by_sentiment")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 2. Win Rate by Sentiment
-# ─────────────────────────────────────────────────────────────────────────────
 
 def plot_win_rate(sentiment_pnl: pd.DataFrame) -> Path:
     fig, ax = plt.subplots(figsize=(10, 6), facecolor="#0f0f1a")
@@ -120,9 +111,6 @@ def plot_win_rate(sentiment_pnl: pd.DataFrame) -> Path:
     return _save(fig, "02_win_rate_by_sentiment")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 3. Trade Count & Average Size by Sentiment
-# ─────────────────────────────────────────────────────────────────────────────
 
 def plot_activity_and_size(activity: pd.DataFrame, pnl_summary: pd.DataFrame) -> Path:
     fig, axes = plt.subplots(1, 2, figsize=(14, 6), facecolor="#0f0f1a")
@@ -136,7 +124,6 @@ def plot_activity_and_size(activity: pd.DataFrame, pnl_summary: pd.DataFrame) ->
     cats   = activity["classification"].astype(str)
     colors = _sentiment_palette(cats)
 
-    # trade counts
     ax1 = axes[0]
     bars = ax1.bar(cats, activity["total_trades"], color=colors, edgecolor="#222240")
     for bar, v in zip(bars, activity["total_trades"]):
@@ -148,7 +135,6 @@ def plot_activity_and_size(activity: pd.DataFrame, pnl_summary: pd.DataFrame) ->
     ax1.tick_params(axis="x", rotation=20)
     ax1.yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x:,.0f}"))
 
-    # average size USD
     ax2 = axes[1]
     size_data = pnl_summary.sort_values(
         "classification",
@@ -171,9 +157,6 @@ def plot_activity_and_size(activity: pd.DataFrame, pnl_summary: pd.DataFrame) ->
     return _save(fig, "03_activity_and_size")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 4. Buy/Sell Ratio by Sentiment
-# ─────────────────────────────────────────────────────────────────────────────
 
 def plot_buy_sell_ratio(activity: pd.DataFrame) -> Path:
     fig, ax = plt.subplots(figsize=(11, 6), facecolor="#0f0f1a")
@@ -203,9 +186,6 @@ def plot_buy_sell_ratio(activity: pd.DataFrame) -> Path:
     return _save(fig, "04_buy_sell_ratio")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 5. Cumulative PnL over time (with sentiment background)
-# ─────────────────────────────────────────────────────────────────────────────
 
 def plot_cumulative_pnl_timeline(daily: pd.DataFrame) -> Path:
     fig, ax = plt.subplots(figsize=(16, 7), facecolor="#0f0f1a")
@@ -220,7 +200,6 @@ def plot_cumulative_pnl_timeline(daily: pd.DataFrame) -> Path:
             ax.axvspan(prev_date, row["date"], alpha=0.12, color=color)
             prev_date = row["date"]
             prev_cls  = row["classification"]
-    # final segment
     ax.axvspan(prev_date, daily["date"].max(),
                alpha=0.12, color=SENTIMENT_COLORS.get(str(prev_cls), "#555555"))
 
@@ -251,9 +230,6 @@ def plot_cumulative_pnl_timeline(daily: pd.DataFrame) -> Path:
     return _save(fig, "05_cumulative_pnl_timeline")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 6. Daily PnL vs Sentiment Value (dual axis)
-# ─────────────────────────────────────────────────────────────────────────────
 
 def plot_pnl_vs_sentiment_value(daily: pd.DataFrame) -> Path:
     fig, ax1 = plt.subplots(figsize=(16, 6), facecolor="#0f0f1a")
@@ -294,9 +270,6 @@ def plot_pnl_vs_sentiment_value(daily: pd.DataFrame) -> Path:
     return _save(fig, "06_daily_pnl_vs_sentiment")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 7. PnL Distribution (violin + box) by Sentiment
-# ─────────────────────────────────────────────────────────────────────────────
 
 def plot_pnl_distribution(df: pd.DataFrame) -> Path:
     # Clip to [-500, 500] for visual clarity
@@ -313,7 +286,6 @@ def plot_pnl_distribution(df: pd.DataFrame) -> Path:
 
     palette = {s: SENTIMENT_COLORS[s] for s in SENTIMENT_ORDER if s in SENTIMENT_COLORS}
 
-    # violin
     order = [s for s in SENTIMENT_ORDER if s in df_vis["classification"].cat.categories]
     sns.violinplot(data=df_vis, x="classification", y="pnl_clipped",
                    order=order, palette=palette, inner="quartile",
@@ -325,7 +297,6 @@ def plot_pnl_distribution(df: pd.DataFrame) -> Path:
     axes[0].set_ylabel("Closed PnL (USD)", color="white")
     axes[0].tick_params(axis="x", rotation=20)
 
-    # box
     sns.boxplot(data=df_vis, x="classification", y="pnl_clipped",
                 order=order, palette=palette, ax=axes[1],
                 flierprops=dict(marker=".", color="gray", alpha=0.3, markersize=2))
@@ -342,9 +313,6 @@ def plot_pnl_distribution(df: pd.DataFrame) -> Path:
     return _save(fig, "07_pnl_distribution_by_sentiment")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 8. Profit Factor & Sharpe by Sentiment
-# ─────────────────────────────────────────────────────────────────────────────
 
 def plot_profit_factor_sharpe(sentiment_pnl: pd.DataFrame) -> Path:
     fig, axes = plt.subplots(1, 2, figsize=(14, 6), facecolor="#0f0f1a")
@@ -357,7 +325,6 @@ def plot_profit_factor_sharpe(sentiment_pnl: pd.DataFrame) -> Path:
         for spine in ax.spines.values():
             spine.set_edgecolor("#333355")
 
-    # Profit Factor
     pf = sentiment_pnl["profit_factor"].fillna(0)
     bars = axes[0].bar(cats, pf, color=colors, edgecolor="#222240")
     axes[0].axhline(1, color="yellow", linewidth=1, linestyle="--", alpha=0.7, label="Breakeven (PF=1)")
@@ -370,7 +337,6 @@ def plot_profit_factor_sharpe(sentiment_pnl: pd.DataFrame) -> Path:
     axes[0].tick_params(axis="x", rotation=20)
     axes[0].legend(facecolor="#1a1a2e", labelcolor="white")
 
-    # Sharpe
     sh = sentiment_pnl["sharpe_approx"].fillna(0)
     bars2 = axes[1].bar(cats, sh, color=colors, edgecolor="#222240")
     axes[1].axhline(0, color="white", linewidth=0.7, linestyle="--", alpha=0.4)
@@ -388,15 +354,11 @@ def plot_profit_factor_sharpe(sentiment_pnl: pd.DataFrame) -> Path:
     return _save(fig, "08_profit_factor_sharpe")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 9. Fear & Greed Index History + rolling average
-# ─────────────────────────────────────────────────────────────────────────────
 
 def plot_fear_greed_history(daily: pd.DataFrame) -> Path:
     fig, ax = plt.subplots(figsize=(16, 5), facecolor="#0f0f1a")
     ax.set_facecolor("#0f0f1a")
 
-    # Coloured bar for each day
     for _, row in daily.iterrows():
         color = SENTIMENT_COLORS.get(str(row["classification"]), "#888888")
         ax.bar(row["date"], row["sentiment_val"], width=1.5, color=color, alpha=0.7)
@@ -404,7 +366,6 @@ def plot_fear_greed_history(daily: pd.DataFrame) -> Path:
     ax.plot(daily["date"], daily["sentiment_val"].rolling(14).mean(),
             color="white", linewidth=1.5, label="14-day MA", zorder=5)
 
-    # Horizontal zone labels
     for y, label, col in [(20, "Extreme Fear", "#d62728"), (35, "Fear", "#ff7f0e"),
                            (50, "Neutral", "#bcbd22"), (65, "Greed", "#2ca02c"),
                            (80, "Extreme Greed", "#1f77b4")]:
@@ -430,9 +391,6 @@ def plot_fear_greed_history(daily: pd.DataFrame) -> Path:
     return _save(fig, "09_fear_greed_history")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 10. Correlation Heatmap (daily-level)
-# ─────────────────────────────────────────────────────────────────────────────
 
 def plot_correlation_heatmap(daily: pd.DataFrame) -> Path:
     cols = ["sentiment_val", "total_pnl", "net_pnl", "trade_count",
@@ -469,9 +427,6 @@ def plot_correlation_heatmap(daily: pd.DataFrame) -> Path:
     return _save(fig, "10_correlation_heatmap")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 11. Top-10 Traders by PnL
-# ─────────────────────────────────────────────────────────────────────────────
 
 def plot_top_traders(account_perf: pd.DataFrame) -> Path:
     top10 = account_perf.head(10).copy()
@@ -483,7 +438,6 @@ def plot_top_traders(account_perf: pd.DataFrame) -> Path:
         for spine in ax.spines.values():
             spine.set_edgecolor("#333355")
 
-    # Total PnL
     colors_pnl = ["#2ca02c" if v >= 0 else "#d62728" for v in top10["total_pnl"]]
     axes[0].barh(top10["short_addr"], top10["total_pnl"], color=colors_pnl, edgecolor="#222240")
     axes[0].axvline(0, color="white", linewidth=0.8, linestyle="--", alpha=0.4)
@@ -492,7 +446,6 @@ def plot_top_traders(account_perf: pd.DataFrame) -> Path:
     axes[0].set_ylabel("Trader (address prefix)", color="white")
     axes[0].xaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"${x:,.0f}"))
 
-    # Win Rate
     axes[1].barh(top10["short_addr"], top10["win_rate_pct"],
                   color="#00d4ff", edgecolor="#222240")
     axes[1].axvline(50, color="yellow", linewidth=1, linestyle="--", alpha=0.7, label="50%")
@@ -507,9 +460,6 @@ def plot_top_traders(account_perf: pd.DataFrame) -> Path:
     return _save(fig, "11_top_traders")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 12. Top Coins by PnL
-# ─────────────────────────────────────────────────────────────────────────────
 
 def plot_top_coins(coin_summary: pd.DataFrame) -> Path:
     fig, axes = plt.subplots(1, 2, figsize=(16, 7), facecolor="#0f0f1a")
@@ -541,9 +491,6 @@ def plot_top_coins(coin_summary: pd.DataFrame) -> Path:
     return _save(fig, "12_top_coins")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 13. Risk Metrics (VaR, CVaR) by Sentiment
-# ─────────────────────────────────────────────────────────────────────────────
 
 def plot_risk_metrics(risk_df: pd.DataFrame) -> Path:
     fig, axes = plt.subplots(1, 2, figsize=(14, 6), facecolor="#0f0f1a")
@@ -557,7 +504,6 @@ def plot_risk_metrics(risk_df: pd.DataFrame) -> Path:
     cats   = risk_df["classification"]
     colors = _sentiment_palette(cats)
 
-    # VaR 5%
     axes[0].bar(cats, risk_df["VaR_5pct"], color=colors, edgecolor="#222240")
     axes[0].axhline(0, color="white", linewidth=0.7, linestyle="--", alpha=0.4)
     axes[0].set_title("5th Percentile VaR by Sentiment", fontsize=13,
@@ -566,7 +512,6 @@ def plot_risk_metrics(risk_df: pd.DataFrame) -> Path:
     axes[0].set_ylabel("Value at Risk — 5th Pct (USD)", color="white")
     axes[0].tick_params(axis="x", rotation=20)
 
-    # Max loss
     axes[1].bar(cats, risk_df["max_loss"], color=colors, edgecolor="#222240")
     axes[1].axhline(0, color="white", linewidth=0.7, linestyle="--", alpha=0.4)
     axes[1].set_title("Maximum Single Trade Loss by Sentiment", fontsize=13,
@@ -581,9 +526,6 @@ def plot_risk_metrics(risk_df: pd.DataFrame) -> Path:
     return _save(fig, "13_risk_metrics")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 14. Daily Trading Volume by Sentiment
-# ─────────────────────────────────────────────────────────────────────────────
 
 def plot_volume_timeline(daily: pd.DataFrame) -> Path:
     fig, ax = plt.subplots(figsize=(16, 5), facecolor="#0f0f1a")
@@ -616,9 +558,6 @@ def plot_volume_timeline(daily: pd.DataFrame) -> Path:
     return _save(fig, "14_volume_timeline")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 15. Sentiment Transition Analysis
-# ─────────────────────────────────────────────────────────────────────────────
 
 def plot_transition_analysis(transition_df: pd.DataFrame) -> Path:
     fig, ax = plt.subplots(figsize=(8, 5), facecolor="#0f0f1a")
@@ -648,9 +587,6 @@ def plot_transition_analysis(transition_df: pd.DataFrame) -> Path:
     return _save(fig, "15_transition_analysis")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 16. Fee Burden Analysis
-# ─────────────────────────────────────────────────────────────────────────────
 
 def plot_fee_analysis(fee_df: pd.DataFrame) -> Path:
     fig, axes = plt.subplots(1, 2, figsize=(14, 6), facecolor="#0f0f1a")
@@ -682,9 +618,6 @@ def plot_fee_analysis(fee_df: pd.DataFrame) -> Path:
     return _save(fig, "16_fee_analysis")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 17. Win Rate Rolling 30-day
-# ─────────────────────────────────────────────────────────────────────────────
 
 def plot_rolling_winrate(daily: pd.DataFrame) -> Path:
     fig, ax = plt.subplots(figsize=(16, 5), facecolor="#0f0f1a")
@@ -718,9 +651,6 @@ def plot_rolling_winrate(daily: pd.DataFrame) -> Path:
     return _save(fig, "17_rolling_winrate")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Master runner
-# ─────────────────────────────────────────────────────────────────────────────
 
 def generate_all_plots(df: pd.DataFrame, results: dict) -> list:
     """Generate every chart and return list of output paths."""

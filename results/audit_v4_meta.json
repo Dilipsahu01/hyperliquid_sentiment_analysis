@@ -1,0 +1,366 @@
+{
+  "forecast_origin": "2026-11-25 11:00:00 UTC",
+  "historical_max_daily_vol": 1.9310546381268268,
+  "coverage_true_oos": [
+    {
+      "horizon": 1,
+      "context": "Nov 25 (Wednesday)",
+      "cal_days": 639,
+      "oos_days": 250,
+      "cov_80_oos": 80.80000000000001,
+      "cov_95_oos": 92.80000000000001,
+      "cov_80_weekday": 78.65168539325843,
+      "cov_95_weekday": 91.01123595505618,
+      "cov_80_weekend": 86.11111111111111,
+      "cov_95_weekend": 97.22222222222221,
+      "status": "WELL-CALIBRATED",
+      "quantiles": {
+        "q025": -0.747013899137455,
+        "q10": -0.5793517682779253,
+        "q90": 0.3161601434558377,
+        "q975": 0.5870097547387958
+      },
+      "quantiles_full_oos": {
+        "q025": -0.75457529217153,
+        "q10": -0.5660900978952828,
+        "q90": 0.3171684593059269,
+        "q975": 0.6275356019249849
+      }
+    },
+    {
+      "horizon": 2,
+      "context": "Nov 26 (Thursday, Thanksgiving)",
+      "cal_days": 639,
+      "oos_days": 250,
+      "cov_80_oos": 76.0,
+      "cov_95_oos": 93.60000000000001,
+      "cov_80_weekday": 69.66292134831461,
+      "cov_95_weekday": 91.01123595505618,
+      "cov_80_weekend": 91.66666666666666,
+      "cov_95_weekend": 100.0,
+      "status": "WELL-CALIBRATED",
+      "quantiles": {
+        "q025": -0.8236742746884039,
+        "q10": -0.5867606071202162,
+        "q90": 0.3377088381581102,
+        "q975": 0.6398772915158621
+      },
+      "quantiles_full_oos": {
+        "q025": -0.822500874142637,
+        "q10": -0.6198716896992629,
+        "q90": 0.33560160024715335,
+        "q975": 0.6827269216412535
+      }
+    },
+    {
+      "horizon": 3,
+      "context": "Nov 27 (Friday, Black Friday)",
+      "cal_days": 639,
+      "oos_days": 250,
+      "cov_80_oos": 75.6,
+      "cov_95_oos": 92.80000000000001,
+      "cov_80_weekday": 70.39106145251397,
+      "cov_95_weekday": 90.5027932960894,
+      "cov_80_weekend": 88.73239436619718,
+      "cov_95_weekend": 98.59154929577466,
+      "status": "WELL-CALIBRATED",
+      "quantiles": {
+        "q025": -0.8515919309379324,
+        "q10": -0.6085530914492241,
+        "q90": 0.35329802811737276,
+        "q975": 0.6681488470518294
+      },
+      "quantiles_full_oos": {
+        "q025": -0.8558461625424326,
+        "q10": -0.6310411996537683,
+        "q90": 0.34922332968699016,
+        "q975": 0.6971094659814262
+      }
+    },
+    {
+      "horizon": 4,
+      "context": "Nov 28 (Saturday)",
+      "cal_days": 639,
+      "oos_days": 250,
+      "cov_80_oos": 77.2,
+      "cov_95_oos": 92.4,
+      "cov_80_weekday": 75.55555555555556,
+      "cov_95_weekday": 91.66666666666666,
+      "cov_80_weekend": 81.42857142857143,
+      "cov_95_weekend": 94.28571428571428,
+      "status": "WELL-CALIBRATED",
+      "quantiles": {
+        "q025": -0.8494069842296408,
+        "q10": -0.6176705388046476,
+        "q90": 0.3602960881154158,
+        "q975": 0.7345409292815722
+      },
+      "quantiles_full_oos": {
+        "q025": -0.8548213720278528,
+        "q10": -0.6459843078522689,
+        "q90": 0.3459627326928226,
+        "q975": 0.7673106330709487
+      }
+    },
+    {
+      "horizon": 5,
+      "context": "Nov 29 (Sunday)",
+      "cal_days": 639,
+      "oos_days": 250,
+      "cov_80_oos": 77.60000000000001,
+      "cov_95_oos": 92.4,
+      "cov_80_weekday": 77.6536312849162,
+      "cov_95_weekday": 92.17877094972067,
+      "cov_80_weekend": 77.46478873239437,
+      "cov_95_weekend": 92.95774647887323,
+      "status": "WELL-CALIBRATED",
+      "quantiles": {
+        "q025": -0.8503020742728931,
+        "q10": -0.6467422677696477,
+        "q90": 0.3305110203111686,
+        "q975": 0.6961958867433488
+      },
+      "quantiles_full_oos": {
+        "q025": -0.8628848425664447,
+        "q10": -0.6567883256043967,
+        "q90": 0.33207611369321394,
+        "q975": 0.7321184607448968
+      }
+    },
+    {
+      "horizon": 6,
+      "context": "Nov 30 (Monday, Equities Reopen)",
+      "cal_days": 639,
+      "oos_days": 250,
+      "cov_80_oos": 77.60000000000001,
+      "cov_95_oos": 92.0,
+      "cov_80_weekday": 83.70786516853933,
+      "cov_95_weekday": 94.9438202247191,
+      "cov_80_weekend": 62.5,
+      "cov_95_weekend": 84.72222222222221,
+      "status": "WELL-CALIBRATED",
+      "quantiles": {
+        "q025": -0.8994682504660888,
+        "q10": -0.6447108277027521,
+        "q90": 0.32716910805509486,
+        "q975": 0.7315341869183117
+      },
+      "quantiles_full_oos": {
+        "q025": -0.905596376599025,
+        "q10": -0.6543212834035687,
+        "q90": 0.33073726488538974,
+        "q975": 0.7696010588486444
+      }
+    }
+  ],
+  "holiday_sensitivity": {
+    "2026-11-26 (Thanksgiving)": {
+      "spec_A_with_holidays_ols": 0.4065942001451891,
+      "spec_B_without_holidays": 0.6846780163221293,
+      "spec_C_ridge_shrunk": 0.5630427556738693
+    },
+    "2026-11-27 (Black Friday)": {
+      "spec_A_with_holidays_ols": 0.5935219576580323,
+      "spec_B_without_holidays": 0.6866117567294321,
+      "spec_C_ridge_shrunk": 0.649958080026544
+    }
+  },
+  "holdout_diagnostics": {
+    "weekday_diagnostics": [
+      {
+        "weekday": "Monday",
+        "n_days": 4,
+        "actual_vol": 0.45011495132019885,
+        "crypto_pred_vol": 0.5480672837102745,
+        "blend_pred_vol": 0.5374331637769612,
+        "crypto_mae": 0.09795233239007567,
+        "blend_mae": 0.0873182124567624,
+        "crypto_qlike": 0.09287904113213563
+      },
+      {
+        "weekday": "Tuesday",
+        "n_days": 3,
+        "actual_vol": 0.39665407570053457,
+        "crypto_pred_vol": 0.4776529172367847,
+        "blend_pred_vol": 0.47572716856694797,
+        "crypto_mae": 0.18131231719525212,
+        "blend_mae": 0.17683132065226145,
+        "crypto_qlike": 0.33032722870888603
+      },
+      {
+        "weekday": "Wednesday",
+        "n_days": 3,
+        "actual_vol": 0.5188352887749897,
+        "crypto_pred_vol": 0.47475827866664294,
+        "blend_pred_vol": 0.48196552061426917,
+        "crypto_mae": 0.10804245055680266,
+        "blend_mae": 0.10250508925752756,
+        "crypto_qlike": 0.14715454035898787
+      },
+      {
+        "weekday": "Thursday",
+        "n_days": 3,
+        "actual_vol": 0.5940411517402063,
+        "crypto_pred_vol": 0.5156559617676713,
+        "blend_pred_vol": 0.5292693360193191,
+        "crypto_mae": 0.27074976904760106,
+        "blend_mae": 0.278715563214154,
+        "crypto_qlike": 0.5476227049878043
+      },
+      {
+        "weekday": "Friday",
+        "n_days": 3,
+        "actual_vol": 0.6385998480838279,
+        "crypto_pred_vol": 0.26724657073413804,
+        "blend_pred_vol": 0.27237401397120337,
+        "crypto_mae": 0.4282796960611446,
+        "blend_mae": 0.4225202959513839,
+        "crypto_qlike": 3.779069854143215
+      },
+      {
+        "weekday": "Saturday",
+        "n_days": 3,
+        "actual_vol": 0.5551262822998451,
+        "crypto_pred_vol": 0.4039044240554032,
+        "blend_pred_vol": 0.40919834928497273,
+        "crypto_mae": 0.2234516081680696,
+        "blend_mae": 0.2258307688125065,
+        "crypto_qlike": 1.1546831820310477
+      },
+      {
+        "weekday": "Sunday",
+        "n_days": 4,
+        "actual_vol": 0.5718241212881987,
+        "crypto_pred_vol": 0.6354385043091606,
+        "blend_pred_vol": 0.6338977009173907,
+        "crypto_mae": 0.1983576679867772,
+        "blend_mae": 0.19698457102081918,
+        "crypto_qlike": 0.3076611789290358
+      }
+    ],
+    "ranking": [
+      {
+        "model": "HAR-RV (Linear 5/22)",
+        "qlike": 0.49995481413630605,
+        "mse": 0.059997157699752106
+      },
+      {
+        "model": "Ridge_a10",
+        "qlike": 0.5070084170960135,
+        "mse": 0.06399686577044267
+      },
+      {
+        "model": "Lasso_Direct_ML",
+        "qlike": 0.7643139715956953,
+        "mse": 0.07629526104055438
+      },
+      {
+        "model": "Equal_Weight_Blend",
+        "qlike": 0.8028123669227776,
+        "mse": 0.07772034117023248
+      },
+      {
+        "model": "HAR_Crypto_Log_DOW_7_30",
+        "qlike": 0.8469014526493264,
+        "mse": 0.07944522611547797
+      }
+    ],
+    "blend_dm_stat": 1.8149107895792091,
+    "blend_dm_pval": 0.06953762016457832,
+    "plot_path": "outputs/figures/holdout_actual_vs_predicted.png"
+  },
+  "trading_simulation": {
+    "T": 22,
+    "n_trials": 39,
+    "mean_daily_ret_pct": -0.9697042160160168,
+    "std_daily_ret_pct": 2.3278640572991605,
+    "sr_daily": -0.41656375784131083,
+    "sr_ann": -7.958439419044986,
+    "skewness": -0.4569694839822495,
+    "kurtosis": 2.655846782561655,
+    "deflated_sharpe_prob": 9.752886947039979e-14
+  },
+  "signature_plot": {
+    "full_days_evaluated": 24,
+    "autocorrelations": {
+      "rho_1": {
+        "mean": 0.09974978249566285,
+        "std": 0.03327468626845862,
+        "min": 0.03725994420899777,
+        "max": 0.1613561534124802
+      },
+      "rho_2": {
+        "mean": 0.04027144470521523,
+        "std": 0.023418062623698464,
+        "min": -0.03585404802642436,
+        "max": 0.08708195355099803
+      },
+      "rho_3": {
+        "mean": 0.0316737186286489,
+        "std": 0.011179574788643344,
+        "min": 0.009695205893376054,
+        "max": 0.05455601119977173
+      },
+      "rho_4": {
+        "mean": 0.022471263050207604,
+        "std": 0.015421723875125578,
+        "min": -0.007841801761949452,
+        "max": 0.06617386641412247
+      },
+      "rho_5": {
+        "mean": 0.00683693719357555,
+        "std": 0.013246111035687949,
+        "min": -0.01884018335944383,
+        "max": 0.03127551847407478
+      }
+    },
+    "variance_ratios": {
+      "5-sec": {
+        "point": 1.2171744826812585,
+        "ci_95": [
+          1.1951576604361007,
+          1.2368376822589977
+        ]
+      },
+      "1-min": {
+        "point": 1.3467540733063357,
+        "ci_95": [
+          1.2978036238009534,
+          1.4034541710025072
+        ]
+      },
+      "5-min": {
+        "point": 1.454175105867054,
+        "ci_95": [
+          1.2789205643101933,
+          1.7136242564160167
+        ]
+      },
+      "15-min": {
+        "point": 1.3943784433319524,
+        "ci_95": [
+          1.2150147708047905,
+          1.6449258112131064
+        ]
+      },
+      "1-hour": {
+        "point": 1.5157092832061871,
+        "ci_95": [
+          1.1825376559828167,
+          1.9529317041649081
+        ]
+      }
+    },
+    "zero_trade_pct": 11.591194058641975,
+    "math_analysis": "Mathematical Audit of Zero-Trade Seconds:\n  Total seconds: 2,073,600 | Zero-trade seconds: 240,355 (11.59%)\n  Sum of squared returns across all seconds:     0.014774\n  Sum of squared returns across non-zero seconds: 0.014774 (Identical to 10^-12)\n  Conclusion: Zero-trade seconds do NOT dilute integrated realized variance (sum(r^2)), because   true price changes are zero when no trades occur. Rather, the expansion of Variance Ratio VR(q) from 1.0 to 1.51   is mathematically governed by Lo-MacKinlay positive autocorrelation expansion (rho_1 = +0.0998, rho_2 = +0.0403),   induced by execution algorithms splitting orders into consecutive child trades across adjacent seconds."
+  },
+  "rv_5m_comparison": {
+    "mean_vol_1h": 0.40352749693458817,
+    "mean_vol_5m": 0.4231912946708465,
+    "corr_1h_5m": 0.8315258699233338,
+    "holdout_5m_qlike": 0.3979019640424997,
+    "holdout_5m_mse": 0.04059437484436492,
+    "holdout_5m_mae": 0.14765550564810165
+  },
+  "total_experiments_tracked": 39
+}

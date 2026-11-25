@@ -48,7 +48,6 @@ def generate_report(merged_df: pd.DataFrame, results: dict) -> Path:
     total_fees     = merged_df["Fee"].sum()
     overall_winrate= merged_df["is_winner"].mean() * 100
 
-    # ── assemble markdown ────────────────────────────────────────────────────
     md = f"""# Hyperliquid × Bitcoin Fear & Greed Index — Full Analysis Report
 
 > **Generated:** {report_date}  
@@ -97,7 +96,6 @@ a rigorous examination of how market sentiment drives trader behaviour and profi
 
 """
 
-    # ── 2. Dataset Overview ──────────────────────────────────────────────────
     md += """## 2. Dataset Overview
 
 ### Sentiment Distribution
@@ -119,7 +117,6 @@ a rigorous examination of how market sentiment drives trader behaviour and profi
             n = int(r["trade_count"])
             md += f"| {s} | {n:,} | {n/total_trades*100:.1f}% |\n"
 
-    # ── 3. Performance ───────────────────────────────────────────────────────
     md += """
 ---
 
@@ -165,7 +162,6 @@ a rigorous examination of how market sentiment drives trader behaviour and profi
 
 """
 
-    # ── 4. Activity ──────────────────────────────────────────────────────────
     md += """---
 
 ## 4. Trading Activity & Behaviour
@@ -202,7 +198,6 @@ a rigorous examination of how market sentiment drives trader behaviour and profi
 
 """
 
-    # ── 5. Risk ──────────────────────────────────────────────────────────────
     md += """---
 
 ## 5. Risk Metrics by Sentiment
@@ -222,7 +217,6 @@ a rigorous examination of how market sentiment drives trader behaviour and profi
 
 """
 
-    # ── 6. Correlation ───────────────────────────────────────────────────────
     md += """---
 
 ## 6. Time-Series & Correlation Analysis
@@ -263,7 +257,6 @@ a rigorous examination of how market sentiment drives trader behaviour and profi
 
 """
 
-    # ── 7. Top Traders ───────────────────────────────────────────────────────
     md += """---
 
 ## 7. Top Trader Analysis
@@ -281,7 +274,6 @@ a rigorous examination of how market sentiment drives trader behaviour and profi
             f"{r['profit_factor']:.2f} |\n"
         )
 
-    # ── 8. Coins ─────────────────────────────────────────────────────────────
     md += """
 ---
 
@@ -299,7 +291,6 @@ a rigorous examination of how market sentiment drives trader behaviour and profi
             f"{int(r['trades']):,} | {_fmt_usd(r['total_vol'])} |\n"
         )
 
-    # ── 9. Fees ──────────────────────────────────────────────────────────────
     md += """
 ---
 
@@ -320,7 +311,6 @@ A ratio > 1.0 would indicate fees exceed gross profits — a critical warning si
 
 """
 
-    # ── 10. Transitions ──────────────────────────────────────────────────────
     md += """---
 
 ## 10. Sentiment Transition Effects
@@ -340,7 +330,6 @@ as traders rapidly adjust positions. This creates both risk and opportunity for 
 
 """
 
-    # ── 11. Stats ────────────────────────────────────────────────────────────
     kw = cor.get("kruskal_wallis", {})
     mw = cor.get("mw_ef_vs_eg", {})
     md += f"""---
@@ -363,7 +352,6 @@ Tests whether PnL during Extreme Fear differs from Extreme Greed.
 
 """
 
-    # ── 12. Recommendations ─────────────────────────────────────────────────
     md += """---
 
 ## 12. Strategic Recommendations
@@ -375,7 +363,7 @@ Position sizes are naturally smaller during Extreme Greed. Lean into this:
 reduce leverage and size as the F&G index climbs above 75. Euphoric markets 
 invite mean-reversion and sudden reversals.
 
-### 🟠 Buy Conviction in Fear Regimes
+###  Buy Conviction in Fear Regimes
 Fear regimes show the highest average position sizes and above-average PnL.
 This is the "buying the dip" effect — traders who enter during fear 
 and hold for the recovery capture the most value.

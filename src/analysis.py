@@ -5,20 +5,16 @@ All heavy computation lives here so that visualisation modules stay thin.
 Call `run_all(merged_df)` to produce a comprehensive results dictionary.
 """
 
+import warnings
 import numpy as np
 import pandas as pd
 from scipy import stats
 from scipy.stats import kruskal, mannwhitneyu, spearmanr
-import warnings
 
 from src.config import SENTIMENT_ORDER, MIN_TRADES_PER_ACCOUNT, OUTLIER_ZSCORE_THRESHOLD
 
 warnings.filterwarnings("ignore")
 
-
-# ─────────────────────────────────────────────────────────────────────────────
-# 1. PnL / Performance by Sentiment
-# ─────────────────────────────────────────────────────────────────────────────
 
 def sentiment_pnl_summary(df: pd.DataFrame) -> pd.DataFrame:
     """Aggregate trade-level PnL and net-PnL statistics by sentiment class."""
@@ -57,7 +53,7 @@ def sentiment_pnl_summary(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def _profit_factor(pnl_series: pd.Series) -> float:
-    gains  = pnl_series[pnl_series > 0].sum()
+    gains = pnl_series[pnl_series > 0].sum()
     losses = pnl_series[pnl_series < 0].abs().sum()
     return round(gains / losses, 4) if losses > 0 else np.nan
 
@@ -66,10 +62,6 @@ def _sharpe(pnl_series: pd.Series, risk_free: float = 0.0) -> float:
     mu, sigma = pnl_series.mean(), pnl_series.std()
     return round((mu - risk_free) / sigma, 4) if sigma > 0 else np.nan
 
-
-# ─────────────────────────────────────────────────────────────────────────────
-# 2. Trading Activity by Sentiment
-# ─────────────────────────────────────────────────────────────────────────────
 
 def sentiment_activity_summary(df: pd.DataFrame) -> pd.DataFrame:
     """Buy/sell ratios, direction bias, and daily trade counts by sentiment."""
@@ -85,13 +77,12 @@ def sentiment_activity_summary(df: pd.DataFrame) -> pd.DataFrame:
         close_short_trades= ("Direction", lambda x: (x == "Close Short").sum()),
     ).reset_index()
 
-    act["buy_ratio"]  = act["buy_trades"]  / act["total_trades"]
+    act["buy_ratio"] = act["buy_trades"] / act["total_trades"]
     act["sell_ratio"] = act["sell_trades"] / act["total_trades"]
     act["dominant_bias"] = act.apply(
         lambda r: "BUY Bias" if r["buy_ratio"] >= 0.5 else "SELL Bias", axis=1
     )
 
-    # trades per unique day
     day_counts = df.groupby("classification", observed=True)["date"].nunique().rename("unique_days")
     act = act.merge(day_counts, on="classification")
     act["avg_trades_per_day"] = act["total_trades"] / act["unique_days"]
@@ -102,10 +93,6 @@ def sentiment_activity_summary(df: pd.DataFrame) -> pd.DataFrame:
     ).reset_index(drop=True)
     return act
 
-
-# ─────────────────────────────────────────────────────────────────────────────
-# 3. Daily Aggregated Time-Series
-# ─────────────────────────────────────────────────────────────────────────────
 
 def daily_summary(df: pd.DataFrame) -> pd.DataFrame:
     """Day-level aggregation for time-series charts."""
@@ -120,38 +107,30 @@ def daily_summary(df: pd.DataFrame) -> pd.DataFrame:
         classification= ("classification", lambda x: x.mode()[0] if not x.empty else np.nan),
     ).reset_index()
 
-    daily["cumulative_pnl"]     = daily["total_pnl"].cumsum()
+    daily["cumulative_pnl"] = daily["total_pnl"].cumsum()
     daily["cumulative_net_pnl"] = daily["net_pnl"].cumsum()
 
-    # 7-day rolling metrics
     daily = daily.sort_values("date")
-    daily["roll7_pnl"]     = daily["total_pnl"].rolling(7, min_periods=1).sum()
+    daily["roll7_pnl"] = daily["total_pnl"].rolling(7, min_periods=1).sum()
     daily["roll7_winrate"] = daily["win_rate"].rolling(7, min_periods=1).mean()
-    daily["roll7_vol"]     = daily["total_vol_usd"].rolling(7, min_periods=1).sum()
+    daily["roll7_vol"] = daily["total_vol_usd"].rolling(7, min_periods=1).sum()
     return daily
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 4. Correlation Analysis
-# ─────────────────────────────────────────────────────────────────────────────
-
 def correlation_analysis(df: pd.DataFrame, daily: pd.DataFrame) -> dict:
     """
-    Pearson & Spearman correlations at trade level and daily level.
-    Also tests H0: PnL is equal across sentiment groups (Kruskal-Wallis).
+    Pearson and Spearman correlations at trade level and daily level.
+    Tests H0: PnL is equal across sentiment groups (Kruskal-Wallis).
     """
     results = {}
 
-    # Trade-level Spearman: sentiment value vs Closed PnL
     mask = df[["value", "Closed PnL"]].dropna()
     r_sp, p_sp = spearmanr(mask["value"], mask["Closed PnL"])
     results["spearman_value_pnl"] = {"rho": round(r_sp, 4), "p": round(p_sp, 6)}
 
-    # Trade-level Pearson
     r_pe, p_pe = stats.pearsonr(mask["value"], mask["Closed PnL"])
     results["pearson_value_pnl"] = {"r": round(r_pe, 4), "p": round(p_pe, 6)}
 
-    # Daily level: sentiment vs total PnL
     dm = daily[["sentiment_val", "total_pnl", "net_pnl", "win_rate", "total_vol_usd"]].dropna()
     r2, p2 = spearmanr(dm["sentiment_val"], dm["total_pnl"])
     results["daily_spearman_val_pnl"] = {"rho": round(r2, 4), "p": round(p2, 6)}
@@ -162,17 +141,16 @@ def correlation_analysis(df: pd.DataFrame, daily: pd.DataFrame) -> dict:
     r4, p4 = spearmanr(dm["sentiment_val"], dm["total_vol_usd"])
     results["daily_spearman_val_vol"] = {"rho": round(r4, 4), "p": round(p4, 6)}
 
-    # Kruskal-Wallis: is PnL distribution different across sentiment groups?
     groups = [
         df.loc[df["classification"] == s, "Closed PnL"].dropna().values
         for s in SENTIMENT_ORDER
         if s in df["classification"].cat.categories
     ]
+    groups = [g for g in groups if len(g) > 0]
     if len(groups) >= 2:
         h_stat, p_kw = kruskal(*groups)
         results["kruskal_wallis"] = {"H": round(h_stat, 4), "p": round(p_kw, 6)}
 
-    # Mann-Whitney pairwise (Extreme Fear vs Extreme Greed)
     ef = df.loc[df["classification"] == "Extreme Fear", "Closed PnL"].dropna()
     eg = df.loc[df["classification"] == "Extreme Greed", "Closed PnL"].dropna()
     if len(ef) > 0 and len(eg) > 0:
@@ -182,12 +160,8 @@ def correlation_analysis(df: pd.DataFrame, daily: pd.DataFrame) -> dict:
     return results
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 5. Top-Trader / Account-Level Analysis
-# ─────────────────────────────────────────────────────────────────────────────
-
 def account_performance(df: pd.DataFrame) -> pd.DataFrame:
-    """Per-account stats filtered to accounts with ≥ MIN_TRADES_PER_ACCOUNT."""
+    """Per-account stats filtered to accounts with >= MIN_TRADES_PER_ACCOUNT."""
     g = df.groupby("Account")
 
     perf = g.agg(
@@ -206,8 +180,9 @@ def account_performance(df: pd.DataFrame) -> pd.DataFrame:
     perf["profit_factor"] = perf.apply(
         lambda r: _profit_factor(df[df["Account"] == r["Account"]]["Closed PnL"]), axis=1
     )
-    perf["rank_pnl"]   = perf["total_pnl"].rank(ascending=False).astype(int)
-    perf["short_addr"] = perf["Account"].str[:8] + "…"
+    perf["rank_pnl"] = perf["total_pnl"].rank(ascending=False).astype(int)
+    perf["Account"] = perf["Account"].astype(str)
+    perf["short_addr"] = perf["Account"].str[:8] + "..."
     return perf.sort_values("total_pnl", ascending=False).reset_index(drop=True)
 
 
@@ -225,13 +200,9 @@ def account_sentiment_breakdown(df: pd.DataFrame, top_n: int = 10) -> pd.DataFra
         aggfunc="sum",
         observed=True
     ).fillna(0)
-    pivot.index = [a[:8] + "…" for a in pivot.index]
+    pivot.index = [a[:8] + "..." for a in pivot.index]
     return pivot
 
-
-# ─────────────────────────────────────────────────────────────────────────────
-# 6. Coin / Symbol Analysis
-# ─────────────────────────────────────────────────────────────────────────────
 
 def coin_sentiment_analysis(df: pd.DataFrame, top_n: int = 15) -> pd.DataFrame:
     """Most traded coins and their PnL profile across sentiment regimes."""
@@ -251,19 +222,15 @@ def coin_summary(df: pd.DataFrame, top_n: int = 20) -> pd.DataFrame:
     """Overall per-coin summary ranked by total PnL."""
     g = df.groupby("Coin")
     s = g.agg(
-        trades      = ("Closed PnL", "count"),
-        total_pnl   = ("Closed PnL", "sum"),
-        avg_pnl     = ("Closed PnL", "mean"),
-        win_rate    = ("is_winner",  "mean"),
-        total_vol   = ("Size USD",   "sum"),
+        trades    = ("Closed PnL", "count"),
+        total_pnl = ("Closed PnL", "sum"),
+        avg_pnl   = ("Closed PnL", "mean"),
+        win_rate  = ("is_winner",  "mean"),
+        total_vol = ("Size USD",   "sum"),
     ).reset_index()
     s["win_rate_pct"] = s["win_rate"] * 100
     return s.sort_values("total_pnl", ascending=False).head(top_n).reset_index(drop=True)
 
-
-# ─────────────────────────────────────────────────────────────────────────────
-# 7. Position Sizing & Risk Metrics
-# ─────────────────────────────────────────────────────────────────────────────
 
 def risk_metrics_by_sentiment(df: pd.DataFrame) -> pd.DataFrame:
     """Value-at-Risk (5th pct), max loss, max gain by sentiment."""
@@ -290,10 +257,6 @@ def size_distribution_by_sentiment(df: pd.DataFrame) -> pd.DataFrame:
     return g.describe(percentiles=[.1, .25, .5, .75, .9]).reset_index()
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 8. Transition / Regime-Change Analysis
-# ─────────────────────────────────────────────────────────────────────────────
-
 def sentiment_transition_pnl(df: pd.DataFrame) -> pd.DataFrame:
     """
     For each day, check if the sentiment changed from the prior day.
@@ -308,17 +271,13 @@ def sentiment_transition_pnl(df: pd.DataFrame) -> pd.DataFrame:
     daily["is_transition"] = daily["classification"] != daily["prev_class"]
     daily = daily.dropna(subset=["prev_class"])
     daily["transition_label"] = daily.apply(
-        lambda r: f"{r['prev_class']} → {r['classification']}" if r["is_transition"] else "stable",
+        lambda r: f"{r['prev_class']} -> {r['classification']}" if r["is_transition"] else "stable",
         axis=1
     )
     result = daily.groupby("is_transition")["total_pnl"].agg(["mean", "std", "count"])
     result.index = result.index.map({True: "Transition Day", False: "Stable Day"})
     return result.reset_index().rename(columns={"index": "day_type"})
 
-
-# ─────────────────────────────────────────────────────────────────────────────
-# 9. Fee Analysis
-# ─────────────────────────────────────────────────────────────────────────────
 
 def fee_analysis(df: pd.DataFrame) -> pd.DataFrame:
     """Fee burden by sentiment: total fees paid and fee-to-PnL ratio."""
@@ -330,16 +289,15 @@ def fee_analysis(df: pd.DataFrame) -> pd.DataFrame:
         trade_count= ("Fee", "count"),
     ).reset_index()
     fa["fee_to_pnl_ratio"] = fa["total_fee"] / fa["total_pnl"].abs()
-    fa["fee_per_1k_vol"]   = (fa["avg_fee"] / df.groupby("classification", observed=True)["Size USD"].mean().values) * 1000
+    avg_size = df.groupby("classification", observed=True)["Size USD"].mean().rename("avg_size_usd_ref")
+    fa = fa.merge(avg_size, on="classification", how="left")
+    fa["fee_per_1k_vol"] = (fa["avg_fee"] / fa["avg_size_usd_ref"]) * 1000
+    fa.drop(columns=["avg_size_usd_ref"], inplace=True)
     return fa.sort_values(
         "classification",
         key=lambda c: c.map({s: i for i, s in enumerate(SENTIMENT_ORDER)})
     ).reset_index(drop=True)
 
-
-# ─────────────────────────────────────────────────────────────────────────────
-# 10. Outlier Detection
-# ─────────────────────────────────────────────────────────────────────────────
 
 def detect_outlier_trades(df: pd.DataFrame) -> pd.DataFrame:
     """Flag trades with |z-score| > threshold as outliers."""
@@ -352,16 +310,12 @@ def detect_outlier_trades(df: pd.DataFrame) -> pd.DataFrame:
                       "pnl_zscore", "classification", "Size USD"]].head(50)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Master runner
-# ─────────────────────────────────────────────────────────────────────────────
-
 def run_all(df: pd.DataFrame) -> dict:
     """Compute every analysis and return results in a labelled dictionary."""
-    print("\n[Analysis] Running all statistical analyses …")
+    print("\n[Analysis] Running all statistical analyses...")
 
     daily = daily_summary(df)
-    corr  = correlation_analysis(df, daily)
+    corr = correlation_analysis(df, daily)
 
     results = {
         "sentiment_pnl":         sentiment_pnl_summary(df),

@@ -1,0 +1,333 @@
+{
+  "check1": {
+    "HAR_Linear": {
+      "qlike": 0.4190026995882384,
+      "mse": 0.03954724465308951,
+      "mae": 0.1531500001354114,
+      "r2_oos": 0.1442192181998485
+    },
+    "HAR_Log": {
+      "qlike": 0.4104386044676399,
+      "mse": 0.04033780737238565,
+      "mae": 0.15384492537833466,
+      "r2_oos": 0.1271118725954702
+    },
+    "HAR_Sqrt": {
+      "qlike": 0.4214363840041139,
+      "mse": 0.036303101278077364,
+      "mae": 0.13914561136545744,
+      "r2_oos": 0.21442070955767412
+    }
+  },
+  "strongest_har": "HAR_Log",
+  "check2": {
+    "shift_r2": 0.28366751683318847,
+    "shift_mse": 0.03312983868869553,
+    "shuffled_r2": -0.025054438760682363,
+    "pytest_tests": [
+      [
+        "test_data_integrity_shape_and_dates",
+        "Asserts N >= 500, date continuity, monotonically increasing unique dates."
+      ],
+      [
+        "test_no_nans_in_feature_matrix",
+        "Asserts zero NaN values across all 89 engineered feature columns."
+      ],
+      [
+        "test_no_lookahead_bias_in_features",
+        "Asserts target_rv_next[t] == rv[t+1] and target_dir_next[t] == (close[t+1] > close[t])."
+      ],
+      [
+        "test_feature_lag_integrity",
+        "Asserts btc_ret_lag1[t] == daily_ret[t-1] and btc_ret_lag2[t] == daily_ret[t-2]."
+      ],
+      [
+        "test_rv_scaling_plausibility",
+        "Asserts annualized RV in [0.05, 3.0] and daily RV in [0, 0.10], ruling out 19,400% bug."
+      ],
+      [
+        "test_holdout_isolation",
+        "Asserts train window < 2026-11-01 has >= 500 rows and holdout >= 23 rows."
+      ],
+      [
+        "test_results_baselines_json",
+        "Asserts results/baselines.json exists with valid QLIKE and MSE metrics for all 4 baselines."
+      ],
+      [
+        "test_results_walk_forward_metrics_csv",
+        "Asserts results/walk_forward_metrics.csv exists with >= 500 evaluation rows and required columns."
+      ],
+      [
+        "test_results_holdout_json",
+        "Asserts results/holdout.json exists with 23 holdout days and model evaluations."
+      ],
+      [
+        "test_results_forecast_csv",
+        "Asserts forecast_nov26_30.csv has 5 rows (Nov 26-30) and strictly monotone prediction intervals."
+      ],
+      [
+        "test_diebold_mariano_math",
+        "Asserts Diebold-Mariano test yields stat > 5 and p < 0.001 on known synthetic loss differential."
+      ]
+    ]
+  },
+  "check3": {
+    "1_HAR_only": {
+      "n_features": 3,
+      "n_nonzero": 3,
+      "qlike": 0.4390945367779887,
+      "mse": 0.03778802022801985,
+      "r2_oos": 0.18228787423529313,
+      "nonzero_coefs": {
+        "rv_d": 0.0567,
+        "rv_w": 0.02018,
+        "rv_m": 0.03069
+      }
+    },
+    "2_Plus_Jumps": {
+      "n_features": 9,
+      "n_nonzero": 4,
+      "qlike": 0.4371539858145,
+      "mse": 0.038099026658697285,
+      "r2_oos": 0.17555786488256264,
+      "nonzero_coefs": {
+        "rv_d": 0.02218,
+        "rv_w": 0.01773,
+        "rv_m": 0.03063,
+        "bv": 0.03807
+      }
+    },
+    "3_Plus_Macro": {
+      "n_features": 33,
+      "n_nonzero": 8,
+      "qlike": 0.4504623731333762,
+      "mse": 0.038569530992663685,
+      "r2_oos": 0.1653764079872928,
+      "nonzero_coefs": {
+        "rv_d": 0.02183,
+        "rv_w": 0.01739,
+        "rv_m": 0.02596,
+        "bv": 0.03784,
+        "AMD": -0.00606,
+        "AVGO": -0.00677,
+        "TLT": 0.00888,
+        "UUP": 0.01305
+      }
+    },
+    "4_Plus_FG": {
+      "n_features": 35,
+      "n_nonzero": 8,
+      "qlike": 0.4557841408127967,
+      "mse": 0.03870816709332923,
+      "r2_oos": 0.16237639846313956,
+      "nonzero_coefs": {
+        "rv_d": 0.02183,
+        "rv_w": 0.01739,
+        "rv_m": 0.02596,
+        "bv": 0.03784,
+        "AMD": -0.00606,
+        "AVGO": -0.00677,
+        "TLT": 0.00888,
+        "UUP": 0.01305
+      }
+    },
+    "5_Plus_Calendar": {
+      "n_features": 42,
+      "n_nonzero": 12,
+      "qlike": 0.32029116633674337,
+      "mse": 0.028419063017156715,
+      "r2_oos": 0.38502699289948694,
+      "nonzero_coefs": {
+        "rv_d": 0.01768,
+        "rv_w": 0.03888,
+        "rv_m": 0.01633,
+        "bv": 0.03367,
+        "AMD": -0.00542,
+        "AVGO": -0.00633,
+        "MS": -0.00031,
+        "TLT": 0.00893,
+        "UUP": 0.01307,
+        "is_weekend": -0.0562,
+        "is_friday": -0.07542,
+        "is_sunday": 0.06482
+      }
+    }
+  },
+  "check4": {
+    "n_holdout_days": 23,
+    "mean_vol_1h": 0.5303272274013827,
+    "mean_vol_1s": 0.4494047726321876,
+    "mean_vol_diff_pct": -8.092245476919503,
+    "correlation": 0.949274243588456,
+    "mse_har_1s": 0.022781398401752303,
+    "mse_lasso_1s": 0.022258715232230587,
+    "mse_har_1h": 0.06896267133630085,
+    "mse_lasso_1h": 0.06531701736874881
+  },
+  "check5_dm": {
+    "RandomWalk": {
+      "qlike_mean": 0.8423268724816035,
+      "mse_mean": 0.05147229715820675,
+      "dm_stat_qlike": -6.26877484206644,
+      "dm_pval_qlike": 5.71094282975082e-10,
+      "dm_stat_mse": -4.602472568121625,
+      "dm_pval_mse": 4.793232371458345e-06
+    },
+    "RollingMean20d": {
+      "qlike_mean": 0.47945519986935764,
+      "mse_mean": 0.04306679306981971,
+      "dm_stat_qlike": -3.9082791833944177,
+      "dm_pval_qlike": 0.00010014031158567249,
+      "dm_stat_mse": -2.318467621651465,
+      "dm_pval_mse": 0.020653851050533634
+    },
+    "HAR-RV": {
+      "qlike_mean": 0.4190026995882384,
+      "mse_mean": 0.03954724465308951,
+      "dm_stat_qlike": 0.0,
+      "dm_pval_qlike": 1.0,
+      "dm_stat_mse": 0.0,
+      "dm_pval_mse": 1.0
+    },
+    "GARCH(1,1)-t": {
+      "qlike_mean": 0.495537319541243,
+      "mse_mean": 0.04962672658162994,
+      "dm_stat_qlike": -3.374449613155893,
+      "dm_pval_qlike": 0.0007721926841799398,
+      "dm_stat_mse": -4.401200670921949,
+      "dm_pval_mse": 1.209582481620508e-05
+    },
+    "Ridge_a10": {
+      "qlike_mean": 0.41130940681601713,
+      "mse_mean": 0.026915623020256414,
+      "dm_stat_qlike": 0.15081245894964565,
+      "dm_pval_qlike": 0.8801584571918077,
+      "dm_stat_mse": 8.198703498792753,
+      "dm_pval_mse": 8.881784197001252e-16
+    },
+    "Lasso_a005": {
+      "qlike_mean": 0.27633064162236315,
+      "mse_mean": 0.024715664336986413,
+      "dm_stat_qlike": 7.492369462553542,
+      "dm_pval_qlike": 1.6564527527407336e-13,
+      "dm_stat_mse": 12.054038672847827,
+      "dm_pval_mse": 0.0
+    },
+    "ElasticNet": {
+      "qlike_mean": 0.29833801898645146,
+      "mse_mean": 0.02481451103632497,
+      "dm_stat_qlike": 5.251823712903238,
+      "dm_pval_qlike": 1.89251682769509e-07,
+      "dm_stat_mse": 11.407759228653216,
+      "dm_pval_mse": 0.0
+    },
+    "LightGBM_Shallow": {
+      "qlike_mean": 0.32133048594934843,
+      "mse_mean": 0.028897476140121864,
+      "dm_stat_qlike": 8.4822250952363,
+      "dm_pval_qlike": 0.0,
+      "dm_stat_mse": 9.95666896384432,
+      "dm_pval_mse": 0.0
+    }
+  },
+  "check5_blocks": [
+    {
+      "block": 1,
+      "dates": "2024-06-05 to 2025-03-22",
+      "N": 291,
+      "HAR-RV_qlike": 0.43990966716717445,
+      "HAR-RV_mse": 0.05457658421988308,
+      "Ridge_a10_qlike": 0.338027977617578,
+      "Ridge_a10_mse": 0.038439956528796386,
+      "Lasso_a005_qlike": 0.2824788032800907,
+      "Lasso_a005_mse": 0.03661821759240679,
+      "ElasticNet_qlike": 0.29163739077876766,
+      "ElasticNet_mse": 0.036945016199410194,
+      "LightGBM_Shallow_qlike": 0.37264236312557314,
+      "LightGBM_Shallow_mse": 0.04435619635220015
+    },
+    {
+      "block": 2,
+      "dates": "2025-03-23 to 2026-01-07",
+      "N": 291,
+      "HAR-RV_qlike": 0.3930464523367568,
+      "HAR-RV_mse": 0.030401541890940374,
+      "Ridge_a10_qlike": 0.4085510766569405,
+      "Ridge_a10_mse": 0.01922146070417376,
+      "Lasso_a005_qlike": 0.24967028803515526,
+      "Lasso_a005_mse": 0.016902580385908944,
+      "ElasticNet_qlike": 0.30009672490987754,
+      "ElasticNet_mse": 0.01676967198752869,
+      "LightGBM_Shallow_qlike": 0.27626724120066853,
+      "LightGBM_Shallow_mse": 0.018628184637229223
+    },
+    {
+      "block": 3,
+      "dates": "2026-01-08 to 2026-10-27",
+      "N": 293,
+      "HAR-RV_qlike": 0.42401751318793385,
+      "HAR-RV_mse": 0.03370376919182149,
+      "Ridge_a10_qlike": 0.4868301234475429,
+      "Ridge_a10_mse": 0.023111596341058187,
+      "Lasso_a005_qlike": 0.2967028185898675,
+      "Lasso_a005_mse": 0.02065410949888473,
+      "ElasticNet_qlike": 0.30324620801279634,
+      "ElasticNet_mse": 0.020756733427935624,
+      "LightGBM_Shallow_qlike": 0.315124506302879,
+      "LightGBM_Shallow_mse": 0.02374347015250064
+    }
+  ],
+  "check7": {
+    "range_slope_empirical": 9.117238342231015,
+    "range_intercept_empirical": -0.04316179416577717,
+    "parkinson_slope_theoretical": 6.95,
+    "log_quantiles_h1": {
+      "q025": -0.7069301714020149,
+      "q10": -0.5131056125329284,
+      "q90": 0.3833983913484721,
+      "q975": 0.6690266943560299
+    }
+  },
+  "check8": {
+    "n_thanksgiving": 3,
+    "n_black_friday": 3,
+    "tg_dates": [
+      "2023-11-23",
+      "2024-11-28",
+      "2025-11-27"
+    ],
+    "bf_dates": [
+      "2023-11-24",
+      "2024-11-29",
+      "2025-11-28"
+    ],
+    "tg_coef": -0.0,
+    "bf_coef": -0.0,
+    "direct_h_step_forecasts": {
+      "h=1": 0.5630103804210831,
+      "h=2": 0.5342764276196101,
+      "h=3": 0.4746326110424424,
+      "h=4": 0.3733601548867135,
+      "h=5": 0.39555427470978716
+    }
+  },
+  "check9": {
+    "holdout_days": 22,
+    "avg_exposure": 0.7012755473586647,
+    "bh_100": {
+      "return_pct": -21.394063871318313,
+      "max_dd_pct": 27.041465971199685,
+      "ann_vol_pct": 49.32368908982696
+    },
+    "bh_equal": {
+      "return_pct": -15.423045361270148,
+      "max_dd_pct": 19.71215814611178,
+      "ann_vol_pct": 34.596825146145285
+    },
+    "vol_targeted": {
+      "return_pct": -16.468258940507297,
+      "max_dd_pct": 20.74638659179633,
+      "ann_vol_pct": 37.41140568677942
+    }
+  }
+}

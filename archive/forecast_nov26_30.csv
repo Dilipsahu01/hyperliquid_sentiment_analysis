@@ -1,0 +1,6 @@
+forecast_date,day_name,equity_status,equity_stale,model_used,point_forecast_vol_ann,point_forecast_vol_pct,interval_80_lower_pct,interval_80_upper_pct,interval_95_lower_pct,interval_95_upper_pct,interval_80_lower,interval_80_upper,interval_95_lower,interval_95_upper,har_rv_benchmark_vol_ann,predicted_high_low_range_pct,predicted_dir_prob_up,predicted_direction
+2026-11-26,Thursday (Thanksgiving),Closed,1,Lasso_a005,0.5639,56.39%,34.43%,82.48%,25.37%,118.14%,0.3443,0.8248,0.2537,1.1814,0.5303,6.18,0.514,UP
+2026-11-27,Friday (Black Friday),Half Day,0,Lasso_a005,0.5588,55.88%,28.98%,87.83%,17.89%,131.50%,0.2898,0.8783,0.1789,1.315,0.5283,2.61,0.369,DOWN
+2026-11-28,Saturday,Closed,1,Lasso_a005,0.3389,33.89%,5.00%,70.78%,5.00%,121.21%,0.05,0.7078,0.05,1.2121,0.5245,0.94,0.012,DOWN
+2026-11-29,Sunday,Closed,1,Lasso_a005,0.4646,46.46%,11.72%,87.70%,5.00%,144.08%,0.1172,0.877,0.05,1.4408,0.4634,2.13,0.247,DOWN
+2026-11-30,Monday (Equities Reopen),Open,0,Lasso_a005,0.6404,64.04%,25.99%,109.22%,10.30%,170.98%,0.2599,1.0922,0.103,1.7098,0.485,3.96,0.261,DOWN

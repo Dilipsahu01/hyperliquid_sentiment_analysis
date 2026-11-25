@@ -1,10 +1,10 @@
 # Hyperliquid × Bitcoin Fear & Greed Index — Full Analysis Report
 
-> **Generated:** 2026-05-14 19:21  
-> **Dataset coverage:** 2023-05-01 → 2025-05-01  
-> **Total trades analysed:** 211,218  
-> **Unique traders:** 32  
-> **Unique assets:** 246
+> **Generated:** 2026-11-25 14:35  
+> **Dataset coverage:** 2026-09-27 → 2026-11-25  
+> **Total trades analysed:** 524,484  
+> **Unique traders:** 64  
+> **Unique assets:** 64
 
 ---
 
@@ -28,8 +28,8 @@
 
 ## 1. Executive Summary
 
-This report analyses **211,218 trades** executed on Hyperliquid by **32 unique traders** 
-across **246 distinct assets** over the period **2023-05-01 to 2025-05-01**. 
+This report analyses **524,484 trades** executed on Hyperliquid by **64 unique traders** 
+across **64 distinct assets** over the period **2026-09-27 to 2026-11-25**. 
 Each trade is linked to the Bitcoin Fear & Greed Index classification for that day, enabling 
 a rigorous examination of how market sentiment drives trader behaviour and profitability.
 
@@ -37,12 +37,12 @@ a rigorous examination of how market sentiment drives trader behaviour and profi
 
 | Metric | Value |
 |---|---|
-| Total Closed PnL (all trades) | $10,254,486.95 |
-| Total Fees Paid | $245,849.21 |
-| Net PnL (after fees) | $10,008,637.74 |
-| Overall Win Rate | 41.12% |
-| Date Range | 2023-05-01 → 2025-05-01 |
-| Trading Days | 479 |
+| Total Closed PnL (all trades) | $8,593.20 |
+| Total Fees Paid | $36,726,371,081,966.50 |
+| Net PnL (after fees) | $-36,726,371,073,373.30 |
+| Overall Win Rate | 39.83% |
+| Date Range | 2026-09-27 → 2026-11-25 |
+| Trading Days | 60 |
 
 ## 2. Dataset Overview
 
@@ -50,21 +50,19 @@ a rigorous examination of how market sentiment drives trader behaviour and profi
 
 | Sentiment | Days | % of Days |
 |---|---|---|
-| Extreme Fear | 14 | 2.9% |
-| Fear | 91 | 19.0% |
-| Neutral | 67 | 14.0% |
-| Greed | 193 | 40.3% |
-| Extreme Greed | 114 | 23.8% |
+| Extreme Fear | 14 | 23.3% |
+| Fear | 12 | 20.0% |
+| Neutral | 10 | 16.7% |
+| Greed | 24 | 40.0% |
 
 ### Trades per Sentiment Regime
 
 | Sentiment | Trades | % of Total |
 |---|---|---|
-| Extreme Fear | 21,400 | 10.1% |
-| Fear | 61,837 | 29.3% |
-| Neutral | 37,686 | 17.8% |
-| Greed | 50,303 | 23.8% |
-| Extreme Greed | 39,992 | 18.9% |
+| Extreme Fear | 117,501 | 22.4% |
+| Fear | 110,625 | 21.1% |
+| Neutral | 90,506 | 17.3% |
+| Greed | 205,852 | 39.2% |
 
 ---
 
@@ -74,27 +72,26 @@ a rigorous examination of how market sentiment drives trader behaviour and profi
 
 | Sentiment | Trades | Avg PnL | Median PnL | Total PnL | Win Rate | Profit Factor | Sharpe |
 |---|---|---|---|---|---|---|---|
-| Extreme Fear | 21,400 | $34.54 | $0.00 | $739,110.25 | 37.06% | 2.16 | 0.030 |
-| Fear | 61,837 | $54.29 | $0.00 | $3,357,155.44 | 42.08% | 6.66 | 0.058 |
-| Neutral | 37,686 | $34.31 | $0.00 | $1,292,920.68 | 39.70% | 4.32 | 0.066 |
-| Greed | 50,303 | $42.74 | $0.00 | $2,150,129.27 | 38.48% | 3.03 | 0.038 |
-| Extreme Greed | 39,992 | $67.89 | $0.00 | $2,715,171.31 | 46.49% | 11.02 | 0.088 |
+| Extreme Fear | 117,501 | $0.01 | $0.00 | $1,643.17 | 40.69% | 1.02 | 0.001 |
+| Fear | 110,625 | $0.01 | $0.00 | $1,534.76 | 39.10% | 1.02 | 0.001 |
+| Neutral | 90,506 | $0.02 | $0.00 | $1,681.44 | 38.74% | 1.03 | 0.002 |
+| Greed | 205,852 | $0.02 | $0.00 | $3,733.83 | 40.21% | 1.03 | 0.002 |
 
 ### Key Observations
 
-- **Highest Average PnL** is achieved during **Extreme Greed** 
-  ($67.89), suggesting traders are best positioned 
+- **Highest Average PnL** is achieved during **Neutral** 
+  ($0.02), suggesting traders are best positioned 
   to capture profit in that regime.
 
-- **Lowest Average PnL** occurs during **Neutral** 
-  ($34.31), indicating the most challenging 
+- **Lowest Average PnL** occurs during **Fear** 
+  ($0.01), indicating the most challenging 
   environment for profitable trading.
 
-- **Best Win Rate** is seen in **Extreme Greed** 
-  (46.49%), reflecting high trade success.
+- **Best Win Rate** is seen in **Extreme Fear** 
+  (40.69%), reflecting high trade success.
 
-- **Best Profit Factor** (gains ÷ losses) belongs to **Extreme Greed** 
-  (11.02x), meaning traders recover far 
+- **Best Profit Factor** (gains ÷ losses) belongs to **Neutral** 
+  (1.03x), meaning traders recover far 
   more in wins than they lose on losses in this regime.
 
 ---
@@ -105,11 +102,10 @@ a rigorous examination of how market sentiment drives trader behaviour and profi
 
 | Sentiment | Trades | Unique Traders | Avg Trades/Day | Buy% | Sell% | Dominant Bias | Avg Size (USD) |
 |---|---|---|---|---|---|---|---|
-| Extreme Fear | 21,400 | 32 | 1528.6 | 51.1% | 48.9% | BUY Bias | $5,349.73 |
-| Fear | 61,837 | 32 | 679.5 | 49.0% | 51.0% | SELL Bias | $7,816.11 |
-| Neutral | 37,686 | 31 | 562.5 | 50.3% | 49.7% | BUY Bias | $4,782.73 |
-| Greed | 50,303 | 31 | 260.6 | 48.9% | 51.1% | SELL Bias | $5,736.88 |
-| Extreme Greed | 39,992 | 30 | 350.8 | 44.9% | 55.1% | SELL Bias | $3,112.25 |
+| Extreme Fear | 117,501 | 64 | 8392.9 | 59.7% | 40.3% | BUY Bias | $257,014,882,267.33 |
+| Fear | 110,625 | 64 | 9218.8 | 60.3% | 39.7% | BUY Bias | $225,852,375,171.37 |
+| Neutral | 90,506 | 64 | 9050.6 | 59.9% | 40.1% | BUY Bias | $159,075,988,743.42 |
+| Greed | 205,852 | 64 | 8577.2 | 58.4% | 41.6% | BUY Bias | $171,728,876,492.73 |
 
 ### Behavioural Insights
 
@@ -131,11 +127,10 @@ a rigorous examination of how market sentiment drives trader behaviour and profi
 
 | Sentiment | VaR (5%) | CVaR (5%) | Max Loss | Max Gain | PnL Range |
 |---|---|---|---|---|---|
-| Extreme Fear | $-33.67 | $-582.04 | $-31,036.69 | $115,287.00 | $146,323.69 |
-| Fear | $-0.72 | $-191.92 | $-35,681.75 | $135,329.09 | $171,010.84 |
-| Neutral | $-5.34 | $-205.32 | $-24,500.00 | $48,504.10 | $73,004.10 |
-| Greed | $-13.96 | $-415.18 | $-117,990.10 | $74,530.52 | $192,520.63 |
-| Extreme Greed | $-0.22 | $-135.44 | $-10,259.47 | $44,223.45 | $54,482.92 |
+| Extreme Fear | $-0.29 | $-16.13 | $-806.58 | $883.73 | $1,690.31 |
+| Fear | $-0.31 | $-13.16 | $-929.24 | $839.73 | $1,768.97 |
+| Neutral | $-0.33 | $-11.80 | $-481.96 | $541.61 | $1,023.57 |
+| Greed | $-0.38 | $-12.23 | $-993.84 | $669.07 | $1,662.91 |
 
 **VaR (5%)** = The trade PnL that is worse than 95% of all trades in that regime.  
 **CVaR (5%)** = Average PnL of the worst 5% of trades — the "expected shortfall."
@@ -148,18 +143,18 @@ a rigorous examination of how market sentiment drives trader behaviour and profi
 
 | Pair | Rho | p-value | Interpretation |
 |---|---|---|---|
-| Sentiment Value ↔ Trade PnL (trade-level) | 0.0381 | 0.000000 | **Significant** — Positive |
-| Sentiment Value ↔ Daily Total PnL | 0.0398 | 0.384247 | Not significant — Positive |
-| Sentiment Value ↔ Daily Win Rate | 0.1905 | 0.000027 | **Significant** — Positive |
-| Sentiment Value ↔ Daily Volume | -0.0562 | 0.219261 | Not significant — Negative |
+| Sentiment Value ↔ Trade PnL (trade-level) | -0.0095 | 0.000000 | **Significant** — Negative |
+| Sentiment Value ↔ Daily Total PnL | 0.0655 | 0.619023 | Not significant — Positive |
+| Sentiment Value ↔ Daily Win Rate | 0.0702 | 0.594041 | Not significant — Positive |
+| Sentiment Value ↔ Daily Volume | -0.2055 | 0.115293 | Not significant — Negative |
 
 ### Interpretation
 
 - The **trade-level correlation** between sentiment value and individual trade PnL is 
-  **0.0381** — very weak, confirming that the raw F&G number is not a direct predictor 
+  **-0.0095** — very weak, confirming that the raw F&G number is not a direct predictor 
   of individual trade success. Sentiment *regime categories* matter more than the daily index value.
 
-- The **daily volume correlation** (-0.0562) reveals that lower 
+- The **daily volume correlation** (-0.2055) reveals that lower 
   sentiment tends to be associated with lower trading volumes — 
   fear drives more speculative volume.
 
@@ -174,21 +169,21 @@ a rigorous examination of how market sentiment drives trader behaviour and profi
 
 | Rank | Address | Total PnL | Net PnL | Win Rate | Trade Count | Avg Size | Profit Factor |
 |---|---|---|---|---|---|---|---|
-| 1 | `0xb1231a…` | $2,143,382.60 | $2,127,387.28 | 33.71% | 14,733 | $3,837.89 | 36.10 |
-| 2 | `0x083384…` | $1,600,229.82 | $1,592,824.51 | 35.96% | 3,818 | $16,159.58 | 4.71 |
-| 3 | `0xbaaaf6…` | $940,163.81 | $931,567.10 | 46.76% | 21,192 | $3,210.47 | 27208.37 |
-| 4 | `0x513b86…` | $840,422.56 | $763,997.91 | 40.12% | 12,236 | $34,396.58 | 5.90 |
-| 5 | `0xbee170…` | $836,080.55 | $822,727.65 | 42.82% | 40,184 | $1,844.21 | 3.86 |
-| 6 | `0x4acb90…` | $677,747.05 | $669,721.06 | 48.62% | 4,356 | $9,084.70 | 52.80 |
-| 7 | `0x72743a…` | $429,355.57 | $427,804.13 | 34.59% | 1,590 | $7,216.67 | 7.45 |
-| 8 | `0x430f09…` | $416,541.87 | $415,794.87 | 48.42% | 1,237 | $2,397.82 | nan |
-| 9 | `0x75f7ee…` | $379,095.41 | $376,500.15 | 81.09% | 9,893 | $2,600.78 | 8.60 |
-| 10 | `0x72c6a4…` | $360,539.51 | $360,258.01 | 30.34% | 1,424 | $2,080.39 | 9.30 |
-| 11 | `0x4f93fe…` | $308,975.87 | $268,251.40 | 36.04% | 7,584 | $17,098.17 | 2.43 |
-| 12 | `0xbd5fea…` | $220,519.06 | $215,745.96 | 32.75% | 2,641 | $7,852.10 | 1.65 |
-| 13 | `0x420ab4…` | $199,505.59 | $199,237.63 | 23.50% | 383 | $5,189.37 | nan |
-| 14 | `0x2c229d…` | $168,658.00 | $165,549.81 | 51.99% | 3,239 | $3,138.89 | 14.96 |
-| 15 | `0x28736f…` | $132,464.81 | $130,246.45 | 43.86% | 13,311 | $507.63 | 4.41 |
+| 1 | `BTC…` | $2,627.16 | $-36,143,145,867,401.11 | 49.86% | 8,508 | $12,137,533,034,464.46 | 1.01 |
+| 2 | `MKR…` | $1,994.90 | $-36,236,144.51 | 25.53% | 5,374 | $19,266,382.80 | 1.26 |
+| 3 | `ZEC…` | $1,647.64 | $-9,960,501,265.18 | 50.97% | 8,748 | $3,253,152,692.15 | 1.12 |
+| 4 | `XMR…` | $1,321.34 | $-604,674,018.37 | 52.00% | 8,467 | $204,044,387.36 | 1.94 |
+| 5 | `YFI…` | $856.59 | $-113,987,733.74 | 35.77% | 8,425 | $38,656,580.02 | 1.06 |
+| 6 | `QNT…` | $508.87 | $-454,630,047.21 | 51.09% | 8,205 | $158,311,327.96 | 1.18 |
+| 7 | `BNB…` | $75.16 | $-6,153,374,184.51 | 50.60% | 8,579 | $2,049,314,525.39 | 1.03 |
+| 8 | `AAVE…` | $32.61 | $-350,393,992.54 | 48.43% | 8,389 | $119,337,917.05 | 1.03 |
+| 9 | `LTC…` | $20.12 | $-96,441,023.98 | 51.09% | 8,783 | $31,372,633.53 | 1.06 |
+| 10 | `DASH…` | $15.07 | $-31,102,516.29 | 45.13% | 9,208 | $9,650,779.25 | 1.03 |
+| 11 | `SOL…` | $12.21 | $-2,096,883,069.39 | 48.39% | 8,649 | $692,692,163.12 | 1.02 |
+| 12 | `BCH…` | $8.09 | $-343,363,267.15 | 49.88% | 8,589 | $114,220,273.52 | 1.00 |
+| 13 | `INJ…` | $7.63 | $-6,867,687.75 | 49.40% | 8,265 | $2,374,106.08 | 1.09 |
+| 14 | `NEAR…` | $5.48 | $-29,359,509.65 | 49.71% | 8,338 | $10,060,485.60 | 1.10 |
+| 15 | `LINK…` | $4.65 | $-32,502,453.25 | 49.40% | 8,487 | $10,941,930.65 | 1.06 |
 
 ---
 
@@ -198,21 +193,21 @@ a rigorous examination of how market sentiment drives trader behaviour and profi
 
 | Rank | Coin | Total PnL | Avg PnL | Win Rate | Trades | Total Volume |
 |---|---|---|---|---|---|---|
-| 1 | @107 | $2,783,912.92 | $92.82 | 46.76% | 29,992 | $55,760,858.63 |
-| 2 | HYPE | $1,948,484.60 | $28.65 | 41.50% | 68,005 | $141,990,206.05 |
-| 3 | SOL | $1,639,555.93 | $153.36 | 39.46% | 10,691 | $125,074,752.06 |
-| 4 | ETH | $1,319,978.84 | $118.30 | 35.99% | 11,158 | $118,280,994.07 |
-| 5 | BTC | $868,044.73 | $33.30 | 35.08% | 26,064 | $644,232,116.63 |
-| 6 | MELANIA | $390,351.07 | $88.16 | 44.40% | 4,428 | $7,040,710.45 |
-| 7 | ENA | $217,329.50 | $219.52 | 31.31% | 990 | $1,625,400.50 |
-| 8 | SUI | $199,268.83 | $100.69 | 42.40% | 1,979 | $7,781,167.59 |
-| 9 | ZRO | $183,777.78 | $148.33 | 36.72% | 1,239 | $1,213,825.42 |
-| 10 | DOGE | $147,543.16 | $178.62 | 48.67% | 826 | $2,452,103.46 |
-| 11 | PURR/USDC | $75,261.06 | $27.13 | 35.65% | 2,774 | $1,642,418.69 |
-| 12 | AIXBT | $73,712.17 | $90.00 | 58.12% | 819 | $1,273,650.18 |
-| 13 | BERA | $73,689.75 | $69.91 | 51.61% | 1,054 | $2,056,756.00 |
-| 14 | USUAL | $69,631.94 | $116.44 | 54.01% | 598 | $962,189.37 |
-| 15 | AVAX | $48,297.31 | $239.10 | 50.00% | 202 | $400,115.48 |
+| 1 | BTC | $2,627.16 | $0.31 | 49.86% | 8,508 | $103,266,131,057,223,616.00 |
+| 2 | MKR | $1,994.90 | $0.37 | 25.53% | 5,374 | $103,537,541,182.41 |
+| 3 | ZEC | $1,647.64 | $0.19 | 50.97% | 8,748 | $28,458,579,750,909.94 |
+| 4 | XMR | $1,321.34 | $0.16 | 52.00% | 8,467 | $1,727,643,827,734.86 |
+| 5 | YFI | $856.59 | $0.10 | 35.77% | 8,425 | $325,681,686,651.41 |
+| 6 | QNT | $508.87 | $0.06 | 51.09% | 8,205 | $1,298,944,445,949.70 |
+| 7 | BNB | $75.16 | $0.01 | 50.60% | 8,579 | $17,581,069,313,361.57 |
+| 8 | AAVE | $32.61 | $0.00 | 48.43% | 8,389 | $1,001,125,786,133.20 |
+| 9 | LTC | $20.12 | $0.00 | 51.09% | 8,783 | $275,545,840,290.43 |
+| 10 | DASH | $15.07 | $0.00 | 45.13% | 9,208 | $88,864,375,322.43 |
+| 11 | SOL | $12.21 | $0.00 | 48.39% | 8,649 | $5,991,094,518,851.62 |
+| 12 | BCH | $8.09 | $0.00 | 49.88% | 8,589 | $981,037,929,255.60 |
+| 13 | INJ | $7.63 | $0.00 | 49.40% | 8,265 | $19,621,986,791.12 |
+| 14 | NEAR | $5.48 | $0.00 | 49.71% | 8,338 | $83,884,328,958.30 |
+| 15 | LINK | $4.65 | $0.00 | 49.40% | 8,487 | $92,864,165,414.70 |
 
 ---
 
@@ -220,11 +215,10 @@ a rigorous examination of how market sentiment drives trader behaviour and profi
 
 | Sentiment | Total Fees | Avg Fee/Trade | Total PnL | Fee-to-PnL Ratio |
 |---|---|---|---|---|
-| Extreme Fear | $23,888.63 | $1.12 | $739,110.25 | 0.0323 |
-| Fear | $92,456.95 | $1.50 | $3,357,155.44 | 0.0275 |
-| Neutral | $39,374.27 | $1.04 | $1,292,920.68 | 0.0305 |
-| Greed | $63,098.69 | $1.25 | $2,150,129.27 | 0.0293 |
-| Extreme Greed | $27,030.67 | $0.68 | $2,715,171.31 | 0.0100 |
+| Extreme Fear | $10,569,826,988,452.66 | $89,955,208.79 | $1,643.17 | 6432593130.4261 |
+| Fear | $8,744,721,651,166.34 | $79,048,331.31 | $1,534.76 | 5697771805.0644 |
+| Neutral | $5,039,066,003,024.12 | $55,676,596.06 | $1,681.44 | 2996879562.4941 |
+| Greed | $12,372,756,439,323.38 | $60,105,106.77 | $3,733.83 | 3313689521.0380 |
 
 **Fee-to-PnL Ratio < 1.0** means fees are a fraction of total gross profit.
 A ratio > 1.0 would indicate fees exceed gross profits — a critical warning sign.
@@ -238,8 +232,8 @@ was compared against days where sentiment remained stable:
 
 | Day Type | Avg Total PnL | Std Dev | Count |
 |---|---|---|---|
-| Stable Day | $17,581.52 | $60,041.63 | 348 |
-| Transition Day | $31,816.28 | $96,552.03 | 130 |
+| Stable Day | $151.57 | $1,255.14 | 48 |
+| Transition Day | $128.05 | $1,272.34 | 11 |
 
 Sentiment transitions (regime changes) tend to be associated with elevated PnL volatility, 
 as traders rapidly adjust positions. This creates both risk and opportunity for well-prepared traders.
@@ -251,16 +245,16 @@ as traders rapidly adjust positions. This creates both risk and opportunity for 
 ### Kruskal-Wallis H-Test
 Tests whether PnL distributions are statistically different across sentiment groups.
 
-- **H-statistic:** 1226.9956  
+- **H-statistic:** 37.3519  
 - **p-value:** 0.0  
 - **Conclusion:** The distributions are **statistically significantly different** (p < 0.05) across sentiment regimes.
 
 ### Mann-Whitney U-Test: Extreme Fear vs Extreme Greed
 Tests whether PnL during Extreme Fear differs from Extreme Greed.
 
-- **U-statistic:** 379741541.0  
-- **p-value:** 0.0  
-- **Conclusion:** These two regimes produce **statistically different** PnL distributions (p < 0.05).
+- **U-statistic:** N/A  
+- **p-value:** N/A  
+- **Conclusion:** No statistically significant difference between Extreme Fear and Extreme Greed PnL.
 
 ---
 
@@ -273,7 +267,7 @@ Position sizes are naturally smaller during Extreme Greed. Lean into this:
 reduce leverage and size as the F&G index climbs above 75. Euphoric markets 
 invite mean-reversion and sudden reversals.
 
-### 🟠 Buy Conviction in Fear Regimes
+###  Buy Conviction in Fear Regimes
 Fear regimes show the highest average position sizes and above-average PnL.
 This is the "buying the dip" effect — traders who enter during fear 
 and hold for the recovery capture the most value.

@@ -1,0 +1,6 @@
+forecast_date,day_name,equity_status,point_vol_ann,point_vol_ann_pct,interval_80_lower_pct,interval_80_upper_pct,interval_95_lower_pct,interval_95_upper_pct,expected_range_parkinson_pct,direction_signal
+2026-11-26,Thursday (Thanksgiving),Closed (Stale),0.5343,53.43%,25.86%,91.88%,19.66%,137.62%,3.71%,Neutral (AUC ~ 0.50)
+2026-11-27,Friday (Black Friday),Half Day,0.4746,47.46%,19.52%,92.21%,13.95%,151.22%,3.30%,Neutral (AUC ~ 0.50)
+2026-11-28,Saturday,Closed (BTC only),0.3734,37.34%,13.38%,80.38%,9.08%,142.31%,2.59%,Neutral (AUC ~ 0.50)
+2026-11-29,Sunday,Closed (BTC only),0.3956,39.56%,12.56%,93.22%,8.14%,176.57%,2.75%,Neutral (AUC ~ 0.50)
+2026-11-30,Monday (Equities Reopen),Open,0.3956,39.56%,11.26%,101.17%,7.00%,203.67%,2.75%,Neutral (AUC ~ 0.50)
