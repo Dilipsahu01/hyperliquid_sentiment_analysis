@@ -20,7 +20,12 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
+import sys
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+
+from btc_pipeline.models import diebold_mariano_test, compute_newey_west_bandwidth
+
 DATA_DIR = ROOT / "data"
 RESULTS_DIR = ROOT / "results"
 FIGURES_DIR = ROOT / "outputs/figures"
@@ -32,21 +37,6 @@ def qlike_loss(y_true: np.ndarray, y_pred: np.ndarray) -> np.ndarray:
     """QLIKE loss array: loss_t = (y_true / y_pred) - ln(y_true / y_pred) - 1."""
     ratio = y_true / np.maximum(y_pred, 1e-8)
     return ratio - np.log(np.maximum(ratio, 1e-8)) - 1.0
-
-
-def diebold_mariano_test(loss1: np.ndarray, loss2: np.ndarray) -> tuple:
-    """Diebold-Mariano test for predictive accuracy."""
-    d = loss1 - loss2
-    n = len(d)
-    mean_d = np.mean(d)
-    var_d = np.var(d, ddof=1)
-    if var_d < 1e-12:
-        return 0.0, 1.0
-    dm_stat = mean_d / np.sqrt(var_d / n)
-    # 2-sided normal approx
-    from scipy.stats import norm
-    p_val = 2.0 * (1.0 - norm.cdf(abs(dm_stat)))
-    return float(dm_stat), float(p_val)
 
 
 def run_london_close_backtest():
@@ -200,7 +190,9 @@ def run_london_close_backtest():
         "diebold_mariano_qlike": {"dm_stat": dm_stat_qlike, "p_value": dm_pval_qlike},
         "baseline_har_mse": mean_mse_har,
         "london_close_har_mse": mean_mse_lon,
-        "diebold_mariano_mse": {"dm_stat": dm_stat_mse, "p_value": dm_pval_mse}
+        "diebold_mariano_mse": {"dm_stat": dm_stat_mse, "p_value": dm_pval_mse},
+        "loss_har_qlike": loss_har_qlike.tolist(),
+        "loss_lon_qlike": loss_lon_qlike.tolist()
     }
 
     with open(RESULTS_DIR / "london_close_backtest_metrics.json", "w") as f:

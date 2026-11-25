@@ -166,7 +166,17 @@ def evaluate_holdout():
             "mae": range_mae,
             "mse": range_mse
         },
-        "weekend_to_monday_signals": weekend_summary
+        "weekend_to_monday_signals": weekend_summary,
+        "results_with_series": {
+            k: {
+                "qlike": v["qlike"],
+                "mse": v["mse"],
+                "mae": v["mae"],
+                "r2_oos": v["r2_oos"],
+                "q_loss_series": v["q_loss_series"].tolist() if hasattr(v["q_loss_series"], "tolist") else list(v["q_loss_series"])
+            }
+            for k, v in results.items()
+        }
     }
 
     out_file = RESULTS_DIR / "holdout.json"

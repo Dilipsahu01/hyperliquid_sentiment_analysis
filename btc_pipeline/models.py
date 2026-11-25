@@ -39,38 +39,100 @@ def qlike_loss(y_true_var: np.ndarray, y_pred_var: np.ndarray) -> np.ndarray:
     return ratio - np.log(ratio) - 1.0
 
 
-def diebold_mariano_test(loss_benchmark: np.ndarray, loss_candidate: np.ndarray, h: int = 1) -> tuple:
+def compute_newey_west_bandwidth(T: int) -> int:
     """
-    Diebold-Mariano test with Harvey, Leybourne, Newbold (1997) small-sample correction.
+    Automatic Newey-West (1994) lag selection rule-of-thumb: floor(4 * (T/100)^(2/9)).
+    Guarantees at least 1 lag for T >= 2.
+    """
+    if T <= 1:
+        return 0
+    bw = int(np.floor(4.0 * (float(T) / 100.0) ** (2.0 / 9.0)))
+    return max(1, bw)
+
+
+def diebold_mariano_test(
+    loss_benchmark: np.ndarray,
+    loss_candidate: np.ndarray,
+    h: int = 1,
+    bandwidth: int | None = None,
+    return_details: bool = False
+) -> tuple | dict:
+    """
+    Diebold-Mariano test with Newey-West Bartlett kernel HAC variance and
+    Harvey, Leybourne, Newbold (1997) finite-sample correction.
+
     Testing H0: E[loss_benchmark - loss_candidate] = 0 vs H1: E[loss_candidate] < E[loss_benchmark].
-    Returns (dm_statistic, p_value).
     A positive DM statistic indicates candidate has lower loss than benchmark.
+
+    Parameters:
+    -----------
+    loss_benchmark : array-like, benchmark loss series
+    loss_candidate : array-like, candidate model loss series
+    h : int, forecast horizon (default 1)
+    bandwidth : int or None. If None, computes bandwidth from T using compute_newey_west_bandwidth(T).
+    return_details : bool. If True, returns full dict with one- and two-sided p-values.
+                     If False, returns tuple (dm_stat, p_val_two_sided) for backward compatibility.
     """
     d = np.asarray(loss_benchmark) - np.asarray(loss_candidate)
     T = len(d)
-    if T < 5:
+    if T < 3:
+        if return_details:
+            return {"dm_stat": 0.0, "dm_raw": 0.0, "p_two_sided": 1.0, "p_one_sided": 0.5, "bandwidth": 0, "df": 0}
         return 0.0, 1.0
 
-    mean_d = np.mean(d)
-    gamma0 = np.var(d, ddof=0)
-    
-    # Autocovariance adjustment for h-step horizon
-    var_d = gamma0
-    for k in range(1, h):
-        gamma_k = np.mean((d[k:] - mean_d) * (d[:-k] - mean_d))
-        var_d += 2.0 * (1.0 - k / h) * gamma_k
+    if bandwidth is None:
+        max_lags = compute_newey_west_bandwidth(T)
+    else:
+        max_lags = int(max(0, bandwidth))
 
-    var_mean_d = var_d / T
-    if var_mean_d <= 1e-14:
+    mean_d = float(np.mean(d))
+    d_centered = d - mean_d
+
+    # Sample autocovariances
+    gamma = np.zeros(max_lags + 1)
+    for lag in range(max_lags + 1):
+        gamma[lag] = np.mean(d_centered[lag:] * d_centered[:T - lag]) if lag < T else 0.0
+
+    # Newey-West Bartlett kernel HAC variance
+    if max_lags > 0:
+        weights = 1.0 - (np.arange(1, max_lags + 1) / (max_lags + 1))
+        hac_var = gamma[0] + 2.0 * np.sum(weights * gamma[1:])
+    else:
+        hac_var = gamma[0]
+
+    if hac_var <= 1e-14:
+        if return_details:
+            return {
+                "dm_stat": 0.0, "dm_raw": 0.0, "p_two_sided": 1.0, "p_one_sided": 0.5,
+                "bandwidth": max_lags, "df": T - 1, "mean_loss_diff": mean_d, "hac_variance": 0.0
+            }
         return 0.0, 1.0
 
-    # HLN small sample correction factor
-    hln_corr = np.sqrt((T + 1 - 2 * h + (h / T) * (h - 1)) / T)
-    stat = (mean_d / np.sqrt(var_mean_d)) * hln_corr
+    dm_raw = mean_d / np.sqrt(hac_var / T)
 
-    # Two-sided p-value against t-distribution with (T-1) degrees of freedom
-    p_val = 2.0 * (1.0 - stats.t.cdf(np.abs(stat), df=T - 1))
-    return float(stat), float(p_val)
+    # Harvey-Leybourne-Newbold (1997) finite-sample correction factor
+    hln_scale = np.sqrt((T + 1 - 2 * h + (h / T) * (h - 1)) / T)
+    dm_hln = float(dm_raw * hln_scale)
+
+    df = T - 1
+    # Two-sided p-value
+    p_two_sided = float(2.0 * (1.0 - stats.t.cdf(np.abs(dm_hln), df=df)))
+    # One-sided p-value (H1: candidate has lower loss, i.e. d > 0)
+    p_one_sided = float(1.0 - stats.t.cdf(dm_hln, df=df))
+
+    if return_details:
+        return {
+            "mean_loss_diff": mean_d,
+            "hac_variance": float(hac_var),
+            "bandwidth": max_lags,
+            "dm_raw": float(dm_raw),
+            "dm_stat": dm_hln,
+            "p_two_sided": p_two_sided,
+            "p_one_sided": p_one_sided,
+            "df": df,
+            "hln_scale": float(hln_scale)
+        }
+    return dm_hln, p_two_sided
 
 
 class RidgeModel:

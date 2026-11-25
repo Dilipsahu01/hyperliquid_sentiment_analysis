@@ -89,21 +89,29 @@ claims = [
     {
         "claim_text": "Headline claim: Volatility blend beats HAR-Log at 5% statistical significance",
         "value": "DM = +1.8149, p = 0.0695",
-        "source_script": "btc_pipeline/audit_v4_pipeline.py",
-        "sample": "N=889 walk-forward days | 2024-06-05 to 2026-10-27",
+        "source_script": "btc_pipeline/evaluate_holdout.py",
+        "sample": "N=23 holdout days | 2026-11-01 to 2026-11-23",
         "evaluation_type": "daily-vol",
         "status": "retracted"
     },
     {
-        "claim_text": "Re-evaluated DM test vs HAR-Log with Newey-West bandwidth q=6 and HLN correction",
-        "value": "DM_HLN = +1.524, p = 0.128 (not significant at alpha=0.05)",
-        "source_script": "scripts/reproduce_quant_audit.py",
-        "sample": "N=125 walk-forward folds (889 days) | 2024-06-05 to 2026-10-27",
+        "claim_text": "Walk-forward Diebold-Mariano tests vs HAR-RV across bandwidths (q=3, 6, 10) with HLN correction",
+        "value": "Lasso: DM=+6.92 (p2=8.8e-12); ElasticNet: DM=+4.29 (p2=2.0e-5); LightGBM: DM=+9.98 (p2<1e-15); Ridge: DM=+0.43 (p2=0.67)",
+        "source_script": "scripts/rerun_diebold_mariano_audit.py",
+        "sample": "N=889 days | 2024-05-20 to 2026-10-25",
         "evaluation_type": "daily-vol",
         "status": "verified"
     },
     {
-        "claim_text": "HAC Newey-West bandwidth = 2",
+        "claim_text": "Newey-West bandwidth computed from T in code via formula floor(4*(T/100)^(2/9))",
+        "value": "T=889 gives q=6; T=23 gives q=2; T=917 gives q=6",
+        "source_script": "btc_pipeline/models.py",
+        "sample": "T=889, T=23, T=917",
+        "evaluation_type": "daily-vol",
+        "status": "verified"
+    },
+    {
+        "claim_text": "HAC Newey-West bandwidth = 2 for T=889",
         "value": "2",
         "source_script": "None (Arithmetic error: floor(4*(889/100)^(2/9)) = 6)",
         "sample": "N=889 days",
@@ -219,9 +227,9 @@ claims = [
         "status": "verified"
     },
     {
-        "claim_text": "London Close out-of-sample walk-forward incremental QLIKE advantage",
-        "value": "DM = +1.0777, p = 0.2812 (Not statistically significant)",
-        "source_script": "scripts/backtest_london_close_feature.py",
+        "claim_text": "London Close out-of-sample walk-forward incremental QLIKE advantage across bandwidths (q=3, 6, 10)",
+        "value": "BW=3: DM=+1.0380 (p2=0.2996); BW=6: DM=+1.0479 (p2=0.2950); BW=10: DM=+1.0532 (p2=0.2925)",
+        "source_script": "scripts/rerun_diebold_mariano_audit.py",
         "sample": "N=917 out-of-sample days | 2024-05-15 to 2026-11-17",
         "evaluation_type": "daily-vol",
         "status": "verified"

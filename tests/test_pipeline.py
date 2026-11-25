@@ -222,4 +222,17 @@ def test_kupiec_and_christoffersen_coverage_tests():
     assert np.isclose(p_uc, 1.0, atol=1e-2)
 
 
+def test_newey_west_bandwidth_t889():
+    """Assert that Newey-West formula floor(4 * (T/100)^(2/9)) for T=889 yields exactly 6."""
+    from btc_pipeline.models import compute_newey_west_bandwidth
+    bw = compute_newey_west_bandwidth(889)
+    assert bw == 6, f"Expected bandwidth 6 for T=889, got {bw}"
+    
+    # Check exact mathematical formula
+    formula_val = 4.0 * (889.0 / 100.0) ** (2.0 / 9.0)
+    assert np.isclose(formula_val, 6.5002, atol=1e-4)
+    assert int(np.floor(formula_val)) == 6
+
+
+
 

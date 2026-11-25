@@ -15,12 +15,16 @@ Recomputes:
 
 import json
 import subprocess
+import sys
 from pathlib import Path
 import numpy as np
 import pandas as pd
 import scipy.stats as stats
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+from btc_pipeline.models import diebold_mariano_test, compute_newey_west_bandwidth
+
 DATA_DIR = ROOT / "data"
 RESULTS_DIR = ROOT / "results"
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
@@ -86,32 +90,30 @@ def run_quant_reconciliation():
     print(f"Git Commit: {commit} | Seed: {seed}")
     print("=" * 80)
 
-    # 1. Bandwidth Verification: 4 * (T/100)^(2/9)
+    # 1. Bandwidth Verification: compute_newey_west_bandwidth(T)
     T_wf = 889
+    hac_bw = compute_newey_west_bandwidth(T_wf)
     hac_bw_formula = 4.0 * (T_wf / 100.0)**(2.0 / 9.0)
-    hac_bw = int(np.floor(hac_bw_formula))
-    print(f"\n1. HAC Bandwidth: 4 * ({T_wf}/100)^(2/9) = {hac_bw_formula:.4f} -> floor = {hac_bw}")
+    print(f"\n1. HAC Bandwidth: 4 * ({T_wf}/100)^(2/9) = {hac_bw_formula:.4f} -> code computed bw = {hac_bw}")
 
     # 2. Walk-forward Diebold-Mariano re-evaluation
-    # Load fold metrics from walk_forward_metrics.csv
-    df_wf = pd.read_csv(RESULTS_DIR / "walk_forward_metrics.csv")
-    vol_models = df_wf[df_wf["target"] == "volatility"].copy()
-    
-    pivot_qlike = vol_models.pivot(index=["fold", "test_start"], columns="model", values="qlike").dropna()
-    N_folds = len(pivot_qlike)
-    print(f"\n2. Walk-Forward Loss Differential Test (N = {N_folds} test folds, {vol_models['test_start'].min()} to {vol_models['test_end'].max()}):")
+    with open(RESULTS_DIR / "walk_forward_daily_losses.json") as f:
+        wf_daily = json.load(f)
+
+    wf_models = wf_daily["models"]
+    loss_har = np.array(wf_models["HAR-RV"]["qlike_series"])
+    N_daily = len(loss_har)
+    print(f"\n2. Walk-Forward Daily Loss Differential Test (N = {N_daily} days, 2024-05-20 to 2026-10-25):")
 
     dm_results = {}
-    if "HAR-RV" in pivot_qlike.columns:
-        loss_har = pivot_qlike["HAR-RV"].values
-        for m in pivot_qlike.columns:
-            if m == "HAR-RV":
-                continue
-            loss_m = pivot_qlike[m].values
-            # Testing whether HAR-RV has higher loss than model m (loss_har - loss_m)
-            res = diebold_mariano_hln(loss_har, loss_m, max_lags=hac_bw)
-            dm_results[f"HAR-RV_vs_{m}"] = res
-            print(f"  • HAR-RV vs {m:<16} | Mean QLIKE diff: {res['mean_loss_diff']:+.4f} | DM_HLN: {res['dm_hln']:+.4f} | p-val: {res['p_value_hln']:.4f} (Sig: {res['two_sided_significant_05']})")
+    for m in ["Lasso_a005", "ElasticNet", "LightGBM_Shallow", "Ridge_a10", "RollingMean20d", "GARCH(1,1)-t", "RandomWalk"]:
+        loss_m = np.array(wf_models[m]["qlike_series"])
+        dm_results[f"HAR-RV_vs_{m}"] = {}
+        for bw in [3, 6, 10]:
+            res = diebold_mariano_test(loss_har, loss_m, bandwidth=bw, return_details=True)
+            dm_results[f"HAR-RV_vs_{m}"][f"bw_{bw}"] = res
+            if bw == hac_bw:
+                print(f"  • HAR-RV vs {m:<16} | Mean QLIKE diff: {res['mean_loss_diff']:+.4f} | DM_HLN (q={bw}): {res['dm_stat']:+.4f} | p1: {res['p_one_sided']:.4e} | p2: {res['p_two_sided']:.4e}")
 
     # 3. London Close Feature Walk-Forward Recomputation
     with open(RESULTS_DIR / "london_close_backtest_metrics.json") as f:

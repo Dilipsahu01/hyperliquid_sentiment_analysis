@@ -226,6 +226,22 @@ def run_walk_forward_validation(min_train_size: int = 500, step_size: int = 7):
         json.dump(baselines_json_data, f, indent=2)
     print(f"Saved baseline metrics to {RESULTS_DIR / 'baselines.json'}")
 
+    # Save serialized daily QLIKE loss series for fast reproduction
+    daily_losses_payload = {
+        "dates": [d.strftime("%Y-%m-%d") if hasattr(d, "strftime") else str(d) for d in all_dates],
+        "models": {
+            m: {
+                "qlike": baseline_losses[m]["qlike"],
+                "mse": baseline_losses[m]["mse"],
+                "qlike_series": baseline_losses[m]["qlike_series"].tolist()
+            }
+            for m in model_factories
+        }
+    }
+    with open(RESULTS_DIR / "walk_forward_daily_losses.json", "w") as f:
+        json.dump(daily_losses_payload, f)
+    print(f"Saved daily loss series to {RESULTS_DIR / 'walk_forward_daily_losses.json'}")
+
     # Evaluate all models vs best baseline
     for m in model_factories:
         b_loss = baseline_losses[best_baseline]["qlike_series"]
@@ -284,7 +300,9 @@ def run_walk_forward_validation(min_train_size: int = 500, step_size: int = 7):
         "best_baseline": best_baseline,
         "summary": summary_table,
         "direction": {"accuracy": dir_acc, "balanced_acc": dir_bal_acc, "auc": dir_auc, "brier": dir_brier},
-        "range": {"mae": range_mae, "mse": range_mse}
+        "range": {"mae": range_mae, "mse": range_mse},
+        "baseline_losses": baseline_losses,
+        "dates": all_dates
     }
 
 
